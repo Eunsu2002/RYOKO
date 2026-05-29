@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="css/mainCSS.css">
+        <script src="js/mainJS.js"></script>
     </head>
 
     <nav>
@@ -43,10 +44,37 @@
                 <p>목적지 날짜 여행 스타일만 입력하세요.<br>AI가 당신만을 위한 최적의 여행 일정을 만들어드립니다.</p>
             </div>
             <div class="type-select">
-                <section>
-                    <p>어디로 가시나요?</p>
-                    <input>
-                </section>
+                <div class="type-select-top">
+                    <section>
+                        <p>어디로 가시나요?</p>
+                        <input type="text" placeholder="예: 서울, 부산, 제주도">
+                    </section>
+                    <section>
+                        <p>여행 날짜</p>
+                        <input type="date">
+                    </section>
+                    <section>
+                        <p>여행 인원</p>
+                        <input type="text" placeholder="예: 1명(나홀로 여행)">
+                    </section>
+                </div>
+                <div class="type-select-bottom">
+                    <p>여행 스타일</p>
+                    <div class="type-button">
+                        <button>휴양</button>
+                        <button>관광</button>
+                        <button>모험</button>
+                        <button>미식</button>
+                        <button>쇼핑</button>
+                        <button>문화체험</button>
+                    </div>
+                </div>
+
+                <button class="generate-btn">AI 일정 생성하기</button>
+            </div>
+            <div>
+                <h1>왜 AI 여행 플래너인가요?</h1>
+                <p>복잡한 여행 계획, 이제 AI에게 맡기세요</p>
             </div>
         </div>
     </body>
