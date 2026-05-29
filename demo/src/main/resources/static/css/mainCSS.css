@@ -1,15 +1,22 @@
+body {
+  background-color: #F9F9F9;
+}
+
 nav {
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
   height: 60px;
-  background: #fff;
+  background: #ffffff !important;
   border-bottom: 1px solid #e5e5e5;
 }
 
 nav img {
-    height: 60px;
+  height: 60px;
 }
 
 /* 로고 영역 */
@@ -28,6 +35,7 @@ nav img {
   display: flex;
   align-items: center;
   gap: 50px;
+  background: #ffffff !important;
 }
 
 .nav-links a {
@@ -40,6 +48,7 @@ nav img {
   font-size: 16px;
   border-radius: 8px;
   transition: background 0.15s;
+  background: #ffffff;
 }
 
 .nav-links a:hover {
@@ -61,25 +70,32 @@ nav img {
 
 .main-s span {
   color:#FFBA25 !important;
+  font-weight: bolder;
+}
+
+.main-s span, svg, p, h1 {
+  background: none;
 }
 
 .main-s {
-  font-size: 20px;
+  font-size: 18px;
   color:#FFFFFF;
-  margin: 100px 50px 0px 100px !important;
+  margin: 100px 50px 230px 100px !important;
+  background: none;
 }
 
 .logo-content {
   display: flex;
   align-items: center;
   gap: 10px;
+  background: none;
 }
 
-.main-content {
-  background: linear-gradient(rgba(0,0,0,0.01), rgba(0,0,0,0.25)),
-              url('../images/main_back.png') center 40%/cover no-repeat;
-  height: 550px;  
-  padding-top: 1px;        
+.hero-bg {
+    background: linear-gradient(rgba(0,0,0,0.01), rgba(0,0,0,0.25)),
+                url('../images/main_back.png') center 32%/cover no-repeat;
+    height: 800px;
+    padding-top: 1px;
 }
 
 .type-select {
@@ -96,12 +112,14 @@ nav img {
 .type-select-top {
   display: flex;
   gap: 16px;
+  background: none;
 }
 
 .type-select-top section {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  background: none;
   flex: 1;
 }
 
@@ -110,6 +128,7 @@ nav img {
   font-size: 14px;
   margin: 0;
   font-weight: bolder;
+  background: none;
 }
 
 .type-select-top input {
@@ -126,16 +145,22 @@ nav img {
   color: rgb(255, 255, 255);
 }
 
+.type-select-bottom {
+  background: none;
+}
+
 .type-select-bottom p {
   color: #fff;
   font-size: 14px;
   margin: 0 0 10px 0;
+  background: none;
 }
 
-.type-select-bottom > div {
+.type-select-bottom div {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  background: none;
 }
 
 .type-select-bottom button {
@@ -178,4 +203,145 @@ nav img {
 
 input[type="date"] {
     font-family: 'your-font', sans-serif; 
+}
+
+.plan-exp {
+  padding: 200px 0 0 50px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.plan-exp-low {
+  display: flex;
+  gap: 30px;
+  margin: 50px auto;
+  justify-content: center;
+}
+
+.plan-exp-low section p, b {
+  background: none;
+}
+
+.plan-exp-low section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: none;
+  width: 200px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  border: none;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.popular-top {
+  background-color: #ffffff;
+  margin: 0 50px;
+}
+
+.popular {
+  background-color: #ffffff;
+  margin: 50px;
+  text-align: center;
+}
+
+.popular h1 {
+  padding-top: 100px;
+}
+
+.popular-inner {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  gap: 150px;
+  padding-bottom: 50px;
+}
+
+.popular-inner .popular {
+  background-color: #ffffff;
+  text-align: left;
+}
+
+#tour1 { background-image: url('../images/busan.jpg'); }
+#tour2 { background-image: url('../images/seoul.jpg'); }
+#tour3 { background-image: url('../images/beach.jpg'); }
+
+.ai-plan {
+  background-color: #FFBA25;
+  margin: 0 50px;
+  text-align: center;
+  padding: 60px 20px;
+  color: #FFFFFF;
+}
+
+.ai-plan button {
+  margin-top: 30px;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  background: #fff;
+  color: #FFBA25;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1);
+}
+
+.ai-plan button:hover {
+  background: #f5f5f5;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 50px;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  margin: 0 50px;
+}
+
+footer > section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+footer > section b {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+footer > section p {
+  color: #555;
+  font-size: 14px;
+  margin: 0;
+}
+
+footer > div {
+  display: flex;
+  gap: 80px;
+}
+
+footer > div section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer > div section b {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+footer > div section p {
+  color: #555;
+  font-size: 14px;
+  margin: 0;
+  cursor: pointer;
+}
+
+footer > div section p:hover {
+  color: #333;
 }
