@@ -1,0 +1,636 @@
+/* =====================================================
+   style.css — りょうこそ 일정 페이지 전용 스타일시트
+   =====================================================
+   전체 구조:
+   1. 기본 초기화 (Reset)
+   2. 네비게이션 바
+   3. 히어로 영역
+   4. 지도 영역
+   5. 추천 여행지 카드
+   6. 일정 섹션 (달력 + 카드 그리드)
+   7. 푸터
+===================================================== */
+
+
+/* ─────────────────────────────────────────────────────
+   1. 기본 초기화 (CSS Reset)
+   - 모든 요소의 기본 margin, padding을 0으로 리셋
+   - box-sizing: border-box → padding이 너비 안에 포함되도록 설정
+   - 기본 폰트, 색상, 배경색 지정
+───────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box; /* padding이 요소 너비 안에 포함됨 */
+  margin: 0;              /* 기본 바깥 여백 제거 */
+  padding: 0;             /* 기본 안쪽 여백 제거 */
+}
+
+body {
+  font-family: 'Noto SansJP', sans-serif; /* 한글 최적화 폰트 */
+  color: #1a1a1a;   /* 기본 글자색 (거의 검정) */
+  background: #fff; /* 배경색 흰색 */
+}
+
+/* 링크 기본 스타일 제거 */
+a {
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit;        /* 부모 요소의 색상 상속 */
+}
+
+
+/* ─────────────────────────────────────────────────────
+   2. 네비게이션 바
+   - 화면 상단에 고정 (position: fixed)
+   - 좌: 로고 / 가운데: 메뉴 링크 / 우: 로그인 버튼
+───────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;       /* 스크롤해도 상단에 고정 */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;          /* 네비게이션 바 높이 */
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0; /* 하단 구분선 */
+  display: flex;
+  align-items: center;              /* 세로 가운데 정렬 */
+  justify-content: space-between;   /* 로고/메뉴/버튼 양쪽 배치 */
+  padding: 0 48px;                  /* 좌우 여백 */
+  z-index: 100;                     /* 다른 요소 위에 표시 */
+}
+
+/* 로고 전체 묶음 — flex로 겹침영역과 こそ를 나란히 배치 */
+.navbar-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+/* 旅와 りょう가 겹치는 구역 — flex로 두 요소를 나란히 놓되 마진 음수로 겹침 */
+.logo-overlap {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 배경 한자 旅
+   - 크고 굵게, 금빛 주황색
+   - rotate(8deg): 오른쪽으로 살짝 기울기
+   - margin-right 음수: 뒤에 오는 りょう를 앞으로 당겨 한자 위에 겹치게 함
+   - z-index: 0 → りょう 뒤에 위치 */
+.logo-kanji {
+  font-size: 44px;
+  font-weight: 900;
+  color: #FFAA00;
+  display: inline-block;
+  transform: rotate(15deg);   /* 이미지처럼 오른쪽으로 기울기 */
+  line-height: 1;
+  margin-right: -53px;       /* りょう가 旅 위로 겹치도록 당김 */
+  position: relative;
+  z-index: 0;
+}
+
+/* りょう 텍스트 — 旅 위에 겹쳐서 앞에 표시 */
+.logo-ryo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  position: relative;
+  z-index: 1;   /* 한자보다 앞에 위치 */
+}
+
+/* こそ 텍스트 — 旅 겹침 영역 바깥, 뒤에 이어 붙음 */
+.logo-koso {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* 오른쪽 묶음: 링크 + 로그인 버튼을 함께 감싸는 컨테이너 */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* 링크 묶음과 버튼 사이 간격 */
+}
+
+/* 네비게이션 링크 묶음 */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 28px; /* 링크 사이 간격 */
+}
+
+/* 개별 링크 스타일 */
+.navbar-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #888; /* 기본 회색 */
+}
+
+/* 현재 페이지 링크 강조 */
+.navbar-links a.active {
+  color: #1a1a1a;   /* 진한 색으로 변경 */
+  font-weight: 700;
+}
+
+/* 로그인/회원가입 버튼 */
+.btn-login {
+  background: #FFBE00;  /* 브랜드 노란색 배경 */
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: 20px;  /* 알약 모양의 둥근 버튼 */
+  border: none;
+  cursor: pointer;
+  font-family: inherit; /* body의 폰트 상속 */
+}
+
+.btn-login:hover {
+  background: #e6a800; /* 마우스 올릴 때 살짝 어두운 노란색 */
+}
+
+
+/* ─────────────────────────────────────────────────────
+   3. 히어로 영역
+   - 페이지 최상단의 타이틀 배너
+   - 노란색 배경, 큰 제목과 부제목
+───────────────────────────────────────────────────── */
+.hero {
+  background: #FFBA25;        /* 브랜드 노란색 배경 */
+  opacity: 0.9;
+  padding: 100px 64px 48px;   /* 위쪽: navbar 높이(64px) + 추가 여백, 좌우, 아래 여백 */
+}
+
+/* 메인 제목 */
+.hero h1 {
+  font-size: 42px;
+  color: #ffffff;
+  font-weight: 800;   /* 가장 굵은 굵기 */
+  margin-bottom: 10px;
+}
+
+/* 부제목 */
+.hero p {
+  font-size: 15px;
+  color: #FFF;
+}
+
+
+/* ─────────────────────────────────────────────────────
+   4. 지도 영역
+   - 실제 지도 API가 들어갈 자리
+   - 현재는 플레이스홀더(회색 박스)로 표시
+───────────────────────────────────────────────────── */
+
+/* 지도 영역 전체를 감싸는 컨테이너 */
+.map-section {
+  position: relative; /* 검색창을 지도 위에 띄우기 위한 기준점 */
+}
+
+/* 지도 위에 떠있는 검색창 */
+.map-searchbar {
+  position: absolute;        /* 부모(.map-section) 기준으로 절대 위치 */
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%); /* 정중앙 정렬 */
+  z-index: 10;                 /* 지도 위에 표시 */
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 16px;
+  width: 320px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14); /* 그림자로 떠있는 효과 */
+}
+
+/* 검색창 내부 텍스트 입력 필드 */
+.map-searchbar input {
+  flex: 1;           /* 남은 공간을 모두 차지 */
+  border: none;
+  outline: none;     /* 클릭 시 파란 테두리 제거 */
+  font-size: 14px;
+  font-family: inherit;
+  color: #555;
+}
+
+.map-searchbar input::placeholder {
+  color: #bbb; /* placeholder 텍스트 색상 */
+}
+
+/* 지도 플레이스홀더 박스 */
+.map-placeholder {
+  width: 100%;
+  height: 420px;          /* 지도와 동일한 높이 */
+  background: #e8f0e4;    /* 지도처럼 보이는 연한 녹색 배경 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #777;
+}
+
+/* 플레이스홀더 안의 지도 아이콘 */
+.map-placeholder .map-icon {
+  font-size: 48px;
+}
+
+/* 플레이스홀더 안의 안내 텍스트 */
+.map-placeholder .map-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #555;
+}
+
+/* 플레이스홀더 안의 보조 설명 텍스트 */
+.map-placeholder .map-sub {
+  font-size: 13px;
+  color: #999;
+}
+
+
+/* ─────────────────────────────────────────────────────
+   5. 추천 여행지 카드
+   - 지도 바로 아래에 위치
+   - 왼쪽: 이미지 / 오른쪽: 제목, 설명, 리뷰, 상세보기 링크
+───────────────────────────────────────────────────── */
+
+/* 섹션 전체 여백 및 구분선 */
+.featured-section {
+  padding: 28px 64px;
+  border-bottom: 1px solid #f0f0f0; /* 아래 구분선 */
+}
+
+/* 이미지 + 텍스트를 가로로 나란히 배치 */
+.featured-card {
+  display: flex;
+  align-items: flex-start; /* 세로 기준: 위쪽 정렬 */
+  gap: 24px;               /* 이미지와 텍스트 사이 간격 */
+}
+
+/* 왼쪽 이미지 박스 */
+.featured-img {
+  width: 250px;
+  height: 160px;
+  border-radius: 12px;  /* 모서리 둥글게 */
+  overflow: hidden;     /* 둥근 모서리 밖으로 이미지가 나가지 않도록 */
+  flex-shrink: 0;       /* 이미지가 찌그러지지 않도록 고정 */
+  background: #1a1a3e;  /* 이미지 로딩 전 배경색 */
+}
+
+/* 이미지 태그 스타일 */
+.featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 박스를 꽉 채우도록 잘라내기 */
+  display: block;
+}
+
+/* 오른쪽 텍스트 영역 */
+.featured-info {
+  flex: 1; /* 남은 공간 모두 차지 */
+}
+
+/* 여행지 제목 */
+.featured-info h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+/* 위치 텍스트 (예: 부산광역시) */
+.featured-loc {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+/* 여행지 설명 */
+.featured-desc {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.75; /* 줄 간격 */
+  margin-bottom: 16px;
+}
+
+/* 리뷰 수와 상세보기를 양 끝에 배치 */
+.featured-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 양쪽 끝에 배치 */
+}
+
+/* 리뷰 수 텍스트 */
+.review-count {
+  font-size: 13px;
+  color: #888;
+}
+
+/* 상세보기 링크 */
+.btn-detail {
+  font-size: 13px;
+  font-weight: 700;
+  color: #FF9900; /* 주황색 강조 */
+}
+
+
+/* ─────────────────────────────────────────────────────
+   6. 일정 섹션
+   - 연한 노란 배경
+   - 왼쪽: 달력 위젯 / 오른쪽: 3×2 일정 카드 그리드
+───────────────────────────────────────────────────── */
+
+/* 섹션 전체 배경 및 여백 */
+.schedule-section {
+  background: #FFF8E1; /* 연한 노란색 배경 */
+  padding: 40px 64px 56px;
+}
+
+/* 달력과 카드를 가로로 배치 */
+.schedule-inner {
+  display: flex;
+  gap: 36px;           /* 달력과 카드 사이 간격 */
+  align-items: flex-start;
+}
+
+/* ── 달력 위젯 ── */
+
+/* 달력 전체를 감싸는 흰색 박스 */
+.calendar-widget {
+  flex-shrink: 0;       /* 크기 고정 (찌그러지지 않음) */
+  width: 240px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 18px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); /* 부드러운 그림자 */
+}
+
+/* 달력 상단: 이전/다음 화살표 + 연월 텍스트 */
+.cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+/* 연월 텍스트 */
+.cal-head h3 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 이전/다음 달 이동 버튼 */
+.cal-nav-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #888;
+}
+
+.cal-nav-btn:hover {
+  background: #e0e0e0; /* 마우스 올릴 때 배경 변경 */
+}
+
+/* 요일 헤더 (S M T W T F S) */
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7등분 */
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.cal-weekdays span {
+  font-size: 11px;
+  font-weight: 700;
+  color: #bbb;
+  padding: 3px 0;
+}
+
+/* 일요일(첫 번째) 빨간색 */
+.cal-weekdays span:first-child { color: #ef5350; }
+/* 토요일(마지막) 파란색 */
+.cal-weekdays span:last-child  { color: #42a5f5; }
+
+/* 날짜 숫자 그리드 */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7열 */
+  gap: 1px;
+}
+
+/* 개별 날짜 칸 */
+.cal-day {
+  text-align: center;
+  font-size: 12px;
+  padding: 6px 2px;
+  border-radius: 50%; /* 원형으로 만들기 위한 준비 */
+  cursor: pointer;
+}
+
+.cal-day:hover {
+  background: #fff3cd; /* 마우스 올릴 때 연한 노란색 */
+}
+
+/* 다른 달 날짜: 연하게 표시 */
+.cal-day.other { color: #ddd; }
+
+/* 일요일: 빨간색 */
+.cal-day.sun { color: #ef5350; }
+
+/* 토요일: 파란색 */
+.cal-day.sat { color: #42a5f5; }
+
+/* 오늘 날짜: 주황색 원형 배경 */
+.cal-day.today {
+  background: #FF9900;
+  color: #fff !important; /* !important로 sun/sat 색상 덮어쓰기 */
+  font-weight: 700;
+}
+
+/* 선택된 날짜: 노란색 배경 */
+.cal-day.selected {
+  background: #FFBE00;
+  font-weight: 700;
+}
+
+/* ── 일정 카드 그리드 ── */
+
+/* 카드 그리드 전체를 감싸는 컨테이너 */
+.schedule-cards {
+  flex: 1; /* 남은 공간 모두 차지 */
+}
+
+/* 3열 카드 배치 */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3등분 */
+  gap: 14px; /* 카드 사이 간격 */
+}
+
+/* 개별 일정 카드 */
+.s-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07); /* 부드러운 그림자 */
+  border-left: 3px solid #FFBE00;              /* 왼쪽 색상 강조선 */
+  position: relative; /* 내부 버튼을 절대 위치로 배치하기 위한 기준점 */
+}
+
+/* 카드별로 왼쪽 강조선 색상 변경 (구분용) */
+.s-card:nth-child(4) { border-left-color: #66bb6a; } /* 녹색 */
+.s-card:nth-child(5) { border-left-color: #ef5350; } /* 빨간색 */
+.s-card:nth-child(6) { border-left-color: #42a5f5; } /* 파란색 */
+
+/* 편집/삭제 버튼을 오른쪽 상단에 절대 위치로 배치 */
+.s-card-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 4px;
+}
+
+/* 편집/삭제 버튼 공통 스타일 */
+.s-card-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%; /* 원형 버튼 */
+  background: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  color: #999;
+}
+
+.s-card-btn:hover {
+  background: #e0e0e0;
+}
+
+/* 카드 내부: 시간 (주황색 소문자 텍스트) */
+.s-card-time {
+  font-size: 10px;
+  font-weight: 700;
+  color: #FF9900;
+  margin-bottom: 6px;
+  padding-right: 50px; /* 오른쪽 버튼과 겹치지 않도록 여백 */
+}
+
+/* 카드 내부: 장소명 */
+.s-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  padding-right: 50px; /* 오른쪽 버튼과 겹치지 않도록 여백 */
+}
+
+/* 카드 내부: 부가 설명 */
+.s-card-sub {
+  font-size: 11px;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+/* 카드 내부: 위치 정보 */
+.s-card-loc {
+  font-size: 12px;
+  color: #888;
+}
+
+
+/* ─────────────────────────────────────────────────────
+   7. 푸터
+   - 흰색 배경, 상단 구분선
+   - 4열 그리드: 브랜드 소개 + 링크 3개 컬럼
+───────────────────────────────────────────────────── */
+footer {
+  background: #fff;
+  border-top: 1px solid #e0e0e0; /* 상단 구분선 */
+  padding: 48px 64px 32px;
+}
+
+/* 4열 그리드 레이아웃 */
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr; /* 브랜드 영역을 2배 너비로 */
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* 푸터 로고 텍스트 */
+.footer-logo {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* 푸터 브랜드 설명 */
+.footer-desc {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+/* 소셜 아이콘 묶음 */
+.footer-social {
+  display: flex;
+  gap: 10px;
+}
+
+/* 개별 소셜 아이콘 버튼 */
+.footer-social a {
+  width: 32px;
+  height: 32px;
+  background: #f5f5f5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: #555;
+}
+
+.footer-social a:hover {
+  background: #FFBE00; /* 마우스 올릴 때 노란색 배경 */
+}
+
+/* 링크 컬럼 제목 */
+.footer-col h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* 링크 목록 */
+.footer-col ul {
+  list-style: none; /* 기본 점(bullet) 제거 */
+  display: flex;
+  flex-direction: column;
+  gap: 9px; /* 링크 사이 간격 */
+}
+
+/* 개별 링크 */
+.footer-col ul li a {
+  font-size: 13px;
+  color: #888;
+}
+
+.footer-col ul li a:hover {
+  color: #FF9900; /* 마우스 올릴 때 주황색 */
+}
+
+/* 저작권 표시 하단 바 */
+.footer-bottom {
+  border-top: 1px solid #e0e0e0;
+  margin-top: 36px;
+  padding-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: #bbb;
+}
