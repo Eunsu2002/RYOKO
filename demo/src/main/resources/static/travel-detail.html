@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>부산 해운대 해수욕장 | ようこそ</title>
+  <link rel="stylesheet" href="css/travel-detail.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="./travel-list.html" class="logo" aria-label="ようこそ 홈">
+      <span class="logo-mark">旅</span>
+      <span class="logo-text">ようこそ</span>
+    </a>
+
+    <nav class="header-nav">
+      <a href="./travel-list.html" class="nav-link">
+        <span class="nav-icon">⌖</span>
+        여행지
+      </a>
+      <a href="#" class="nav-link">
+        <span class="nav-icon">▣</span>
+        일정
+      </a>
+      <a href="#" class="login-btn">로그인/회원가입</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-top">
+      <a href="./travel-list.html" class="back-link">← 여행지 목록으로 돌아가기</a>
+    </div>
+
+    <section class="detail-hero">
+      <!-- 아래 컨텐츠들은 추후 다 BE 연결해주는 코드로 바꿔야함. -->
+      
+      <!-- Thymeleaf 예시:
+           <img th:src="${travel.imageUrl}" th:alt="${travel.name}" />
+           <h1 th:text="${travel.name}"></h1>
+           <span th:text="${travel.location}"></span>
+      -->
+      <img
+        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
+        alt="부산 해운대 해수욕장"
+      />
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>부산 해운대 해수욕장</h1>
+        <p>⌖ 부산광역시</p>
+      </div>
+    </section>
+
+    <section class="content-wrap">
+      <article class="info-card">
+        <h2>소개</h2>
+        <p>
+          국내 최대 규모의 해수욕장으로 여름 휴양지로 인기
+        </p>
+      </article>
+
+      <article class="review-card">
+        <h2>리뷰</h2>
+
+        <div class="rating-summary">
+          <strong>4.7</strong>
+          <div>
+            <div class="stars">★★★★★</div>
+            <span>3개의 리뷰</span>
+          </div>
+        </div>
+
+        <div class="review-form">
+          <h3>리뷰 작성하기</h3>
+          <label for="review-rating">별점</label>
+          <div class="review-stars" id="review-rating" aria-label="별점 선택">★★★★★</div>
+          <label for="review-content">리뷰 내용</label>
+          <textarea id="review-content" placeholder="이 여행지에 대한 리뷰를 공유해주세요"></textarea>
+          <button type="button">리뷰 등록</button>
+        </div>
+
+        <div class="review-list">
+          <!-- 여기도 리뷰 연결 -->
+
+          <!-- Thymeleaf 예시:
+               <div class="review-item" th:each="review : ${reviews}">
+                 <strong th:text="${review.userName}"></strong>
+                 <span th:text="${review.createdAt}"></span>
+                 <p th:text="${review.content}"></p>
+               </div>
+          -->
+
+          <div class="review-item">
+            <div class="review-user-icon">●</div>
+            <div class="review-content">
+              <div class="review-meta">
+                <strong>김여행</strong>
+                <div>
+                  <span class="small-stars">★★★★★</span>
+                  <time datetime="2025-05-08">2025-05-08</time>
+                </div>
+              </div>
+              <p>
+                정말 아름다운 곳이었습니다! 가족들과 함께 방문했는데 모두가 만족했어요.
+                특히 일몰이 정말 장관이었습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="review-item">
+            <div class="review-user-icon">●</div>
+            <div class="review-content">
+              <div class="review-meta">
+                <strong>김관광</strong>
+                <div>
+                  <span class="small-stars">★★★★★</span>
+                  <time datetime="2025-04-08">2025-04-08</time>
+                </div>
+              </div>
+              <p>
+                정말 아름다운 곳이었습니다! 가족들과 함께 방문했는데 모두가 만족했어요.
+                특히 일몰이 정말 장관이었습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="review-item">
+            <div class="review-user-icon">●</div>
+            <div class="review-content">
+              <div class="review-meta">
+                <strong>김관광</strong>
+                <div>
+                  <span class="small-stars">★★★★☆</span>
+                  <time datetime="2025-04-08">2025-04-08</time>
+                </div>
+              </div>
+              <p>
+                정말 아름다운 곳이었습니다! 가족들과 함께 방문했는데 모두가 만족했어요.
+                특히 일몰이 정말 장관이었습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="travel-info-card">
+        <h2>여행 정보</h2>
+
+        <div class="travel-info-row">
+          <span class="info-icon">▦</span>
+          <div>
+            <strong>운영 시간</strong>
+            <p>하절기: 05시~18시</p>
+          </div>
+        </div>
+
+        <div class="travel-info-row">
+          <span class="info-icon">₩</span>
+          <div>
+            <strong>추천 일정</strong>
+            <p>당일 ~ 1박 2일</p>
+          </div>
+        </div>
+
+        <button type="button" class="schedule-btn">일정에 추가하기</button>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="./travel-list.html" class="logo footer-logo">
+          <span class="logo-mark">旅</span>
+          <span class="logo-text">ようこそ</span>
+        </a>
+        <p>AI 기술로 당신에게 딱 맞는 여행지를 추천합니다</p>
+        <!-- 아이콘 및 주소 연결 필요 -->
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="X">𝕏</a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>서비스</h3>
+        <a href="#">여행지</a>
+        <a href="#">여행 일정</a>
+        <a href="#">여행 가이드</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>기능 소개</h3>
+        <a href="#">통합 기능</a>
+        <a href="#">추천 여행</a>
+        <a href="#">취향 분석 시스템</a>
+        <a href="#">데이터 분석</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>고객지원</h3>
+        <a href="#">자주 묻는 질문</a>
+        <a href="#">고객센터</a>
+        <a href="#">이용약관</a>
+        <a href="#">개인정보 처리방침</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

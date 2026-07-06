@@ -1,0 +1,387 @@
+:root {
+  --main-yellow: #ffc84d;
+  --button-yellow: #ffb51f;
+  --text-main: #1f2933;
+  --text-sub: #6b7280;
+  --border: #e5e7eb;
+  --background: #f7f7f7;
+  --white: #ffffff;
+  --blue: #1683e8;
+  --shadow: 0 3px 10px rgba(15, 23, 42, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  color: var(--text-main);
+  background: var(--background);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  height: 80px;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+}
+
+.logo-mark {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #111827;
+  font-size: 34px;
+  font-weight: 900;
+  transform: rotate(15deg);
+  position: relative;
+}
+
+.logo-mark::before {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--main-yellow);
+  z-index: -1;
+  transform: rotate(-15deg);
+}
+
+.logo-text {
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 14px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #333;
+}
+
+.nav-icon {
+  font-size: 15px;
+}
+
+.login-btn {
+  padding: 10px 18px;
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--button-yellow);
+  border-radius: 999px;
+}
+
+.hero {
+  background: var(--main-yellow);
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 40px 58px;
+  color: var(--white);
+}
+
+.hero h1 {
+  margin: 0 0 22px;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.hero p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.search-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 40px 54px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.search-input-wrap {
+  flex: 1;
+  height: 46px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #dcdfe5;
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.search-icon {
+  color: #9ca3af;
+  font-size: 17px;
+}
+
+.search-input-wrap input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.search-input-wrap input::placeholder {
+  color: #a4a8b0;
+}
+
+.search-box button {
+  min-width: 86px;
+  height: 46px;
+  border: 0;
+  border-radius: 10px;
+  color: var(--white);
+  font-weight: 700;
+  background: var(--button-yellow);
+  cursor: pointer;
+}
+
+.travel-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 78px;
+}
+
+.travel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.travel-card {
+  overflow: hidden;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.travel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.16);
+}
+
+.card-image-link {
+  position: relative;
+  display: block;
+  height: 230px;
+  overflow: hidden;
+}
+
+.card-image-link img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.rating {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 9px;
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--white);
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.card-body {
+  padding: 20px 22px 18px;
+}
+
+.card-body h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.location {
+  margin: 0 0 20px;
+  color: var(--text-sub);
+  font-size: 13px;
+}
+
+.description {
+  min-height: 42px;
+  margin: 0 0 18px;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-sub);
+  font-size: 13px;
+}
+
+.card-bottom a {
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.site-footer {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 54px 40px 64px;
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 48px;
+}
+
+.footer-logo .logo-mark {
+  width: 38px;
+  height: 38px;
+  font-size: 28px;
+}
+
+.footer-logo .logo-mark::before {
+  width: 30px;
+  height: 30px;
+}
+
+.footer-logo .logo-text {
+  font-size: 18px;
+}
+
+.footer-brand p {
+  margin: 20px 0 38px;
+  color: var(--text-sub);
+  font-size: 13px;
+}
+
+.social-links {
+  display: flex;
+  gap: 18px;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.footer-column h3 {
+  margin: 0 0 20px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.footer-column a {
+  display: block;
+  margin-bottom: 13px;
+  color: var(--text-sub);
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    height: auto;
+    padding: 18px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .header-nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .hero-inner,
+  .search-section,
+  .travel-section,
+  .footer-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .travel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .search-box {
+    flex-direction: column;
+  }
+
+  .search-input-wrap,
+  .search-box button {
+    width: 100%;
+  }
+
+  .travel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-image-link {
+    height: 210px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
