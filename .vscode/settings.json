@@ -1,6 +1,3 @@
 {
-    "java.compile.nullAnalysis.mode": "disabled",
-    "files.eol": "\n",
-    "files.encoding": "utf8",
-    "editor.formatOnSave": true
+    "java.compile.nullAnalysis.mode": "disabled"
 }
