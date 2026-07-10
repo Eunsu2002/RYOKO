@@ -56,7 +56,7 @@ nav img {
 }
 
 /* 로그인/회원가입 버튼 */
-.nav-links a.btn-login {
+.nav-links a#loginBtn {
   background: #f5a623;
   color: #fff;
   font-weight: 500;
@@ -64,8 +64,25 @@ nav img {
   border-radius: 20px;
 }
 
-.nav-links a.btn-login:hover {
-  background: #e09415;
+.nav-links a#loginBtn:hover {
+  background: #fff;
+  color: #f5a623;
+  border: #f5a623 1px solid;
+}
+
+/* 마이페이지 버튼 */
+.nav-links a#myPageBtn {
+  background: #fff;
+  color: #f5a623;
+  border: #f5a623 1px solid;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 20px;
+}
+
+.nav-links a#myPageBtn:hover {
+  background: #f5a623;
+  color: #fff;
 }
 
 .main-s span {
