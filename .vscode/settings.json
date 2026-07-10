@@ -2,5 +2,6 @@
     "java.compile.nullAnalysis.mode": "disabled",
     "files.eol": "\n",
     "files.encoding": "utf8",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "liveServer.settings.port": 5501
 }
