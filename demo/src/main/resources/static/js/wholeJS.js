@@ -14,12 +14,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-document.querySelectorAll('.style-buttons button').forEach(btn => {
-    btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
-    });
-});
-
 function myOrLogin() {
     const loginBtn = document.querySelector("#loginBtn");
     const myPageBtn = document.querySelector("#myPageBtn");
