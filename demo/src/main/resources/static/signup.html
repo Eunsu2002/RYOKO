@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 | RYOKO</title>
+    <!-- 회원가입 페이지 전용 스타일시트 -->
+    <link rel="stylesheet" href="css/signUpCSS.css">
+</head>
+
+<body>
+    <div class="signUpWrapper">
+        <!-- 상단: 홈으로 돌아가는 링크 -->
+        <a href="index.html" class="backHomeLink">← 홈으로 돌아가기</a>
+
+        <!-- 회원가입 폼이 담긴 흰색 카드 -->
+        <div class="signUpCard">
+            <h1 class="signUpTitle">회원가입</h1>
+            <p class="signUpSubtitle">AI 여행 플래너와 함께 여행을 시작하세요</p>
+
+            <form id="signUpForm" class="signUpForm">
+                <!-- 이름 입력 -->
+                <div class="formField">
+                    <label for="nameInput" class="fieldLabel">이름</label>
+                    <input type="text" id="nameInput" class="fieldInput" placeholder="홍길동" autocomplete="name">
+                    <p id="nameErrorMessage" class="fieldErrorMessage">이름을 입력해주세요.</p>
+                </div>
+
+                <!-- 전화번호 입력 -->
+                <div class="formField">
+                    <label for="phoneInput" class="fieldLabel">전화번호</label>
+                    <input type="tel" id="phoneInput" class="fieldInput" placeholder="010-1234-9643" autocomplete="tel">
+                    <p id="phoneErrorMessage" class="fieldErrorMessage">올바른 전화번호 형식이 아닙니다.</p>
+                </div>
+
+                <!-- 이메일 입력 -->
+                <div class="formField">
+                    <label for="emailInput" class="fieldLabel">이메일</label>
+                    <input type="email" id="emailInput" class="fieldInput" placeholder="example@email.com"
+                        autocomplete="email">
+                    <p id="emailErrorMessage" class="fieldErrorMessage">올바른 이메일 형식이 아닙니다.</p>
+                </div>
+
+                <!-- 비밀번호 입력 -->
+                <div class="formField">
+                    <label for="passwordInput" class="fieldLabel">비밀번호</label>
+                    <input type="password" id="passwordInput" class="fieldInput" placeholder="8자 이상 입력해주세요"
+                        autocomplete="new-password">
+                    <p id="passwordErrorMessage" class="fieldErrorMessage">비밀번호는 8자 이상이어야 합니다.</p>
+                </div>
+
+                <!-- 비밀번호 확인 입력 -->
+                <div class="formField">
+                    <label for="passwordConfirmInput" class="fieldLabel">비밀번호 확인</label>
+                    <input type="password" id="passwordConfirmInput" class="fieldInput" placeholder="비밀번호를 다시 입력하세요"
+                        autocomplete="new-password">
+                    <p id="passwordConfirmErrorMessage" class="fieldErrorMessage">비밀번호가 일치하지 않습니다.</p>
+                </div>
+
+                <!-- 하단 버튼: 취소 / 회원가입 -->
+                <div class="buttonRow">
+                    <button type="button" id="cancelButton" class="actionButton cancelButton">취소</button>
+                    <button type="submit" id="submitButton" class="actionButton submitButton">회원가입</button>
+                </div>
+            </form>
+
+            <!-- 로그인 페이지로 이동하는 링크 -->
+            <p class="loginRedirectText">
+                이미 계정이 있으신가요?
+                <a href="logIn.html" class="loginRedirectLink">로그인하기</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ===== 상수 선언 (2번 이상 사용되는 값들) =====
+        const MIN_PASSWORD_LENGTH = 8;                          // 비밀번호 최소 길이
+        const PHONE_PATTERN = /^01[0-9]-\d{3,4}-\d{4}$/;         // 전화번호 형식 검사용 정규식
+        const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;      // 이메일 형식 검사용 정규식
+
+        // ===== DOM 요소 참조 =====
+        const signUpForm = document.getElementById("signUpForm");
+        const cancelButton = document.getElementById("cancelButton");
+
+        const nameInput = document.getElementById("nameInput");
+        const phoneInput = document.getElementById("phoneInput");
+        const emailInput = document.getElementById("emailInput");
+        const passwordInput = document.getElementById("passwordInput");
+        const passwordConfirmInput = document.getElementById("passwordConfirmInput");
+
+        // 입력창에 에러 스타일과 에러 메시지를 켜고 끄는 함수
+        // 인자가 3개 이상이라 객체로 묶어서 받음 (클린코드 규칙 4번)
+        function toggleFieldError({ inputElement, errorElement, isValid }) {
+            inputElement.classList.toggle("inputError", !isValid);
+            errorElement.classList.toggle("errorVisible", !isValid);
+        }
+
+        // 이름 유효성 검사: 비어있지 않은지만 확인
+        function validateName() {
+            const isValid = nameInput.value.trim().length > 0;
+            toggleFieldError({
+                inputElement: nameInput,
+                errorElement: document.getElementById("nameErrorMessage"),
+                isValid,
+            });
+            return isValid;
+        }
+
+        // 전화번호 유효성 검사: 010-1234-5678 형식인지 확인
+        function validatePhone() {
+            const isValid = PHONE_PATTERN.test(phoneInput.value.trim());
+            toggleFieldError({
+                inputElement: phoneInput,
+                errorElement: document.getElementById("phoneErrorMessage"),
+                isValid,
+            });
+            return isValid;
+        }
+
+        // 이메일 유효성 검사: 이메일 형식인지 확인
+        function validateEmail() {
+            const isValid = EMAIL_PATTERN.test(emailInput.value.trim());
+            toggleFieldError({
+                inputElement: emailInput,
+                errorElement: document.getElementById("emailErrorMessage"),
+                isValid,
+            });
+            return isValid;
+        }
+
+        // 비밀번호 유효성 검사: 최소 길이 이상인지 확인
+        function validatePassword() {
+            const isValid = passwordInput.value.length >= MIN_PASSWORD_LENGTH;
+            toggleFieldError({
+                inputElement: passwordInput,
+                errorElement: document.getElementById("passwordErrorMessage"),
+                isValid,
+            });
+            return isValid;
+        }
+
+        // 비밀번호 확인 유효성 검사: 비밀번호와 일치하는지 확인
+        function validatePasswordConfirm() {
+            const isValid = passwordConfirmInput.value === passwordInput.value
+                && passwordConfirmInput.value.length > 0;
+            toggleFieldError({
+                inputElement: passwordConfirmInput,
+                errorElement: document.getElementById("passwordConfirmErrorMessage"),
+                isValid,
+            });
+            return isValid;
+        }
+
+        // 폼 전체 유효성 검사: 위의 개별 검사 함수들을 모두 실행하고 결과를 종합
+        function validateSignUpForm() {
+            const isNameValid = validateName();
+            const isPhoneValid = validatePhone();
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            const isPasswordConfirmValid = validatePasswordConfirm();
+
+            return isNameValid
+                && isPhoneValid
+                && isEmailValid
+                && isPasswordValid
+                && isPasswordConfirmValid;
+        }
+
+        // 회원가입 폼 제출 처리
+        function handleSignUpSubmit(event) {
+            event.preventDefault(); // 기본 폼 제출(새로고침) 막기
+
+            const isFormValid = validateSignUpForm();
+            if (!isFormValid) {
+                return; // 유효성 검사 실패 시 서버 요청 보내지 않음
+            }
+
+            const signUpData = {
+                name: nameInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                email: emailInput.value.trim(),
+                password: passwordInput.value,
+            };
+
+            console.log("회원가입 요청 데이터:", signUpData);
+            // TODO: 서버 API 연동 (fetch 등)
+        }
+
+        // 취소 버튼 클릭 시 홈으로 이동
+        function handleCancelClick() {
+            window.location.href = "index.html";
+        }
+
+        // ===== 이벤트 리스너 등록 =====
+        signUpForm.addEventListener("submit", handleSignUpSubmit);
+        cancelButton.addEventListener("click", handleCancelClick);
+
+        // 입력창에서 포커스가 벗어날 때(blur)마다 실시간으로 유효성 검사
+        nameInput.addEventListener("blur", validateName);
+        phoneInput.addEventListener("blur", validatePhone);
+        emailInput.addEventListener("blur", validateEmail);
+        passwordInput.addEventListener("blur", validatePassword);
+        passwordConfirmInput.addEventListener("blur", validatePasswordConfirm);
+    </script>
+</body>
+
+</html>
