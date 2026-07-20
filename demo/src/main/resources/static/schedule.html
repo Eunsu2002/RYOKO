@@ -20,8 +20,9 @@
   <title>一定 - りょうこそ</title>
   <!-- 외부 CSS 파일 연결 — 모든 스타일은 style.css에 작성 -->
   <link rel="stylesheet" href="css/scheduleCSS.css">
+  <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=14nm107dsy&submodules=geocoder"></script>
   <script type="module" src="js/wholeJS.js"></script>
-
+  <script type="module" src="js/scheduleJS.js"></script>
 </head>
 
 <body>
@@ -67,49 +68,17 @@
     <p>韓国の美しい旅行先を探しよう！</p>
   </section>
 
-
-  <!--
-    ★ 지도 영역 — Google Maps API 연동 방법 ★
-    아래 플레이스홀더를 지우고 다음 순서로 교체하세요.
-
-    [Step 1] https://console.cloud.google.com 에서 프로젝트 생성
-    [Step 2] "Maps JavaScript API" 활성화
-    [Step 3] API 키 발급
-    [Step 4] 아래 map-placeholder div를 삭제하고, 다음 두 코드를 붙여넣기
-
-      교체할 HTML:
-        div id="map" style="width:100%; height:420px;"  /div
-
-      교체할 SCRIPT (body 닫는 태그 바로 위에 추가):
-        script src="https://maps.googleapis.com/maps/api/js?key=여기에API키입력&callback=initMap" async defer  /script
-        script
-          function initMap() {
-            const seoul = { lat: 37.5665, lng: 126.9780 };
-            const map = new google.maps.Map(document.getElementById("map"), {
-              center: seoul, zoom: 12
-            });
-            new google.maps.Marker({ position: seoul, map: map });
-          }
-        /script
-  -->
   <div class="map-section">
 
     <!-- 지도 위에 떠있는 검색창 -->
     <div class="map-searchbar">
       <span>📍</span>
-      <!-- 실제 검색 기능은 백엔드 또는 Google Places API 연동 후 구현 -->
-      <input type="text" placeholder="Search here" />
-      <span>🎤</span>
+      <input type="text" id="searchInput" placeholder="Search here" />
+      <span id="searchBtn" style="cursor:pointer;">検索</span>
     </div>
 
-    <!-- [지도 플레이스홀더] — API 연동 전까지 임시로 사용하는 박스 -->
-    <!-- API 연동 후 이 div 전체를 위 주석의 코드로 교체하세요 -->
-    <div class="map-placeholder">
-      <div class="map-icon">🗺️</div>
-      <div class="map-text">地図エリア</div>
-      <div class="map-sub">地図 API 連動予定</div>
-    </div>
-
+    <div id="map" style="width:100%; height:400px;"></div>
+    
   </div>
 
 
@@ -193,90 +162,12 @@
 
       <!-- ── 일정 카드 그리드 ── -->
       <div class="schedule-cards">
-        <!--
-          3열 × 2행 = 6개 카드 배치
-          카드 구성: 시간 / 장소명 / 부가설명 / 위치
-          실제 서비스에서는 백엔드 API로 데이터를 받아 동적으로 생성합니다.
-        -->
-        <div class="cards-grid">
-
-          <!-- 카드 1: 한국 박물관 -->
-          <div class="s-card">
-            <div class="s-card-actions">
-              <!-- 편집 버튼 — 클릭 시 수정 기능 연결 예정 -->
-              <button class="s-card-btn" title="編集">✏️</button>
-              <!-- 삭제 버튼 — 클릭 시 해당 일정 삭제 기능 연결 예정 -->
-              <button class="s-card-btn" title="削除">✕</button>
-            </div>
-            <div class="s-card-time">09:00 AM – 11:00 AM</div>
-            <div class="s-card-title">韓国博物館</div>
-            <div class="s-card-sub">説明欄</div>
-            <div class="s-card-loc">📍 Seoul, Korea</div>
-          </div>
-
-          <!-- 카드 2: 청동 -->
-          <div class="s-card">
-            <div class="s-card-actions">
-              <button class="s-card-btn" title="編集">✏️</button>
-              <button class="s-card-btn" title="削除">✕</button>
-            </div>
-            <div class="s-card-time">11:00 AM – 01:00 PM</div>
-            <div class="s-card-title">青銅</div>
-            <div class="s-card-sub">説明欄</div>
-            <div class="s-card-loc">📍 Seoul, Korea</div>
-          </div>
-
-          <!-- 카드 3: 한양 -->
-          <div class="s-card">
-            <div class="s-card-actions">
-              <button class="s-card-btn" title="編集">✏️</button>
-              <button class="s-card-btn" title="削除">✕</button>
-            </div>
-            <div class="s-card-time">01:00 PM – 03:00 PM</div>
-            <div class="s-card-title">漢陽</div>
-            <div class="s-card-sub">説明欄</div>
-            <div class="s-card-loc">📍 Seoul, Korea</div>
-          </div>
-
-          <!-- 카드 4: 한강 (왼쪽 강조선 녹색 — style.css nth-child(4) 참고) -->
-          <div class="s-card">
-            <div class="s-card-actions">
-              <button class="s-card-btn" title="編集">✏️</button>
-              <button class="s-card-btn" title="削除">✕</button>
-            </div>
-            <div class="s-card-time">03:00 PM – 05:00 PM</div>
-            <div class="s-card-title">漢江</div>
-            <div class="s-card-sub">説明欄</div>
-            <div class="s-card-loc">📍 Seoul, Korea</div>
-          </div>
-
-          <!-- 카드 5: 성수동 & 강남동 (왼쪽 강조선 빨간색) -->
-          <div class="s-card">
-            <div class="s-card-actions">
-              <button class="s-card-btn" title="編集">✏️</button>
-              <button class="s-card-btn" title="削除">✕</button>
-            </div>
-            <div class="s-card-time">05:00 PM – 07:00 PM</div>
-            <div class="s-card-title">ソンスドン & カンナムドン</div>
-            <div class="s-card-sub">説明欄</div>
-            <div class="s-card-loc">📍 Seoul, Korea</div>
-          </div>
-
-          <!-- 카드 6: 광복궁 (왼쪽 강조선 파란색) -->
-          <div class="s-card">
-            <div class="s-card-actions">
-              <button class="s-card-btn" title="編集">✏️</button>
-              <button class="s-card-btn" title="削除">✕</button>
-            </div>
-            <div class="s-card-time">07:00 PM – 09:00 PM</div>
-            <div class="s-card-title">景福宮</div>
-            <div class="s-card-sub">説明欄</div>
-            <div class="s-card-loc">📍 Seoul, Korea</div>
-          </div>
-
+        <div class="schedule-cards-head">
+          <button id="addPlanBtn" class="s-card-btn" type="button">＋ 일정 추가</button>
         </div>
-        <!-- /.cards-grid -->
-
+        <div class="cards-grid" id="cardsGrid">
+          <p class="schedule-empty">読み込み中...</p>
+        </div>
       </div>
       <!-- ── /일정 카드 그리드 ── -->
 
@@ -342,130 +233,38 @@
 
   </footer>
 
-
-  <!-- =====================================================
-       JavaScript — 달력 기능
-       - 현재 달의 날짜를 계산해서 달력 그리드에 표시
-       - 이전/다음 달 버튼 클릭 시 달이 바뀜
-       - 날짜 클릭 시 해당 날짜가 선택됨 (강조 표시)
+   <!-- =====================================================
+       일정 추가/수정 모달
+       - "일정 추가" 버튼이나 카드의 편집(✏️) 버튼을 누르면 열림
+       - scheduleJS.js의 openPlanModal() / closePlanModal()이 제어
   ===================================================== -->
-  <script>
+  <div class="modal-overlay" id="planModalOverlay">
+    <div class="modal-box">
+      <h3 id="planModalTitle">일정 추가</h3>
 
-    // 현재 날짜를 기준으로 달력을 초기화
-    let currentDate = new Date();       // 달력에 표시 중인 연월
-    let selectedDay = new Date().getDate(); // 선택된 날짜 (기본값: 오늘)
+      <label for="planTitleInput">제목</label>
+      <input type="text" id="planTitleInput" placeholder="예: 景福宮" />
 
-    /**
-     * renderCalendar()
-     * currentDate를 기준으로 달력을 다시 그리는 함수
-     * - 이전 달 / 이번 달 / 다음 달 날짜를 계산하여 42칸을 채움
-     */
-    function renderCalendar() {
-      const year  = currentDate.getFullYear(); // 표시할 연도
-      const month = currentDate.getMonth();    // 표시할 월 (0=1월 ~ 11=12월)
-      const today = new Date();                // 오늘 날짜 (today 표시에 사용)
+      <div class="modal-time-row">
+        <div>
+          <label for="planStartInput">시작 시간</label>
+          <input type="time" id="planStartInput" value="09:00" />
+        </div>
+        <div>
+          <label for="planEndInput">종료 시간</label>
+          <input type="time" id="planEndInput" value="11:00" />
+        </div>
+      </div>
 
-      // 한국어 월 이름 배열
-      const monthNames = [
-        '1月','2月','3月','4月','5月','6月',
-        '7月','8月','9月','10月','11月','12月'
-      ];
+      <label for="planMemoInput">설명</label>
+      <textarea id="planMemoInput" placeholder="설명 (선택)"></textarea>
 
-      // 달력 상단 제목 업데이트 (예: "2025년 6월")
-      document.getElementById('calTitle').textContent =
-        year + '年 ' + monthNames[month];
-
-      // 달력 그리드 초기화 (이전 내용 삭제)
-      const grid = document.getElementById('calGrid');
-      grid.innerHTML = '';
-
-      // 이번 달 1일이 무슨 요일인지 계산 (0=일요일 ~ 6=토요일)
-      const firstDay = new Date(year, month, 1).getDay();
-
-      // 이번 달의 마지막 날짜 계산
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      // 이전 달의 마지막 날짜 계산 (앞쪽 빈칸을 채우기 위해)
-      const daysInPrev = new Date(year, month, 0).getDate();
-
-
-      // ── 이전 달 날짜로 앞쪽 빈칸 채우기 ──
-      // 1일이 수요일(3)이면 → 일/월/화 3칸을 이전 달 날짜로 채움
-      for (let i = firstDay - 1; i >= 0; i--) {
-        const cell = document.createElement('div');
-        cell.className = 'cal-day other'; // 'other' 클래스: 회색으로 표시
-        cell.textContent = daysInPrev - i;
-        grid.appendChild(cell);
-      }
-
-
-      // ── 이번 달 날짜 채우기 ──
-      for (let d = 1; d <= daysInMonth; d++) {
-
-        // 해당 날짜의 요일 계산
-        const dow = new Date(year, month, d).getDay();
-
-        const cell = document.createElement('div');
-        let cls = 'cal-day'; // 기본 클래스
-
-        // 일요일이면 빨간색 클래스 추가
-        if (dow === 0) cls += ' sun';
-        // 토요일이면 파란색 클래스 추가
-        if (dow === 6) cls += ' sat';
-
-        // 오늘 날짜이면 주황색 원형 배경 클래스 추가
-        if (
-          d === today.getDate() &&
-          month === today.getMonth() &&
-          year === today.getFullYear()
-        ) {
-          cls += ' today';
-        }
-        // 선택된 날짜이면 노란색 배경 클래스 추가 (오늘이 아닌 경우만)
-        else if (d === selectedDay) {
-          cls += ' selected';
-        }
-
-        cell.className   = cls;
-        cell.textContent = d;
-
-        // 날짜 클릭 시 selectedDay를 업데이트하고 달력을 다시 그림
-        cell.onclick = function() {
-          selectedDay = d;
-          renderCalendar();
-        };
-
-        grid.appendChild(cell);
-      }
-
-
-      // ── 다음 달 날짜로 뒤쪽 빈칸 채우기 ──
-      // 달력은 항상 6행(42칸)으로 구성
-      const remaining = 42 - grid.children.length;
-      for (let i = 1; i <= remaining; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'cal-day other'; // 'other' 클래스: 회색으로 표시
-        cell.textContent = i;
-        grid.appendChild(cell);
-      }
-    }
-
-
-    /**
-     * changeMonth(dir)
-     * 이전/다음 달 버튼 클릭 시 호출되는 함수
-     * @param {number} dir - 방향: -1(이전 달), +1(다음 달)
-     */
-    function changeMonth(dir) {
-      currentDate.setMonth(currentDate.getMonth() + dir);
-      renderCalendar(); // 달력 다시 그리기
-    }
-
-
-    // 페이지가 로드될 때 달력을 처음 한 번 그림
-    renderCalendar();
-
-  </script>
+      <div class="modal-actions">
+        <button type="button" id="planCancelBtn">취소</button>
+        <button type="button" id="planSaveBtn">저장</button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

@@ -441,6 +441,125 @@ nav img {
   flex: 1; /* 남은 공간 모두 차지 */
 }
 
+/* 카드 그리드 위, "일정 추가" 버튼을 담는 헤더 줄 */
+.schedule-cards-head {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+#addPlanBtn {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #FF9900;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 일정이 없거나 로딩/에러 상태일 때 표시하는 안내 문구 */
+.schedule-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #888;
+  padding: 24px 0;
+}
+
+/* ─────────────────────────────────────────────────────
+   일정 추가/수정 모달
+───────────────────────────────────────────────────── */
+.modal-overlay {
+  display: none; /* 기본은 숨김, .open이 붙으면 보임 */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+ 
+.modal-overlay.open {
+  display: flex;
+}
+ 
+.modal-box {
+  background: #fff;
+  width: 90%;
+  max-width: 380px;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+ 
+.modal-box h3 {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 800;
+}
+ 
+.modal-box label {
+  display: block;
+  margin: 12px 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+}
+ 
+.modal-box input[type="text"],
+.modal-box input[type="time"],
+.modal-box textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+ 
+.modal-box textarea {
+  height: 80px;
+  resize: vertical;
+}
+ 
+.modal-time-row {
+  display: flex;
+  gap: 10px;
+}
+ 
+.modal-time-row > div {
+  flex: 1;
+}
+ 
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+ 
+.modal-actions button {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+ 
+#planCancelBtn {
+  background: #f3f4f6;
+  color: #374151;
+}
+ 
+#planSaveBtn {
+  background: #FFBE00;
+  color: #1a1a1a;
+}
+ 
 /* 3열 카드 배치 */
 .cards-grid {
   display: grid;
