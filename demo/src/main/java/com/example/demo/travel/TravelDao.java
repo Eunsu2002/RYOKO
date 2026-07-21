@@ -12,13 +12,14 @@ import java.util.List;
 public class TravelDao {
 
     public List<Travel> findAll() throws SQLException {
-        String sql = "SELECT t.*, "
-                + "IFNULL(AVG(r.rating), 0) AS avg_rating, "
-                + "COUNT(r.id) AS review_count "
-                + "FROM travel t "
-                + "LEFT JOIN review r ON t.id = r.travel_id "
-                + "GROUP BY t.id "
-                + "ORDER BY t.id";
+        String sql = "SELECT p.*, "
+                + "IFNULL(AVG(r.star), 0) AS avg_rating, "
+                + "COUNT(r.id) AS review_count, "
+                + "(SELECT pi.img_url FROM place_img pi WHERE pi.place_id = p.id ORDER BY pi.sort_order LIMIT 1) AS image_url "
+                + "FROM place p "
+                + "LEFT JOIN reviews r ON p.id = r.place_id "
+                + "GROUP BY p.id "
+                + "ORDER BY p.id";
 
         List<Travel> list = new ArrayList<>();
 
@@ -34,14 +35,15 @@ public class TravelDao {
     }
 
     public List<Travel> findByKeyword(String keyword) throws SQLException {
-        String sql = "SELECT t.*, "
-                + "IFNULL(AVG(r.rating), 0) AS avg_rating, "
-                + "COUNT(r.id) AS review_count "
-                + "FROM travel t "
-                + "LEFT JOIN review r ON t.id = r.travel_id "
-                + "WHERE t.name LIKE ? OR t.location LIKE ? "
-                + "GROUP BY t.id "
-                + "ORDER BY t.id";
+        String sql = "SELECT p.*, "
+                + "IFNULL(AVG(r.star), 0) AS avg_rating, "
+                + "COUNT(r.id) AS review_count, "
+                + "(SELECT pi.img_url FROM place_img pi WHERE pi.place_id = p.id ORDER BY pi.sort_order LIMIT 1) AS image_url "
+                + "FROM place p "
+                + "LEFT JOIN reviews r ON p.id = r.place_id "
+                + "WHERE p.p_name LIKE ? OR p.address LIKE ? "
+                + "GROUP BY p.id "
+                + "ORDER BY p.id";
 
         List<Travel> list = new ArrayList<>();
         String pattern = "%" + keyword + "%";
@@ -62,13 +64,14 @@ public class TravelDao {
     }
 
     public Travel findById(int id) throws SQLException {
-        String sql = "SELECT t.*, "
-                + "IFNULL(AVG(r.rating), 0) AS avg_rating, "
-                + "COUNT(r.id) AS review_count "
-                + "FROM travel t "
-                + "LEFT JOIN review r ON t.id = r.travel_id "
-                + "WHERE t.id = ? "
-                + "GROUP BY t.id";
+        String sql = "SELECT p.*, "
+                + "IFNULL(AVG(r.star), 0) AS avg_rating, "
+                + "COUNT(r.id) AS review_count, "
+                + "(SELECT pi.img_url FROM place_img pi WHERE pi.place_id = p.id ORDER BY pi.sort_order LIMIT 1) AS image_url "
+                + "FROM place p "
+                + "LEFT JOIN reviews r ON p.id = r.place_id "
+                + "WHERE p.id = ? "
+                + "GROUP BY p.id";
 
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -87,9 +90,9 @@ public class TravelDao {
     private Travel mapRow(ResultSet rs) throws SQLException {
         Travel t = new Travel();
         t.setId(rs.getInt("id"));
-        t.setName(rs.getString("name"));
-        t.setLocation(rs.getString("location"));
-        t.setDescription(rs.getString("description"));
+        t.setName(rs.getString("p_name"));
+        t.setLocation(rs.getString("address"));
+        t.setDescription(rs.getString("body"));
         t.setImageUrl(rs.getString("image_url"));
         t.setOperatingHours(rs.getString("operating_hours"));
         t.setRecommendedSchedule(rs.getString("recommended_schedule"));

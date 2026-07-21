@@ -21,6 +21,8 @@ CREATE TABLE place (
   avg_star float DEFAULT 0,
   review_count integer DEFAULT 0,
   created_at timestamp DEFAULT now(),
+  operating_hours VARCHAR(200),
+  recommended_schedule VARCHAR(200),
   updated_at timestamp
 );
 
