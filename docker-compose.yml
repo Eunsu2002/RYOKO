@@ -1,0 +1,19 @@
+
+services:
+  db:
+    image: mysql:8.0
+    platform: linux/arm64
+    container_name: ryoko_mysql
+    restart: always
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ryoko
+      MYSQL_DATABASE: ryoko
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
