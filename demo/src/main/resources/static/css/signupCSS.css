@@ -1,0 +1,196 @@
+/* ===== 전역 초기화 및 폰트 설정 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background-color: #fff5de;
+    /* FFBA25 메인 컬러를 15% 농도로 조합한 부드러운 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* 전체 화면 래퍼 */
+.signUpWrapper {
+    width: 100%;
+    max-width: 460px;
+    /* 시안의 컴팩트한 비율을 위해 폭 미세 조절 */
+}
+
+/* ===== 1. 홈으로 돌아가기 링크 ===== */
+.backHomeLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+    color: #666666;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.backHomeLink:hover {
+    color: #111111;
+}
+
+/* ===== 2. 회원가입 카드 박스 ===== */
+.signUpCard {
+    background-color: #ffffff;
+    border-radius: 24px;
+    /* 시안처럼 부드럽고 둥근 모서리 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    /* 은은하고 고급스러운 그림자 */
+    padding: 54px 44px;
+    /* 내부 여백을 넓혀 시안의 쾌적한 느낌 구현 */
+}
+
+/* 타이틀 및 서브타이틀 */
+.signUpTitle {
+    font-size: 32px;
+    /* 시안의 시원한 서체 크기 반영 */
+    font-weight: 800;
+    /* 더 두껍고 명확하게 수정 */
+    color: #111111;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+.signUpSubtitle {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #9c9c9c;
+    /* 시안의 연한 안내 텍스트 컬러 반영 */
+    text-align: center;
+    letter-spacing: -0.3px;
+}
+
+/* ===== 3. 폼 및 입력 필드 (이름, 전화번호, 이메일 등) ===== */
+.signUpForm {
+    margin-top: 36px;
+}
+
+.formField {
+    margin-bottom: 24px;
+    /* 입력창 간의 간격을 넓혀 가독성 확보 */
+}
+
+.formField:last-of-type {
+    margin-bottom: 0;
+}
+
+/* 입력창 위 항목 라벨 */
+.fieldLabel {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    /* 크기를 살짝 줄여 모던한 스타일 적용 */
+    font-weight: 600;
+    color: #333333;
+}
+
+/* 실제 인풋 박스 */
+.fieldInput {
+    width: 100%;
+    padding: 15px 16px;
+    /* 두께감 있는 인풋창 */
+    border: 1px solid #e8e6e0;
+    /* 시안 특유의 연한 테두리 색상 */
+    border-radius: 12px;
+    font-size: 14px;
+    color: #111111;
+    outline: none;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fieldInput::placeholder {
+    color: #cbc7bc;
+    /* 플레이스홀더 색상 최적화 */
+}
+
+/* 포커스 되었을 때 브랜드 시그니처 옐로우 적용 */
+.fieldInput:focus {
+    border-color: #ffba25;
+    box-shadow: 0 0 0 3px rgba(255, 186, 37, 0.1);
+}
+
+/* 유효성 에러 스타일 */
+.fieldInput.inputError {
+    border-color: #ff4d4d;
+}
+
+.fieldErrorMessage {
+    display: none;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #ff4d4d;
+}
+
+.fieldErrorMessage.errorVisible {
+    display: block;
+}
+
+/* ===== 4. 하단 버튼 영역 ===== */
+.buttonRow {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.actionButton {
+    flex: 1;
+    padding: 15px 0;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.actionButton:active {
+    transform: scale(0.98);
+    /* 클릭 시 살짝 눌리는 인터랙션 추가 */
+}
+
+/* 여섯번째 조건: 로그인 -> [취소] 버튼 변형 (회색 기본 톤) */
+.cancelButton {
+    background-color: #f1effa;
+    color: #666666;
+}
+
+.cancelButton:hover {
+    background-color: #e5e3ed;
+}
+
+/* 일곱번째 조건: 로그인 -> [회원가입] 버튼 변형 (강조용 옐로우) */
+.submitButton {
+    background-color: #ffba25;
+    color: #ffffff;
+}
+
+/* ===== 5. 최하단 로그인 전환 링크 ===== */
+.loginRedirectText {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 14px;
+    color: #777777;
+}
+
+.loginRedirectLink {
+    color: #ffba25;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 6px;
+}
+
+.loginRedirectLink:hover {
+    text-decoration: underline;
+}

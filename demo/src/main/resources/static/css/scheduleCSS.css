@@ -42,110 +42,87 @@ a {
    - 화면 상단에 고정 (position: fixed)
    - 좌: 로고 / 가운데: 메뉴 링크 / 우: 로그인 버튼
 ───────────────────────────────────────────────────── */
-.navbar {
-  position: fixed;       /* 스크롤해도 상단에 고정 */
+nav {
+  display: flex;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;          /* 네비게이션 바 높이 */
-  background: #fff;
-  border-bottom: 1px solid #e0e0e0; /* 하단 구분선 */
-  display: flex;
-  align-items: center;              /* 세로 가운데 정렬 */
-  justify-content: space-between;   /* 로고/메뉴/버튼 양쪽 배치 */
-  padding: 0 48px;                  /* 좌우 여백 */
-  z-index: 100;                     /* 다른 요소 위에 표시 */
+  z-index: 100;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  height: 60px;
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-/* 로고 전체 묶음 — flex로 겹침영역과 こそ를 나란히 배치 */
-.navbar-logo {
-  display: inline-flex;
-  align-items: center;
+nav img {
+  height: 60px;
+}
+
+/* 로고 영역 */
+.logoSection a.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
   text-decoration: none;
-  color: #1a1a1a;
-}
-
-/* 旅와 りょう가 겹치는 구역 — flex로 두 요소를 나란히 놓되 마진 음수로 겹침 */
-.logo-overlap {
-  display: inline-flex;
-  align-items: center;
-}
-
-/* 배경 한자 旅
-   - 크고 굵게, 금빛 주황색
-   - rotate(8deg): 오른쪽으로 살짝 기울기
-   - margin-right 음수: 뒤에 오는 りょう를 앞으로 당겨 한자 위에 겹치게 함
-   - z-index: 0 → りょう 뒤에 위치 */
-.logo-kanji {
-  font-size: 44px;
-  font-weight: 900;
-  color: #FFAA00;
-  display: inline-block;
-  transform: rotate(15deg);   /* 이미지처럼 오른쪽으로 기울기 */
-  line-height: 1;
-  margin-right: -53px;       /* りょう가 旅 위로 겹치도록 당김 */
-  position: relative;
-  z-index: 0;
-}
-
-/* りょう 텍스트 — 旅 위에 겹쳐서 앞에 표시 */
-.logo-ryo {
-  font-size: 22px;
-  font-weight: 700;
-  color: #1a1a1a;
-  position: relative;
-  z-index: 1;   /* 한자보다 앞에 위치 */
-}
-
-/* こそ 텍스트 — 旅 겹침 영역 바깥, 뒤에 이어 붙음 */
-.logo-koso {
-  font-size: 22px;
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-/* 오른쪽 묶음: 링크 + 로그인 버튼을 함께 감싸는 컨테이너 */
-.navbar-right {
   display: flex;
   align-items: center;
-  gap: 24px; /* 링크 묶음과 버튼 사이 간격 */
+  gap: 4px;
 }
 
-/* 네비게이션 링크 묶음 */
-.navbar-links {
+/* 오른쪽 링크 묶음 */
+.nav-links {
   display: flex;
   align-items: center;
-  gap: 28px; /* 링크 사이 간격 */
+  gap: 50px;
+  background: #ffffff !important;
 }
 
-/* 개별 링크 스타일 */
-.navbar-links a {
-  font-size: 14px;
-  font-weight: 500;
-  color: #888; /* 기본 회색 */
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  text-decoration: none;
+  color: #555;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background 0.15s;
+  background: #ffffff;
 }
 
-/* 현재 페이지 링크 강조 */
-.navbar-links a.active {
-  color: #1a1a1a;   /* 진한 색으로 변경 */
-  font-weight: 700;
+.nav-links a:hover {
+  background: #f5f5f5;
 }
 
 /* 로그인/회원가입 버튼 */
-.btn-login {
-  background: #FFBE00;  /* 브랜드 노란색 배경 */
-  color: #1a1a1a;
-  font-size: 13px;
-  font-weight: 700;
-  padding: 9px 20px;
-  border-radius: 20px;  /* 알약 모양의 둥근 버튼 */
-  border: none;
-  cursor: pointer;
-  font-family: inherit; /* body의 폰트 상속 */
+.nav-links a#loginBtn {
+  background: #f5a623;
+  color: #fff;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 20px;
 }
 
-.btn-login:hover {
-  background: #e6a800; /* 마우스 올릴 때 살짝 어두운 노란색 */
+.nav-links a#loginBtn:hover {
+  background: #fff;
+  color: #f5a623;
+  border: #f5a623 1px solid;
+}
+
+/* 마이페이지 버튼 */
+.nav-links a#myPageBtn {
+  background: #fff;
+  color: #f5a623;
+  border: #f5a623 1px solid;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 20px;
+}
+
+.nav-links a#myPageBtn:hover {
+  background: #f5a623;
+  color: #fff;
 }
 
 
@@ -464,6 +441,125 @@ a {
   flex: 1; /* 남은 공간 모두 차지 */
 }
 
+/* 카드 그리드 위, "일정 추가" 버튼을 담는 헤더 줄 */
+.schedule-cards-head {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+#addPlanBtn {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #FF9900;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 일정이 없거나 로딩/에러 상태일 때 표시하는 안내 문구 */
+.schedule-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #888;
+  padding: 24px 0;
+}
+
+/* ─────────────────────────────────────────────────────
+   일정 추가/수정 모달
+───────────────────────────────────────────────────── */
+.modal-overlay {
+  display: none; /* 기본은 숨김, .open이 붙으면 보임 */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+ 
+.modal-overlay.open {
+  display: flex;
+}
+ 
+.modal-box {
+  background: #fff;
+  width: 90%;
+  max-width: 380px;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+ 
+.modal-box h3 {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 800;
+}
+ 
+.modal-box label {
+  display: block;
+  margin: 12px 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+}
+ 
+.modal-box input[type="text"],
+.modal-box input[type="time"],
+.modal-box textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+ 
+.modal-box textarea {
+  height: 80px;
+  resize: vertical;
+}
+ 
+.modal-time-row {
+  display: flex;
+  gap: 10px;
+}
+ 
+.modal-time-row > div {
+  flex: 1;
+}
+ 
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+ 
+.modal-actions button {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+ 
+#planCancelBtn {
+  background: #f3f4f6;
+  color: #374151;
+}
+ 
+#planSaveBtn {
+  background: #FFBE00;
+  color: #1a1a1a;
+}
+ 
 /* 3열 카드 배치 */
 .cards-grid {
   display: grid;
