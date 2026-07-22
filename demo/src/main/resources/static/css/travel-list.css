@@ -16,7 +16,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
   color: var(--text-main);
   background: var(--background);
 }
@@ -214,12 +214,19 @@ nav img {
 
 .search-box {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 18px;
+  flex-direction: column;
+  gap: 22px;
+  padding: 26px 28px;
   background: var(--white);
   border-radius: 12px;
   box-shadow: var(--shadow);
+}
+
+/* 검색창 + 검색 버튼을 한 행에 배치 */
+.search-top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .search-input-wrap {
@@ -246,21 +253,97 @@ nav img {
   outline: 0;
   font-size: 14px;
   color: var(--text-main);
+  background: transparent;
 }
 
 .search-input-wrap input::placeholder {
   color: #a4a8b0;
 }
 
-.search-box button {
-  min-width: 86px;
+/* 여행 스타일 필터 영역 */
+.search-style-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.search-style-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.style-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* 실제 체크박스는 시각적으로 숨기되 접근성은 유지 */
+.style-chip-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* label을 태그(Chip) 형태로 스타일링 */
+.style-chip-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-sub);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.style-chip-label:hover {
+  border-color: var(--button-yellow);
+  color: var(--text-main);
+}
+
+/* 선택된 상태 */
+.style-chip-input:checked+.style-chip-label {
+  background: var(--button-yellow);
+  border-color: var(--button-yellow);
+  color: var(--white);
+}
+
+/* 키보드 포커스 상태 */
+.style-chip-input:focus-visible+.style-chip-label {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.search-submit-btn {
+  flex-shrink: 0;
+  min-width: 140px;
   height: 46px;
+  padding: 0 24px;
   border: 0;
   border-radius: 10px;
   color: var(--white);
+  font-size: 14px;
   font-weight: 700;
   background: var(--button-yellow);
   cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.search-submit-btn:hover {
+  opacity: 0.88;
 }
 
 .travel-section {
@@ -448,11 +531,19 @@ nav img {
 
 @media (max-width: 600px) {
   .search-box {
-    flex-direction: column;
+    padding: 20px 18px;
   }
 
-  .search-input-wrap,
-  .search-box button {
+  .search-top-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input-wrap {
+    flex-basis: auto;
+  }
+
+  .search-submit-btn {
     width: 100%;
   }
 

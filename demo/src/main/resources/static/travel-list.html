@@ -57,12 +57,40 @@
     </section>
 
     <section class="search-section" aria-label="여행지 검색">
-      <form class="search-box" action="#" method="get">
-        <div class="search-input-wrap">
-          <span class="search-icon">⌕</span>
-          <input type="search" name="keyword" placeholder="여행지 이름이나 지역을 검색하세요" aria-label="여행지 검색어" />
+      <form class="search-box" id="searchForm" action="#" method="get">
+        <div class="search-top-row">
+          <div class="search-input-wrap">
+            <span class="search-icon">⌕</span>
+            <input type="search" id="keywordInput" name="keyword" placeholder="여행지 이름이나 지역을 검색하세요"
+              aria-label="여행지 검색어" />
+          </div>
+          <button type="submit" class="search-submit-btn">この條件で検索</button>
         </div>
-        <button type="submit">필터</button>
+
+        <div class="search-style-wrap">
+          <p class="search-style-title">旅のスタイル</p>
+          <div class="style-chip-group" role="group" aria-label="여행 스타일 선택">
+            <input type="checkbox" id="style-relax" name="styles" value="relax" class="style-chip-input" />
+            <label for="style-relax" class="style-chip-label">のんびり</label>
+
+            <input type="checkbox" id="style-sightseeing" name="styles" value="sightseeing" class="style-chip-input" />
+            <label for="style-sightseeing" class="style-chip-label">観光</label>
+
+            <input type="checkbox" id="style-activity" name="styles" value="activity" class="style-chip-input" />
+            <label for="style-activity" class="style-chip-label">アクティビティ</label>
+
+            <input type="checkbox" id="style-food" name="styles" value="food" class="style-chip-input" />
+            <label for="style-food" class="style-chip-label">グルメ</label>
+
+            <input type="checkbox" id="style-shopping" name="styles" value="shopping" class="style-chip-input" />
+            <label for="style-shopping" class="style-chip-label">ショッピング</label>
+
+            <input type="checkbox" id="style-culturalExperience" name="styles" value="culturalExperience"
+              class="style-chip-input" />
+            <label for="style-culturalExperience" class="style-chip-label">文化体験</label>
+
+          </div>
+        </div>
       </form>
     </section>
 
