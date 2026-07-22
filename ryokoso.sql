@@ -13,7 +13,7 @@ CREATE TABLE place (
   id integer PRIMARY KEY AUTO_INCREMENT,
   p_name varchar(255) NOT NULL,
   body text,
-  style varchar(255) COMMENT '예: 힐링, 액티비티',
+  style int NOT NULL DEFAULT 0 COMMENT '여행 스타일 비트 플래그 : [1=のんびり,2=観光,4=アクティビティ,8=グルメ,16=ショッピング,32=文化体験]',
   category varchar(255) COMMENT '예: 자연, 도시, 해변',
   address varchar(255),
   p_location_lat float,
