@@ -45,3 +45,5 @@ node_modules/
 ### etc ###
 *.log
 .env
+
+src/main/resources/application.properties
