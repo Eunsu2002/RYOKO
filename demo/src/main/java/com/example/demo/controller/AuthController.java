@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api")
@@ -32,9 +33,17 @@ public class AuthController {
             return ResponseEntity.status(401).body(e.getMessage());
         }
     }
-        @PostMapping("/logout")
+    @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();
         return ResponseEntity.ok("로그아웃 성공");
+    }
+    @GetMapping("/me")
+    public ResponseEntity<?> me(HttpSession session) {
+        Object userId = session.getAttribute("userId");
+        if (userId == null) {
+            return ResponseEntity.status(401).body("로그인 상태가 아닙니다.");
+        }
+        return ResponseEntity.ok(userId);
     }
 }
