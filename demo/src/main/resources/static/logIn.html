@@ -1,56 +1,47 @@
 <!DOCTYPE html>
-<html lang ="ko">
-    <head>
-        <!-- 네이밍 컨벤션은 html이라 일단 케밥 케이스(kebab-case)로 작성함! -->
-        <meta charset="UTF-8"/>
-        <!--웹 페이지 너비를 현재 기기 화면 너비에 맞춰 조정, initial-scale은 초기 화면 확대/축소 배율 값 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/logInCSS.css">
-        <title>りょこうそ —　ログイン</title>
-    </head>
-    <body>
-        <div class="page active" id="page-login">
+<html lang="ko">
 
-            <a class="back-link" href="index.html">← ホームへ戻る</a>
+<head>
+    <!-- 네이밍 컨벤션은 html이라 일단 케밥 케이스(kebab-case)로 작성함! -->
+    <meta charset="UTF-8" />
+    <!--웹 페이지 너비를 현재 기기 화면 너비에 맞춰 조정, initial-scale은 초기 화면 확대/축소 배율 값 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/logInCSS.css">
+    <title>りょこうそ —　ログイン</title>
+</head>
 
-            <!--카드형 로그인 페이지 타이틀-->
-            <div class="card">
-                <h1 class="card-title">ログイン</h1>
-                <p class="card-subtitle">ログインして旅行プランを作成しましょう</p>
+<body>
+    <div class="page active" id="page-login">
+
+        <a class="back-link" href="index.html">← ホームへ戻る</a>
+
+        <!--카드형 로그인 페이지 타이틀-->
+        <div class="card">
+            <h1 class="card-title">ログイン</h1>
+            <p class="card-subtitle">ログインして旅行プランを作成しましょう</p>
 
             <!--이메일 인풋-->
             <!--for="login-email" - id="login-email" 연결, autocomplete="email": 이메일 주소 자동 완성 -->
             <div class="field-group">
                 <label class="field-label" for="login-email">メールアドレス（ID）</label>
-                <input 
-                    class="field-input"
-                    type="email"
-                    id="login-email"
-                    placeholder="メールアドレス"
-                    autocomplete="email" 
-                /> 
+                <input class="field-input" type="email" id="login-email" placeholder="メールアドレス" autocomplete="email" />
             </div>
 
             <!--비밀번호 인풋-->
             <!--for="login-pw" - id="login-pw" 연결, autocomplete="current-password": 기존 비밀번호 자동 완성 -->
             <div class="field-group">
                 <label class="field-label" for="login-pw">パスワード</label>
-                <input
-                    class="field-input"
-                    type="password"
-                    id="login-pw"
-                    placeholder="パスワード"
-                    autocomplete="current-password"
-                /> 
+                <input class="field-input" type="password" id="login-pw" placeholder="パスワード"
+                    autocomplete="current-password" />
             </div>
 
             <!--로그인 상태 유지 토글 & 비밀번호 찾기 링크-->
             <div class="options-row">
                 <label class="checkbox-label">
-                    <input type="checkbox"/>
+                    <input type="checkbox" id="keep-login" />
                     ログイン状態を保持する
                 </label>
-                <a class="forgot-link" href="#">パスワードをお忘れの方</a>
+                <a class="forgot-link" href="reset-password.html">パスワードをお忘れの方</a>
             </div>
 
             <!--로그인 버튼-->
@@ -64,5 +55,6 @@
             </div>
         </div>
         <script src="js/loginJS.js"></script>
-    </body>
+</body>
+
 </html>

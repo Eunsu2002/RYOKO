@@ -23,4 +23,15 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    private boolean keepLoggedIn;
+
+    public boolean isKeepLoggedIn() {
+        return keepLoggedIn;
+    }
+
+    public void setKeepLoggedIn(boolean keepLoggedIn) {
+        this.keepLoggedIn = keepLoggedIn;
+    }
+    
 }
