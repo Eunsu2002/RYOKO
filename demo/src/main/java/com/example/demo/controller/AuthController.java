@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.dto.ResetPasswordRequest;
+import com.example.demo.dto.SignupRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -33,7 +34,7 @@ public class AuthController {
             if (request.isKeepLoggedIn()) {
                 session.setMaxInactiveInterval(60 * 60 * 24 * 7); // 7일
             } else {
-                session.setMaxInactiveInterval(30); // 30초
+                session.setMaxInactiveInterval(60 * 30); // 30분
             }
 
             return ResponseEntity.ok("로그인 성공");
@@ -59,6 +60,15 @@ public class AuthController {
         try {
             authService.resetPassword(request.getEmail(), request.getNewPassword());
             return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(401).body(e.getMessage());
+        }
+    }
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
+        try {
+            authService.signup(request.getName(), request.getPhone(), request.getEmail(), request.getPassword());
+            return ResponseEntity.ok("회원가입이 완료되었습니다.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }

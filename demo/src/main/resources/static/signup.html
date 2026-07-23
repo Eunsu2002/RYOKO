@@ -183,8 +183,25 @@
                 password: passwordInput.value,
             };
 
-            console.log("회원가입 요청 데이터:", signUpData);
-            // TODO: 서버 API 연동 (fetch 등)
+            fetch("/api/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(signUpData)
+            })
+                .then(function (response) {
+                    return response.text().then(function (message) {
+                        alert(message);
+                        if (response.ok) {
+                            window.location.href = "logIn.html";
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    alert("회원가입 요청 중 오류가 발생했습니다.");
+                    console.error(error);
+                });
         }
 
         // 취소 버튼 클릭 시 홈으로 이동

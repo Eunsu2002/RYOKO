@@ -50,4 +50,17 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
+    public void signup(String name, String phone, String email, String password) {
+        if (userRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("이미 가입된 이메일입니다.");
+        }
+
+        User user = new User();
+        user.setUsername(name);
+        user.setPhoneNum(phone);
+        user.setEmail(email);
+        user.setPassword(passwordEncoder.encode(password));
+
+        userRepository.save(user);
+    }
 }
