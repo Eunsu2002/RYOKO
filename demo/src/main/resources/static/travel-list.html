@@ -8,6 +8,7 @@
   <title>한국의 여행지 | ようこそ</title>
   <link rel="stylesheet" href="css/travel-list.css" />
   <script type="module" src="js/wholeJS.js"></script>
+  <script type="module" src="js/travelListJS.js"></script>
   <!-- 추후 spring boot 등 사용 시 
   DB데이터가 들어가니 templates 폴더에 들어가야하므로 변경 필요 
   -->
@@ -57,7 +58,7 @@
     </section>
 
     <section class="search-section" aria-label="여행지 검색">
-      <form class="search-box" id="searchForm" action="#" method="get">
+      <form class="search-box" id="searchForm" method="get">
         <div class="search-top-row">
           <div class="search-input-wrap">
             <span class="search-icon">⌕</span>
@@ -70,23 +71,22 @@
         <div class="search-style-wrap">
           <p class="search-style-title">旅のスタイル</p>
           <div class="style-chip-group" role="group" aria-label="여행 스타일 선택">
-            <input type="checkbox" id="style-relax" name="styles" value="relax" class="style-chip-input" />
+            <input type="checkbox" id="style-relax" name="styles" data-bit="1" class="style-chip-input" />
             <label for="style-relax" class="style-chip-label">のんびり</label>
 
-            <input type="checkbox" id="style-sightseeing" name="styles" value="sightseeing" class="style-chip-input" />
+            <input type="checkbox" id="style-sightseeing" name="styles" data-bit="2" class="style-chip-input" />
             <label for="style-sightseeing" class="style-chip-label">観光</label>
 
-            <input type="checkbox" id="style-activity" name="styles" value="activity" class="style-chip-input" />
+            <input type="checkbox" id="style-activity" name="styles" data-bit="4" class="style-chip-input" />
             <label for="style-activity" class="style-chip-label">アクティビティ</label>
 
-            <input type="checkbox" id="style-food" name="styles" value="food" class="style-chip-input" />
+            <input type="checkbox" id="style-food" name="styles" data-bit="8" class="style-chip-input" />
             <label for="style-food" class="style-chip-label">グルメ</label>
 
-            <input type="checkbox" id="style-shopping" name="styles" value="shopping" class="style-chip-input" />
+            <input type="checkbox" id="style-shopping" name="styles" data-bit="16" class="style-chip-input" />
             <label for="style-shopping" class="style-chip-label">ショッピング</label>
 
-            <input type="checkbox" id="style-culturalExperience" name="styles" value="culturalExperience"
-              class="style-chip-input" />
+            <input type="checkbox" id="style-culturalExperience" name="styles" data-bit="32" class="style-chip-input" />
             <label for="style-culturalExperience" class="style-chip-label">文化体験</label>
 
           </div>

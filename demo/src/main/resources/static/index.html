@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/mainCSS.css">
     <script type="module" src="js/wholeJS.js"></script>
-    <script src="js/mainJS.js"></script>
+    <script type="module" src="js/mainJS.js"></script>
     <title>りょこそう</title>
 </head>
 
@@ -70,7 +70,7 @@
                 <div class="type-select-top">
                     <section>
                         <p>どこへ行きますか？</p>
-                        <input type="text" placeholder="例：釜山、ソウル、慶州">
+                        <input type="text" id="keywordInput" placeholder="例：釜山、ソウル、慶州">
                     </section>
                 </div>
 
@@ -147,10 +147,10 @@
             </div>
         </div>
 
-        <div class="ai-plan">
+        <div class="search-cta">
             <h1>韓国旅行を始めましょう</h1>
             <p>気になる旅行先を探して、新しい魅力を見つけませんか。</p>
-            <button onclick="toGoAI()">旅行先を探す</button>
+            <button id="scrollSearchBtn">旅行先を探す</button>
         </div>
     </div>
 
