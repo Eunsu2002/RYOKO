@@ -2,13 +2,14 @@ document.getElementById("login-btn").addEventListener("click", function () {
 
     const email = document.getElementById("login-email").value;
     const password = document.getElementById("login-pw").value;
+    const keepLoggedIn = document.getElementById("keep-login").checked;
 
     fetch("/api/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email: email, password: password })
+        body: JSON.stringify({ email: email, password: password, keepLoggedIn: keepLoggedIn })
     })
         .then(function (response) {
             return response.text().then(function (message) {
