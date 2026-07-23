@@ -45,5 +45,6 @@ node_modules/
 ### etc ###
 *.log
 .env
-
 src/main/resources/application.properties
+github-actions-key
+github-actions-key.pub
