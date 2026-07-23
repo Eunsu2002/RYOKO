@@ -1,3 +1,7 @@
+html {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
 body {
   background-color: #F9F9F9;
 }
@@ -307,19 +311,19 @@ b {
 }
 
 .popular-card {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .popular-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 #tour1 {
@@ -380,7 +384,7 @@ footer>section b {
   margin-bottom: 4px;
 }
 
-footer>section p {
+footer>section a {
   color: #555;
   font-size: 14px;
   margin: 0;
@@ -402,13 +406,14 @@ footer>div section b {
   margin-bottom: 4px;
 }
 
-footer>div section p {
+footer>div section a {
   color: #555;
   font-size: 14px;
   margin: 0;
   cursor: pointer;
+  text-decoration: none;
 }
 
-footer>div section p:hover {
+footer>div section a:hover {
   color: #333;
 }
