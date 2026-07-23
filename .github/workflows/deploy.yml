@@ -17,6 +17,20 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Create application.properties
+        run: |
+          cat > demo/src/main/resources/application.properties << EOF
+          spring.application.name=demo
+          spring.datasource.url=${{ secrets.DB_URL }}
+          spring.datasource.username=${{ secrets.DB_USERNAME }}
+          spring.datasource.password=${{ secrets.DB_PASSWORD }}
+          spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+          spring.jpa.hibernate.ddl-auto=validate
+          spring.jpa.show-sql=true
+          spring.jpa.properties.hibernate.format_sql=true
+          spring.jpa.open-in-view=false
+          EOF
+
       - name: Build with Maven
         run: mvn clean package -DskipTests
         working-directory: ./demo
@@ -41,4 +55,7 @@ jobs:
             pkill -f demo-0.0.1-SNAPSHOT.jar || true
             sleep 2
             cd /root
-            nohup java -jar demo-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
+            setsid nohup java -jar demo-0.0.1-SNAPSHOT.jar > app.log 2>&1 < /dev/null &
+            disown
+            sleep 3
+            echo "재시작 완료"
