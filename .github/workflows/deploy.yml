@@ -52,13 +52,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            PID=$(lsof -t -i:8080)
-            if [ -n "$PID" ]; then
-              kill $PID
-              sleep 3
-            fi
-            cd /root
-            setsid nohup java -jar demo-0.0.1-SNAPSHOT.jar > app.log 2>&1 < /dev/null &
-            disown
-            sleep 3
-            echo "재시작 완료"
+            systemctl restart ryoko
+            sleep 5
+            systemctl status ryoko --no-pager
