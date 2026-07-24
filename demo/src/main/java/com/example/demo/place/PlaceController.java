@@ -17,7 +17,7 @@ public class PlaceController {
     private final PlaceService placeService;
     private final PlaceRepository placeRepository;
 
-    // 검색기능 연결
+    // 검색기능 서비스 연결
     @GetMapping
     public List<PlaceResponse> getPlaces(
             @RequestParam(required = false) String keyword
