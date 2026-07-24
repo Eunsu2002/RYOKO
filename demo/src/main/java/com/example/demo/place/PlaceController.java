@@ -13,11 +13,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlaceController {
 
+    private PlaceService placeService;
 
-    // 요청받으면 여행지 리스트 페이지 죽 응답
+    // 요청받을 시 리스트 반환
     @GetMapping
     public List<PlaceResponse> getPlaces() {
-
-    }
-
+        return placeService.getPlaces();    }
 }
