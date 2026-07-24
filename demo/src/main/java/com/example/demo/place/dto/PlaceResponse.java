@@ -10,14 +10,14 @@ public record PlaceResponse(
          int id,
          String pName,
          String body,
-         String style,
+         Integer style,
          String category,
          Float pLocationLat,
          Float pLocationLng,
          Float avgStar,
          Integer reviewCount
 ) {
-    public static PlaceResponse from(Place place) {
+    public static PlaceResponse f   rom(Place place) {
         return new PlaceResponse(
                 place.getId(),
                 place.getPName(),
