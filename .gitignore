@@ -1,1 +1,4 @@
-.vagrant/ 
+github-actions-key
+github-actions-key.pub
+demo/src/main/resources/application.properties
+demo/target/
