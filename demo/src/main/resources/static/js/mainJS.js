@@ -9,6 +9,7 @@ function scrollToSearch() {
 // 메인 페이지 검색 카드(목적지 입력 + 여행 스타일 체크박스) → travel-list 페이지 검색 이동
 function initMainSearch() {
     const searchBtn = document.querySelector('.type-select .search-btn');
+    const popularCards = document.querySelectorAll(".popular-card");
     const keywordInput = document.getElementById('keywordInput');
 
     if (searchBtn && keywordInput) {
@@ -21,6 +22,19 @@ function initMainSearch() {
             performSearch(keyword, styles);
         });
     }
+
+    popularCards.forEach((card) => {
+        card.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            const text = card.querySelector("p");
+            if (!text) return;
+
+            performSearch(text.textContent.trim());
+        });
+
+    });
+
 
     // 버튼을 누르면 메인 페이지 상단 검색 카드 영역으로 스크롤 이동
     const scrollSearchBtn = document.getElementById("scrollSearchBtn");

@@ -46,7 +46,7 @@ export function calculateStylesBitmask(styleCheckboxes) {
 }
 
 // 검색어 + 스타일 비트 플래그를 URL 쿼리로 만들어 검색
-export function performSearch(keyword, styles) {
+export function performSearch(keyword = "", styles = 0) {
     const params = new URLSearchParams();
 
     if (keyword) {
