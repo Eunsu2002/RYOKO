@@ -203,9 +203,8 @@ h1 {
 .type-select-bottom label {
   padding: 8px 20px;
   border-radius: 20px;
-  border: 0.5px solid #5B5A5A;
   background: rgba(217, 217, 217);
-  color: #000000;
+  color: #414141;
   display: inline-flex;
   align-items: center;
   font-size: 14px;
@@ -236,8 +235,8 @@ h1 {
 
 /* 선택된 상태 */
 .type-select-bottom .style-checkbox:checked+label {
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
+  background: #5B5A5A;
+  color: #fff;
   font-weight: 600;
 }
 
