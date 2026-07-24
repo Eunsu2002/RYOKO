@@ -15,20 +15,26 @@ public class PlaceService {
 
     private final PlaceRepository placeRepository;
 
-    // 여행지 전체 조회
-    public List<PlaceResponse> getPlaces() {
-        return placeRepository.findAll()
-                .stream()
+    // 여행지 조회
+    public List<PlaceResponse> getPlaces(String keyword) {
+        List<Place> places;
+        // 키워드가 null 값이나 공백이라면 모든 항목을 repository에서 조회
+        if ( keyword == null || keyword.isBlank() ) {
+            places = placeRepository.findAll();
+            // 키워드가 있으면 repository에서 만든 메서드 사용해서 받은 값 공백 제거하고 조회
+        } else {
+            places = placeRepository.searchByKeyword(keyword.trim());
+        }
+        // 조건문을 지난 places를 List로 반환
+        return places.stream()
                 .map(PlaceResponse::from)
                 .toList();
-    }
 
-//    키워드 검색
-    public
+    }
 
 //    지역·카테고리·스타일 필터
 //    평점·리뷰 수 정렬
-//    페이징
+//    페이지네이션
 //    대표 사진 조회
 
 }
