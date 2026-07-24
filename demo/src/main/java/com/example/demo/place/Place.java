@@ -24,7 +24,7 @@ public class Place {
     private String body;
 
     @Column(name = "style")
-    private String style;
+    private Integer style;
 
     @Column(name = "category")
     private String category;
