@@ -10,15 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     center: new naver.maps.LatLng(37.5665, 126.9780),
     zoom: 15,
     minZoom: 1,
-    mapTypeControl: true,
-    mapTypeControlOptions: {
-      style: naver.maps.MapTypeControlStyle.BUTTON,
-      position: naver.maps.Position.TOP_LEFT
-    },
-    zoomControl: true,
-    zoomControlOptions: {
-      position: naver.maps.Position.TOP_RIGHT
-    }
+    mapTypeControl: false,   // 일반/위성 버튼 숨김
+    zoomControl: false       // 확대/축소 버튼 숨김 (디자인에 없으므로)
   });
  
   var marker = new naver.maps.Marker({
