@@ -1,10 +1,6 @@
 package com.example.demo.place.dto;
 
-
 import com.example.demo.place.Place;
-import jakarta.persistence.Column;
-
-import java.time.LocalDateTime;
 
 public record PlaceResponse(
          int id,
@@ -12,6 +8,7 @@ public record PlaceResponse(
          String body,
          Integer style,
          String category,
+         String address,
          Float pLocationLat,
          Float pLocationLng,
          Float avgStar,
@@ -24,6 +21,7 @@ public record PlaceResponse(
                 place.getBody(),
                 place.getStyle(),
                 place.getCategory(),
+                place.getAddress(),
                 place.getPLocationLat(),
                 place.getPLocationLng(),
                 place.getAvgStar(),
