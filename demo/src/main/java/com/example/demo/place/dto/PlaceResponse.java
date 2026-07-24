@@ -17,7 +17,7 @@ public record PlaceResponse(
          Float avgStar,
          Integer reviewCount
 ) {
-    public static PlaceResponse f   rom(Place place) {
+    public static PlaceResponse from(Place place) {
         return new PlaceResponse(
                 place.getId(),
                 place.getPName(),

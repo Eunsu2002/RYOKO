@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlaceController {
 
-    private PlaceService placeService;
+    private final PlaceService placeService;
 
     // 요청받을 시 리스트 반환
     @GetMapping
