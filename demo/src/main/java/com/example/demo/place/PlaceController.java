@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/place")
+@RequestMapping("/api/places")
 @RequiredArgsConstructor
 public class PlaceController {
 
@@ -18,5 +18,6 @@ public class PlaceController {
     // 요청받을 시 리스트 반환
     @GetMapping
     public List<PlaceResponse> getPlaces() {
-        return placeService.getPlaces();    }
+        return placeService.getPlaces();
+    }
 }
