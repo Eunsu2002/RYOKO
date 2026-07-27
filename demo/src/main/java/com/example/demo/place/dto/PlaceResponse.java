@@ -2,6 +2,8 @@ package com.example.demo.place.dto;
 
 import com.example.demo.place.Place;
 
+import java.time.LocalDateTime;
+
 public record PlaceResponse(
          int id,
          String pName,
@@ -12,7 +14,11 @@ public record PlaceResponse(
          Float pLocationLat,
          Float pLocationLng,
          Float avgStar,
-         Integer reviewCount
+         Integer reviewCount,
+         String operatingHours,
+         String recommendedSchedule,
+         LocalDateTime createdAt,
+         LocalDateTime updatedAt
 ) {
     public static PlaceResponse from(Place place) {
         return new PlaceResponse(
@@ -25,7 +31,11 @@ public record PlaceResponse(
                 place.getPLocationLat(),
                 place.getPLocationLng(),
                 place.getAvgStar(),
-                place.getReviewCount()
+                place.getReviewCount(),
+                place.getOperatingHours(),
+                place.getRecommendedSchedule(),
+                place.getCreatedAt(),
+                place.getUpdatedAt()
         );
     }
 
