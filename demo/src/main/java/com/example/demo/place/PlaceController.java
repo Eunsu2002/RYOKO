@@ -3,12 +3,7 @@ package com.example.demo.place;
 import com.example.demo.place.dto.PlaceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/places")
@@ -30,10 +25,10 @@ public class PlaceController {
     }
 
     // 각 여행 세부 페이지 연결
-    @GetMapping("/places/{id}")
-    public List<Place> getPlace(Integer id) {
+    @GetMapping("/{id}")
+    public PlaceResponse getPlace(@PathVariable Integer id) {
         // service에서 request 받은 id를 넣어서 받은 값을 JSON으로 넘김
-        return
+        return placeService.getPlaceDetail(id);
     }
 
 }

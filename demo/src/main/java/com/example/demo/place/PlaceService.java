@@ -9,11 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
-
-import static com.example.demo.place.SortOption.STAR_DESC;
 
 @Service
 @RequiredArgsConstructor
@@ -42,11 +38,12 @@ public class PlaceService {
 //    대표 사진 조회
 
     // 여행지 세부 페이지 내용 담기
-    public List<Place> placeDetail() {
-        // REQ를 유저에게 받고,
+    public PlaceResponse getPlaceDetail(Integer id) {
+        Place place = placeRepository.findById(id)
+                .orElseThrow();
+        // 나중에 custom Exception 만들어서 넣기
 
+        return PlaceResponse.from(place);
     }
-
-
 
 }
