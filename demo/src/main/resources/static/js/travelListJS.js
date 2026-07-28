@@ -47,8 +47,8 @@ function applyParamsToForm(keywordInput, styleCheckboxes) {
 }
 
 
-/*
-// 현재 폼 조건으로 /api/travels를 호출해 검색 결과를 travel-grid에 렌더링
+
+// 현재 폼 조건으로 /api/places를 호출해 검색 결과를 travel-grid에 렌더링
 async function fetchAndRenderResults(keywordInput, styleCheckboxes) {
   const grid = document.getElementById("travelGrid");
   if (!grid) return;
@@ -65,7 +65,7 @@ async function fetchAndRenderResults(keywordInput, styleCheckboxes) {
   }
 
   try {
-    const response = await fetch(`/api/travels?${params.toString()}`);
+    const response = await fetch(`/api/places?${params.toString()}`);
     if (!response.ok) {
       throw new Error(`검색 요청 실패: ${response.status}`);
     }
@@ -116,7 +116,6 @@ function createTravelCardHtml(place) {
     </article>
   `;
 }
-  */
 
 // 검색 결과(장소명/주소/설명)에 HTML 태그가 섞여 들어오는 것을 방지하기 위한 최소한의 escape
 function escapeHtml(text) {
