@@ -34,6 +34,13 @@ public class PlaceService {
 
     }
 
+    // 여행지 단건 조회
+    public PlaceResponse getPlace(int id) {
+        Place place = placeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 여행지입니다. id=" + id));
+        return PlaceResponse.from(place);
+    }
+
     // 지역·카테고리·스타일 필터
     // 평점·리뷰 수 정렬
     // 페이지네이션
