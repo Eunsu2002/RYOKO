@@ -42,11 +42,13 @@ public class AuthController {
             return ResponseEntity.status(401).body(e.getMessage());
         }
     }
+
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();
         return ResponseEntity.ok("로그아웃 성공");
     }
+
     @GetMapping("/me")
     public ResponseEntity<?> me(HttpSession session) {
         Object userId = session.getAttribute("userId");
@@ -55,6 +57,7 @@ public class AuthController {
         }
         return ResponseEntity.ok(userId);
     }
+
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
         try {
@@ -64,6 +67,7 @@ public class AuthController {
             return ResponseEntity.status(401).body(e.getMessage());
         }
     }
+
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
         try {

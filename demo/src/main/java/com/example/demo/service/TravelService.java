@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.DAO.ReviewDao;
-import com.example.demo.DAO.TravelDao;
+import com.example.demo.dao.ReviewDao;
+import com.example.demo.dao.TravelDao;
 import com.example.demo.entity.Review;
 import com.example.demo.entity.Travel;
 
