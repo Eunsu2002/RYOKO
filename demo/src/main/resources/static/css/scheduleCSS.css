@@ -19,21 +19,31 @@
    - 기본 폰트, 색상, 배경색 지정
 ───────────────────────────────────────────────────── */
 * {
-  box-sizing: border-box; /* padding이 요소 너비 안에 포함됨 */
-  margin: 0;              /* 기본 바깥 여백 제거 */
-  padding: 0;             /* 기본 안쪽 여백 제거 */
+  box-sizing: border-box;
+  /* padding이 요소 너비 안에 포함됨 */
+  margin: 0;
+  /* 기본 바깥 여백 제거 */
+  padding: 0;
+  /* 기본 안쪽 여백 제거 */
 }
 
 body {
-  font-family: 'Noto SansJP', sans-serif; /* 한글 최적화 폰트 */
-  color: #1a1a1a;   /* 기본 글자색 (거의 검정) */
-  background: #fff; /* 배경색 흰색 */
+  font-family: 'Noto SansJP', sans-serif;
+  /* 한글 최적화 폰트 */
+  color: #1a1a1a;
+  /* 기본 글자색 (거의 검정) */
+  background: #fff;
+  /* 배경색 흰색 */
+  margin: 8px;
+
 }
 
 /* 링크 기본 스타일 제거 */
 a {
-  text-decoration: none; /* 밑줄 제거 */
-  color: inherit;        /* 부모 요소의 색상 상속 */
+  text-decoration: none;
+  /* 밑줄 제거 */
+  color: inherit;
+  /* 부모 요소의 색상 상속 */
 }
 
 
@@ -43,6 +53,8 @@ a {
    - 좌: 로고 / 가운데: 메뉴 링크 / 우: 로그인 버튼
 ───────────────────────────────────────────────────── */
 nav {
+  box-sizing: content-box;
+  font-family: "Noto Sans JP", sans-serif;
   display: flex;
   position: sticky;
   top: 0;
@@ -102,6 +114,8 @@ nav img {
   font-weight: 500;
   padding: 7px 16px;
   border-radius: 20px;
+  border: 1px solid transparent;
+  /* ← 추가: hover 때 크기 안 변하게 */
 }
 
 .nav-links a#loginBtn:hover {
@@ -132,16 +146,19 @@ nav img {
    - 노란색 배경, 큰 제목과 부제목
 ───────────────────────────────────────────────────── */
 .hero {
-  background: #FFBA25;        /* 브랜드 노란색 배경 */
+  background: #FFBA25;
+  /* 브랜드 노란색 배경 */
   opacity: 0.9;
-  padding: 100px 64px 48px;   /* 위쪽: navbar 높이(64px) + 추가 여백, 좌우, 아래 여백 */
+  padding: 100px 64px 48px;
+  /* 위쪽: navbar 높이(64px) + 추가 여백, 좌우, 아래 여백 */
 }
 
 /* 메인 제목 */
 .hero h1 {
   font-size: 42px;
   color: #ffffff;
-  font-weight: 800;   /* 가장 굵은 굵기 */
+  font-weight: 800;
+  /* 가장 굵은 굵기 */
   margin-bottom: 10px;
 }
 
@@ -158,7 +175,8 @@ nav img {
 
 .map-section {
   position: relative;
-  padding: 0 64px 32px; /* 다른 섹션들과 좌우 여백 통일 */
+  padding: 0 64px 32px;
+  /* 다른 섹션들과 좌우 여백 통일 */
 }
 
 /* 지도 자체에 둥근 모서리 + 그림자 */
@@ -174,7 +192,8 @@ nav img {
    padding이 생긴 만큼 top/left 값 재조정 */
 .map-searchbar {
   position: absolute;
-  top: 34px;   /* 기존 14px + padding 20px 보정 */
+  top: 34px;
+  /* 기존 14px + padding 20px 보정 */
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -198,37 +217,46 @@ nav img {
 /* 섹션 전체 여백 및 구분선 */
 .featured-section {
   padding: 28px 64px;
-  border-bottom: 1px solid #f0f0f0; /* 아래 구분선 */
+  border-bottom: 1px solid #f0f0f0;
+  /* 아래 구분선 */
 }
 
 /* 이미지 + 텍스트를 가로로 나란히 배치 */
 .featured-card {
   display: flex;
-  align-items: flex-start; /* 세로 기준: 위쪽 정렬 */
-  gap: 24px;               /* 이미지와 텍스트 사이 간격 */
+  align-items: flex-start;
+  /* 세로 기준: 위쪽 정렬 */
+  gap: 24px;
+  /* 이미지와 텍스트 사이 간격 */
 }
 
 /* 왼쪽 이미지 박스 */
 .featured-img {
   width: 250px;
   height: 160px;
-  border-radius: 12px;  /* 모서리 둥글게 */
-  overflow: hidden;     /* 둥근 모서리 밖으로 이미지가 나가지 않도록 */
-  flex-shrink: 0;       /* 이미지가 찌그러지지 않도록 고정 */
-  background: #1a1a3e;  /* 이미지 로딩 전 배경색 */
+  border-radius: 12px;
+  /* 모서리 둥글게 */
+  overflow: hidden;
+  /* 둥근 모서리 밖으로 이미지가 나가지 않도록 */
+  flex-shrink: 0;
+  /* 이미지가 찌그러지지 않도록 고정 */
+  background: #1a1a3e;
+  /* 이미지 로딩 전 배경색 */
 }
 
 /* 이미지 태그 스타일 */
 .featured-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지가 박스를 꽉 채우도록 잘라내기 */
+  object-fit: cover;
+  /* 이미지가 박스를 꽉 채우도록 잘라내기 */
   display: block;
 }
 
 /* 오른쪽 텍스트 영역 */
 .featured-info {
-  flex: 1; /* 남은 공간 모두 차지 */
+  flex: 1;
+  /* 남은 공간 모두 차지 */
 }
 
 /* 여행지 제목 */
@@ -249,7 +277,8 @@ nav img {
 .featured-desc {
   font-size: 13px;
   color: #777;
-  line-height: 1.75; /* 줄 간격 */
+  line-height: 1.75;
+  /* 줄 간격 */
   margin-bottom: 16px;
 }
 
@@ -257,7 +286,8 @@ nav img {
 .featured-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 양쪽 끝에 배치 */
+  justify-content: space-between;
+  /* 양쪽 끝에 배치 */
 }
 
 /* 리뷰 수 텍스트 */
@@ -270,7 +300,8 @@ nav img {
 .btn-detail {
   font-size: 13px;
   font-weight: 700;
-  color: #FF9900; /* 주황색 강조 */
+  color: #FF9900;
+  /* 주황색 강조 */
 }
 
 
@@ -282,14 +313,16 @@ nav img {
 
 /* 섹션 전체 배경 및 여백 */
 .schedule-section {
-  background: #FFF8E1; /* 연한 노란색 배경 */
+  background: #FFF8E1;
+  /* 연한 노란색 배경 */
   padding: 40px 64px 56px;
 }
 
 /* 달력과 카드를 가로로 배치 */
 .schedule-inner {
   display: flex;
-  gap: 36px;           /* 달력과 카드 사이 간격 */
+  gap: 36px;
+  /* 달력과 카드 사이 간격 */
   align-items: flex-start;
 }
 
@@ -297,12 +330,14 @@ nav img {
 
 /* 달력 전체를 감싸는 흰색 박스 */
 .calendar-widget {
-  flex-shrink: 0;       /* 크기 고정 (찌그러지지 않음) */
+  flex-shrink: 0;
+  /* 크기 고정 (찌그러지지 않음) */
   width: 240px;
   background: #fff;
   border-radius: 16px;
   padding: 20px 18px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); /* 부드러운 그림자 */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  /* 부드러운 그림자 */
 }
 
 /* 달력 상단: 이전/다음 화살표 + 연월 텍스트 */
@@ -332,13 +367,15 @@ nav img {
 }
 
 .cal-nav-btn:hover {
-  background: #e0e0e0; /* 마우스 올릴 때 배경 변경 */
+  background: #e0e0e0;
+  /* 마우스 올릴 때 배경 변경 */
 }
 
 /* 요일 헤더 (S M T W T F S) */
 .cal-weekdays {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7등분 */
+  grid-template-columns: repeat(7, 1fr);
+  /* 7등분 */
   margin-bottom: 6px;
   text-align: center;
 }
@@ -351,14 +388,20 @@ nav img {
 }
 
 /* 일요일(첫 번째) 빨간색 */
-.cal-weekdays span:first-child { color: #ef5350; }
+.cal-weekdays span:first-child {
+  color: #ef5350;
+}
+
 /* 토요일(마지막) 파란색 */
-.cal-weekdays span:last-child  { color: #42a5f5; }
+.cal-weekdays span:last-child {
+  color: #42a5f5;
+}
 
 /* 날짜 숫자 그리드 */
 .cal-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7열 */
+  grid-template-columns: repeat(7, 1fr);
+  /* 7열 */
   gap: 1px;
 }
 
@@ -367,27 +410,36 @@ nav img {
   text-align: center;
   font-size: 12px;
   padding: 6px 2px;
-  border-radius: 50%; /* 원형으로 만들기 위한 준비 */
+  border-radius: 50%;
+  /* 원형으로 만들기 위한 준비 */
   cursor: pointer;
 }
 
 .cal-day:hover {
-  background: #fff3cd; /* 마우스 올릴 때 연한 노란색 */
+  background: #fff3cd;
+  /* 마우스 올릴 때 연한 노란색 */
 }
 
 /* 다른 달 날짜: 연하게 표시 */
-.cal-day.other { color: #ddd; }
+.cal-day.other {
+  color: #ddd;
+}
 
 /* 일요일: 빨간색 */
-.cal-day.sun { color: #ef5350; }
+.cal-day.sun {
+  color: #ef5350;
+}
 
 /* 토요일: 파란색 */
-.cal-day.sat { color: #42a5f5; }
+.cal-day.sat {
+  color: #42a5f5;
+}
 
 /* 오늘 날짜: 주황색 원형 배경 */
 .cal-day.today {
   background: #FF9900;
-  color: #fff !important; /* !important로 sun/sat 색상 덮어쓰기 */
+  color: #fff !important;
+  /* !important로 sun/sat 색상 덮어쓰기 */
   font-weight: 700;
 }
 
@@ -401,7 +453,8 @@ nav img {
 
 /* 카드 그리드 전체를 감싸는 컨테이너 */
 .schedule-cards {
-  flex: 1; /* 남은 공간 모두 차지 */
+  flex: 1;
+  /* 남은 공간 모두 차지 */
 }
 
 /* 카드 그리드 위, "일정 추가" 버튼을 담는 헤더 줄 */
@@ -435,7 +488,8 @@ nav img {
    일정 추가/수정 모달
 ───────────────────────────────────────────────────── */
 .modal-overlay {
-  display: none; /* 기본은 숨김, .open이 붙으면 보임 */
+  display: none;
+  /* 기본은 숨김, .open이 붙으면 보임 */
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
@@ -443,11 +497,11 @@ nav img {
   justify-content: center;
   z-index: 1000;
 }
- 
+
 .modal-overlay.open {
   display: flex;
 }
- 
+
 .modal-box {
   background: #fff;
   width: 90%;
@@ -456,13 +510,13 @@ nav img {
   padding: 22px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
- 
+
 .modal-box h3 {
   margin-bottom: 16px;
   font-size: 16px;
   font-weight: 800;
 }
- 
+
 .modal-box label {
   display: block;
   margin: 12px 0 6px;
@@ -470,7 +524,7 @@ nav img {
   font-weight: 700;
   color: #374151;
 }
- 
+
 .modal-box input[type="text"],
 .modal-box input[type="time"],
 .modal-box textarea {
@@ -482,28 +536,28 @@ nav img {
   font-size: 13px;
   outline: none;
 }
- 
+
 .modal-box textarea {
   height: 80px;
   resize: vertical;
 }
- 
+
 .modal-time-row {
   display: flex;
   gap: 10px;
 }
- 
-.modal-time-row > div {
+
+.modal-time-row>div {
   flex: 1;
 }
- 
+
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
   margin-top: 20px;
 }
- 
+
 .modal-actions button {
   padding: 9px 16px;
   border: none;
@@ -512,22 +566,24 @@ nav img {
   font-weight: 700;
   cursor: pointer;
 }
- 
+
 #planCancelBtn {
   background: #f3f4f6;
   color: #374151;
 }
- 
+
 #planSaveBtn {
   background: #FFBE00;
   color: #1a1a1a;
 }
- 
+
 /* 3열 카드 배치 */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3등분 */
-  gap: 14px; /* 카드 사이 간격 */
+  grid-template-columns: repeat(3, 1fr);
+  /* 3등분 */
+  gap: 14px;
+  /* 카드 사이 간격 */
 }
 
 /* 개별 일정 카드 */
@@ -535,15 +591,30 @@ nav img {
   background: #fff;
   border-radius: 12px;
   padding: 14px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07); /* 부드러운 그림자 */
-  border-left: 3px solid #FFBE00;              /* 왼쪽 색상 강조선 */
-  position: relative; /* 내부 버튼을 절대 위치로 배치하기 위한 기준점 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  /* 부드러운 그림자 */
+  border-left: 3px solid #FFBE00;
+  /* 왼쪽 색상 강조선 */
+  position: relative;
+  /* 내부 버튼을 절대 위치로 배치하기 위한 기준점 */
 }
 
 /* 카드별로 왼쪽 강조선 색상 변경 (구분용) */
-.s-card:nth-child(4) { border-left-color: #66bb6a; } /* 녹색 */
-.s-card:nth-child(5) { border-left-color: #ef5350; } /* 빨간색 */
-.s-card:nth-child(6) { border-left-color: #42a5f5; } /* 파란색 */
+.s-card:nth-child(4) {
+  border-left-color: #66bb6a;
+}
+
+/* 녹색 */
+.s-card:nth-child(5) {
+  border-left-color: #ef5350;
+}
+
+/* 빨간색 */
+.s-card:nth-child(6) {
+  border-left-color: #42a5f5;
+}
+
+/* 파란색 */
 
 /* 편집/삭제 버튼을 오른쪽 상단에 절대 위치로 배치 */
 .s-card-actions {
@@ -558,7 +629,8 @@ nav img {
 .s-card-btn {
   width: 22px;
   height: 22px;
-  border-radius: 50%; /* 원형 버튼 */
+  border-radius: 50%;
+  /* 원형 버튼 */
   background: #f5f5f5;
   border: none;
   cursor: pointer;
@@ -576,7 +648,8 @@ nav img {
   font-weight: 700;
   color: #FF9900;
   margin-bottom: 6px;
-  padding-right: 50px; /* 오른쪽 버튼과 겹치지 않도록 여백 */
+  padding-right: 50px;
+  /* 오른쪽 버튼과 겹치지 않도록 여백 */
 }
 
 /* 카드 내부: 장소명 */
@@ -584,7 +657,8 @@ nav img {
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 3px;
-  padding-right: 50px; /* 오른쪽 버튼과 겹치지 않도록 여백 */
+  padding-right: 50px;
+  /* 오른쪽 버튼과 겹치지 않도록 여백 */
 }
 
 /* 카드 내부: 부가 설명 */
@@ -607,34 +681,57 @@ nav img {
   padding: 0;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   max-height: 240px;
   overflow-y: auto;
   z-index: 500;
 }
+
 .search-result-item {
   padding: 10px 14px;
   cursor: pointer;
   border-bottom: 1px solid #f0f0f0;
 }
-.search-result-item:hover { background: #fafafa; }
+
+.search-result-item:hover {
+  background: #fafafa;
+}
+
 .search-result-item .addr {
   display: block;
   font-size: 12px;
   color: #888;
 }
-.search-empty { padding: 12px 14px; color: #999; font-size: 13px; }
+
+.search-empty {
+  padding: 12px 14px;
+  color: #999;
+  font-size: 13px;
+}
 
 .place-popup {
   width: 220px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
-.place-popup .popup-body { padding: 10px 12px; }
-.place-popup h4 { margin: 0 0 4px; font-size: 14px; }
-.place-popup .popup-sub { font-size: 12px; color: #888; margin: 0 0 8px; }
+
+.place-popup .popup-body {
+  padding: 10px 12px;
+}
+
+.place-popup h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.place-popup .popup-sub {
+  font-size: 12px;
+  color: #888;
+  margin: 0 0 8px;
+}
+
 .place-popup .popup-actions button {
   width: 100%;
   padding: 6px 0;
@@ -652,6 +749,7 @@ nav img {
   overflow-y: auto;
   position: relative;
 }
+
 .modal-close {
   position: absolute;
   top: 12px;
@@ -671,17 +769,20 @@ nav img {
 ───────────────────────────────────────────────────── */
 footer {
   background: #fff;
-  border-top: 1px solid #e0e0e0; /* 상단 구분선 */
+  border-top: 1px solid #e0e0e0;
+  /* 상단 구분선 */
   padding: 48px 64px 32px;
 }
 
 /* 4열 그리드 레이아웃 */
 .footer-inner {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr; /* 브랜드 영역을 2배 너비로 */
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  /* 브랜드 영역을 2배 너비로 */
   gap: 48px;
   max-width: 1100px;
-  margin: 0 auto; /* 가운데 정렬 */
+  margin: 0 auto;
+  /* 가운데 정렬 */
 }
 
 /* 푸터 로고 텍스트 */
@@ -719,7 +820,8 @@ footer {
 }
 
 .footer-social a:hover {
-  background: #FFBE00; /* 마우스 올릴 때 노란색 배경 */
+  background: #FFBE00;
+  /* 마우스 올릴 때 노란색 배경 */
 }
 
 /* 링크 컬럼 제목 */
@@ -731,10 +833,12 @@ footer {
 
 /* 링크 목록 */
 .footer-col ul {
-  list-style: none; /* 기본 점(bullet) 제거 */
+  list-style: none;
+  /* 기본 점(bullet) 제거 */
   display: flex;
   flex-direction: column;
-  gap: 9px; /* 링크 사이 간격 */
+  gap: 9px;
+  /* 링크 사이 간격 */
 }
 
 /* 개별 링크 */
@@ -744,7 +848,8 @@ footer {
 }
 
 .footer-col ul li a:hover {
-  color: #FF9900; /* 마우스 올릴 때 주황색 */
+  color: #FF9900;
+  /* 마우스 올릴 때 주황색 */
 }
 
 /* 저작권 표시 하단 바 */

@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+/* 스크롤 여백 만들기 */
+html {
+  overflow-y: scroll;
+}
+
 /* 전체 페이지 기본 설정 */
 body {
   font-family: 'Noto Sans JP', sans-serif;
@@ -22,6 +27,7 @@ body {
 ──────────────────────────────── */
 
 nav {
+  box-sizing: content-box;
   display: flex;
   position: sticky;
   top: 0;
@@ -81,6 +87,8 @@ nav img {
   font-weight: 500;
   padding: 7px 16px;
   border-radius: 20px;
+  border: 1px solid transparent;
+  /* ← 추가: hover 때 크기 안 변하게 */
 }
 
 .nav-links a#loginBtn:hover {
