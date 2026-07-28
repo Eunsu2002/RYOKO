@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="css/scheduleCSS.css">
   <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=14nm107dsy"></script>
   <script type="module" src="js/wholeJS.js"></script>
+  <script type="module" src="js/placeDetailRenderer.js"></script>
   <script type="module" src="js/scheduleJS.js"></script>
 </head>
 
@@ -84,6 +85,7 @@
       <input type="text" id="searchInput" placeholder="Search here" />
       <span id="searchBtn" style="cursor:pointer;">検索</span>
     </div>
+    <ul id="searchResultBox" class="search-result-box"></ul>
 
     <div id="map"></div>
 
@@ -248,8 +250,11 @@
     <div class="modal-box">
       <h3 id="planModalTitle">일정 추가</h3>
 
-      <label for="planTitleInput">제목</label>
+      <label for="planTitleInput">여행지</label>
       <input type="text" id="planTitleInput" placeholder="예: 景福宮" />
+
+      <label for="planDateInput">날짜</label>
+      <input type="date" id="planDateInput" />
 
       <div class="modal-time-row">
         <div>
@@ -269,6 +274,13 @@
         <button type="button" id="planCancelBtn">취소</button>
         <button type="button" id="planSaveBtn">저장</button>
       </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="detailModalOverlay">
+    <div class="modal-box detail-modal-box">
+      <button type="button" class="modal-close" id="detailModalCloseBtn">✕</button>
+      <div id="detailModalContent"></div>
     </div>
   </div>
 

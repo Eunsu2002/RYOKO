@@ -1,7 +1,9 @@
-package com.example.demo.plan;
+package com.example.demo.service;
+import com.example.demo.entity.Plan;
+import com.example.demo.repository.PlanRepository;
 
-import com.example.demo.plan.dto.PlanRequest;
-import com.example.demo.plan.dto.PlanResponse;
+import com.example.demo.dto.PlanRequest;
+import com.example.demo.dto.PlanResponse;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

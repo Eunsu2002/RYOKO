@@ -3,64 +3,132 @@
 // - 달력 렌더링
 // - /api/plans 연동 (조회 / 추가·수정은 모달 팝업 / 삭제)
  
+import { renderPlaceDetail } from './placeDetailRenderer.js';
+
 // ===================== 네이버 지도 + 검색 =====================
  
+let map, marker;
+let currentPopup = null; // 지도 위 place-popup InfoWindow (한 번에 하나만)
+
 document.addEventListener('DOMContentLoaded', function () {
-  var map = new naver.maps.Map('map', {
+  map = new naver.maps.Map('map', {
     center: new naver.maps.LatLng(37.5665, 126.9780),
     zoom: 15,
     minZoom: 1,
-    mapTypeControl: false,   // 일반/위성 버튼 숨김
-    zoomControl: false       // 확대/축소 버튼 숨김 (디자인에 없으므로)
+    mapTypeControl: false,
+    zoomControl: false
   });
- 
-  var marker = new naver.maps.Marker({
+
+  marker = new naver.maps.Marker({
     position: map.getCenter(),
     map: map
   });
- 
-  var infowindow = new naver.maps.InfoWindow({
-    anchorSize: new naver.maps.Size(15, 5),
-    pixelOffset: new naver.maps.Point(0, -10)
-  });
- 
-  function searchAddress() {
-    var query = document.getElementById('searchInput').value;
-    if (!query) return;
- 
-    naver.maps.Service.geocode({ query: query }, function (status, response) {
-      if (status !== naver.maps.Service.Status.OK) {
-        alert('검색 결과가 없습니다.');
-        return;
-      }
- 
-      var result = response.v2.addresses[0];
-      if (!result) {
-        alert('검색 결과가 없습니다.');
-        return;
-      }
- 
-      var point = new naver.maps.LatLng(result.y, result.x);
- 
-      map.setCenter(point);
-      map.setZoom(17);
-      marker.setPosition(point);
- 
-      infowindow.setContent(
-        '<div style="padding:10px;">' +
-        '<h4>' + query + '</h4>' +
-        '<p>' + (result.roadAddress || result.jibunAddress) + '</p>' +
-        '</div>'
-      );
-      infowindow.open(map, marker);
-    });
-  }
- 
-  document.getElementById('searchBtn').addEventListener('click', searchAddress);
+
+  document.getElementById('searchBtn').addEventListener('click', searchPlaces);
   document.getElementById('searchInput').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') searchAddress();
+    if (e.key === 'Enter') searchPlaces();
   });
 });
+
+// ===== DB 검색 (기존 geocode 검색 대체) =====
+
+async function searchPlaces() {
+  const keyword = document.getElementById('searchInput').value.trim();
+  const box = document.getElementById('searchResultBox');
+
+  if (!keyword) {
+    box.innerHTML = '';
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/places?keyword=${encodeURIComponent(keyword)}`);
+    if (!res.ok) throw new Error('검색에 실패했습니다.');
+    const places = await res.json();
+
+    if (places.length === 0) {
+      box.innerHTML = '<li class="search-empty">검색 결과가 없습니다.</li>';
+      return;
+    }
+
+    box.innerHTML = places.map(p => `
+      <li class="search-result-item" data-id="${p.id}">
+        📍 ${p.pName}
+        <span class="addr">${p.address}</span>
+      </li>
+    `).join('');
+
+    box.querySelectorAll('.search-result-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const place = places.find(p => p.id === Number(item.dataset.id));
+        if (place) selectPlace(place);
+        box.innerHTML = '';
+        document.getElementById('searchInput').value = place.pName;
+      });
+    });
+  } catch (err) {
+    box.innerHTML = `<li class="search-empty">${err.message}</li>`;
+  }
+}
+
+// ===== 지도 위 place-popup 카드 =====
+
+function selectPlace(place) {
+  const position = new naver.maps.LatLng(place.pLocationLat, place.pLocationLng);
+  map.setCenter(position);
+  map.setZoom(16);
+  marker.setPosition(position);
+
+  if (currentPopup) currentPopup.close();
+
+  const content = `
+    <div class="place-popup">
+      <div class="popup-body">
+        <h4>${place.pName}</h4>
+        <p class="popup-sub">${place.address}</p>
+        <div class="popup-actions">
+          <button class="icon-btn" data-action="detail">상세보기</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  currentPopup = new naver.maps.InfoWindow({
+    content,
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+    disableAnchor: true,
+    pixelOffset: new naver.maps.Point(0, -10)
+  });
+
+  currentPopup.open(map, position);
+
+  // InfoWindow 콘텐츠는 매번 새로 그려지므로 열릴 때마다 리스너 재연결
+  naver.maps.Event.addListener(currentPopup, 'domready', () => {
+    const btn = document.querySelector('.place-popup [data-action="detail"]');
+    if (btn) btn.addEventListener('click', () => openDetailModal(place.id));
+  });
+}
+
+// ===== 상세 모달 =====
+
+async function openDetailModal(placeId) {
+  const res = await fetch(`/api/places/${placeId}`);
+  if (!res.ok) { alert('상세 정보를 불러오지 못했습니다.'); return; }
+  const place = await res.json();
+
+  document.getElementById('detailModalContent').innerHTML = renderPlaceDetail(place, { showMap: false });
+  document.getElementById('detailModalOverlay').classList.add('open');
+
+  document.querySelector('#detailModalContent .schedule-btn')?.addEventListener('click', () => {
+    closeDetailModal();
+    openPlanModal('add', null, { pName: place.pName });
+  });
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModalOverlay').classList.remove('open');
+}
  
 // ===================== 달력 =====================
  
@@ -168,6 +236,10 @@ function toTimeInputValue(isoString) {
   const d = new Date(isoString);
   return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
 }
+
+function toDateInputValue(dateTimeStr) {
+  return dateTimeStr.split('T')[0]; // "2026-08-01T09:00:00" -> "2026-08-01"
+}
  
 function planCardHtml(plan) {
   const timeRange = (plan.startDate && plan.endDate)
@@ -218,20 +290,24 @@ async function loadPlans() {
  
 // 선택된 날짜 + "HH:MM" 문자열 -> 백엔드가 받는 datetime 문자열
 function buildDateTime(timeStr) {
-  return `${selectedDateStr()}T${timeStr}:00`;
+  const dateStr = document.getElementById('planDateInput').value || selectedDateStr();
+  return `${dateStr}T${timeStr}:00`;
 }
  
 // ===== 일정 추가/수정 모달 =====
  
-function openPlanModal(mode, plan) {
+function openPlanModal(mode, plan, prefill) {
   editingId = (mode === 'edit') ? plan.id : null;
- 
+
   document.getElementById('planModalTitle').textContent = (mode === 'edit') ? '일정 수정' : '일정 추가';
-  document.getElementById('planTitleInput').value = (mode === 'edit') ? (plan.pName ?? '') : '';
+  document.getElementById('planTitleInput').value =
+    (mode === 'edit') ? (plan.pName ?? '') : (prefill?.pName ?? '');
+  document.getElementById('planDateInput').value =
+    (mode === 'edit') ? toDateInputValue(plan.startDate) : selectedDateStr();
   document.getElementById('planStartInput').value = (mode === 'edit') ? toTimeInputValue(plan.startDate) : '09:00';
   document.getElementById('planEndInput').value = (mode === 'edit') ? toTimeInputValue(plan.endDate) : '11:00';
   document.getElementById('planMemoInput').value = (mode === 'edit') ? (plan.memo ?? '') : '';
- 
+
   document.getElementById('planModalOverlay').classList.add('open');
   document.getElementById('planTitleInput').focus();
 }
@@ -321,6 +397,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // 모달 바깥(어두운 배경) 클릭 시 닫기
   document.getElementById('planModalOverlay').addEventListener('click', (e) => {
     if (e.target.id === 'planModalOverlay') closePlanModal();
+  });
+
+  document.getElementById('detailModalCloseBtn').addEventListener('click', closeDetailModal);
+  document.getElementById('detailModalOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'detailModalOverlay') closeDetailModal();
   });
 });
  

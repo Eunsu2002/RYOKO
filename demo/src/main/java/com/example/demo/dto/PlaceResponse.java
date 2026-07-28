@@ -12,7 +12,9 @@ public record PlaceResponse(
         Float pLocationLat,
         Float pLocationLng,
         Float avgStar,
-        Integer reviewCount) {
+        Integer reviewCount,
+        String operatingHours,
+        String recommendedSchedule) {
     public static PlaceResponse from(Place place) {
         return new PlaceResponse(
                 place.getId(),
@@ -24,7 +26,9 @@ public record PlaceResponse(
                 place.getPLocationLat(),
                 place.getPLocationLng(),
                 place.getAvgStar(),
-                place.getReviewCount());
+                place.getReviewCount(),
+                place.getOperatingHours(),
+                place.getRecommendedSchedule());
     }
 
 }
