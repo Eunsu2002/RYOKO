@@ -15,21 +15,19 @@ public class PlaceService {
 
     private final PlaceRepository placeRepository;
 
-    // 여행지 조회
-    public List<PlaceResponse> getPlaces(String keyword) {
-        List<Place> places;
-        // 키워드가 null 값이나 공백이라면 모든 항목을 repository에서 조회
-        if ( keyword == null || keyword.isBlank() ) {
-            places = placeRepository.findAll();
-            // 키워드가 있으면 repository에서 만든 메서드 사용해서 받은 값 공백 제거하고 조회
-        } else {
-            places = placeRepository.searchByKeyword(keyword.trim());
-        }
-        // 조건문을 지난 places를 List로 반환
+    // 여행지 검색
+    public List<PlaceResponse> getPlaces(String keyword, Integer style) {
+        // 키워드 공백 제거
+        String trimmedKeyword = (keyword == null || keyword.isBlank() ? null : keyword.trim());
+        // 스타일 선택
+        Integer chooseStyle = (style == null || style == 0 ? null : style);
+        // repository 조건에 맞춰 db 조회
+        List<Place> places = placeRepository.search(trimmedKeyword, chooseStyle);
+
+        // 키워드와 선택한 스타일로 where절 조건문을 거친 places를 List로 반환
         return places.stream()
                 .map(PlaceResponse::from)
                 .toList();
-
     }
 
 //    지역·카테고리·스타일 필터

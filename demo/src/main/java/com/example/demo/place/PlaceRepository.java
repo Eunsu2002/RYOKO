@@ -11,14 +11,15 @@ import java.util.List;
 public interface PlaceRepository extends JpaRepository<Place, Integer>,
                                          JpaSpecificationExecutor<Place> {
 
-    // 키워드로 검색하는 기능 -- 지역 이름 및 카테고리
-    @Query("""
+    // 키워드로 검색하는 기능 + 스타일 비트플래그 받기
+    @Query(value = """
         SELECT p FROM Place p
-        WHERE lower(p.pName) like lower(concat('%', :keyword, '%'))
-        or lower(p.address) like lower(concat('%', :keyword, '%')) 
-        or lower(p.category) like lower(concat('%', :keyword, '%')) 
-    """)
-    List<Place> searchByKeyword (@Param("keyword") String keyword);
+        WHERE lower(p.pName) LIKE LOWER(CONCAT('%', :keyword, '%') )
+        OR lower(p.address) LIKE LOWER(CONCAT('%', :keyword, '%')) 
+        OR lower(p.category) LIKE LOWER(CONCAT('%', :keyword, '%')) 
+        AND (:style IS NULL OR (p.style & :style) > 0)
+    """, nativeQuery = true)
+    List<Place> search (@Param("keyword") String keyword, @Param("style") Integer style);
 
     // 키워드로 필터 기능
     @Query("""
