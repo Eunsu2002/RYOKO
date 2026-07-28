@@ -2,6 +2,7 @@ package com.example.demo.place;
 
 import com.example.demo.place.dto.PlaceResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +21,9 @@ public class PlaceController {
     @GetMapping
     public List<PlaceResponse> getPlaces(
             @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) Integer style
-    ) {
-        return placeService.getPlaces(keyword, style);
+            @RequestParam(required = false) Integer style,
+            @RequestParam(defaultValue = "RATING_DESC") SortOption sort) {
+        return placeService.getPlaces(keyword, style, sort);
     }
 
 }
