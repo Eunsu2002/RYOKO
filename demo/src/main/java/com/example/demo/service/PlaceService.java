@@ -1,10 +1,12 @@
-package com.example.demo.place;
+package com.example.demo.service;
 
-
-import com.example.demo.place.dto.PlaceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.example.demo.dto.PlaceResponse;
+import com.example.demo.entity.Place;
+import com.example.demo.repository.PlaceRepository;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class PlaceService {
     public List<PlaceResponse> getPlaces(String keyword) {
         List<Place> places;
         // 키워드가 null 값이나 공백이라면 모든 항목을 repository에서 조회
-        if ( keyword == null || keyword.isBlank() ) {
+        if (keyword == null || keyword.isBlank()) {
             places = placeRepository.findAll();
             // 키워드가 있으면 repository에서 만든 메서드 사용해서 받은 값 공백 제거하고 조회
         } else {
@@ -32,9 +34,9 @@ public class PlaceService {
 
     }
 
-//    지역·카테고리·스타일 필터
-//    평점·리뷰 수 정렬
-//    페이지네이션
-//    대표 사진 조회
+    // 지역·카테고리·스타일 필터
+    // 평점·리뷰 수 정렬
+    // 페이지네이션
+    // 대표 사진 조회
 
 }

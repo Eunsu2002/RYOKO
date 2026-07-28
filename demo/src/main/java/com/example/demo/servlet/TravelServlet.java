@@ -1,6 +1,8 @@
-package com.example.demo.travel;
+package com.example.demo.servlet;
 
-import com.example.demo.review.Review;
+import com.example.demo.entity.Review;
+import com.example.demo.entity.Travel;
+import com.example.demo.service.TravelService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -19,9 +21,9 @@ public class TravelServlet extends HttpServlet {
     private final TravelService travelService = new TravelService();
     private final Gson gson = new Gson();
 
-    // GET /api/travels         → 여행지 목록
-    // GET /api/travels?keyword=부산  → 키워드 검색
-    // GET /api/travels/1       → 여행지 상세 (리뷰 포함)
+    // GET /api/travels → 여행지 목록
+    // GET /api/travels?keyword=부산 → 키워드 검색
+    // GET /api/travels/1 → 여행지 상세 (리뷰 포함)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

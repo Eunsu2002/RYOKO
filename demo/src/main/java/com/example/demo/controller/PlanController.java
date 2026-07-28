@@ -1,11 +1,13 @@
-package com.example.demo.plan;
+package com.example.demo.controller;
 
-import com.example.demo.plan.dto.PlanRequest;
-import com.example.demo.plan.dto.PlanResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.dto.PlanRequest;
+import com.example.demo.dto.PlanResponse;
+import com.example.demo.service.PlanService;
 
 import java.time.LocalDate;
 import java.util.List;

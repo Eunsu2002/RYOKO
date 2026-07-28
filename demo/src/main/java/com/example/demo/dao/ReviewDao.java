@@ -1,5 +1,6 @@
-package com.example.demo.review;
+package com.example.demo.dao;
 
+import com.example.demo.entity.Review;
 import com.example.demo.util.DBUtil;
 
 import java.sql.Connection;
@@ -21,7 +22,7 @@ public class ReviewDao {
         List<Review> list = new ArrayList<>();
 
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, placeId);
 
@@ -39,8 +40,8 @@ public class ReviewDao {
                 + "VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql,
-                     PreparedStatement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql,
+                        PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setInt(1, review.getTravelId());
             pstmt.setLong(2, review.getUserId());
@@ -66,7 +67,7 @@ public class ReviewDao {
                 + "WHERE id = ?";
 
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, placeId);
             pstmt.setInt(2, placeId);
