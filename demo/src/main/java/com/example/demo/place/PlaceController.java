@@ -19,9 +19,10 @@ public class PlaceController {
     // 검색기능 서비스 연결
     @GetMapping
     public List<PlaceResponse> getPlaces(
-            @RequestParam(required = false) String keyword
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Integer style
     ) {
-        return placeService.getPlaces(keyword);
+        return placeService.getPlaces(keyword, style);
     }
 
 }
