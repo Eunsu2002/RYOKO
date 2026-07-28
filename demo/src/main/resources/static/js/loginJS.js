@@ -35,7 +35,7 @@ function doLogin() {
             } else {
                 // [기능 4] 실패: 비번 칸 비우고 + 문구 표시
                 pwInput.value = "";
-                errorBox.textContent = "メールアドレスまたはパスワードが正しくありません。入力内容をご確認ください。";
+                errorBox.innerHTML = "ログインに失敗しました。<br>正しいメールアドレスとパスワードを入力してください。";
                 errorBox.classList.add("show");
             }
         })
