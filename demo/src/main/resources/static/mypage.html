@@ -81,7 +81,7 @@
 
   <!-- 회원탈퇴 링크 -->
   <div class="withdraw-link-wrapper">
-    <a href="#" class="withdraw-link">退会</a>
+    <a href="#" id="withdrawBtn" class="withdraw-link">退会</a>
   </div>
 
   <!-- 푸터 -->
@@ -116,6 +116,22 @@
       <a href="#">プライバシーポリシー</a>
     </div>
   </footer>
+
+  <!--회원 탈퇴 모달-->
+  <div class="modal-overlay" id="withdrawModalOverlay">
+    <div class="modal-box">
+      <h3>退会確認</h3>
+      <p class="modal-message">
+        本当に退会しますか？<br>
+        退会後はアカウントを復元することはできません。
+      </p>
+      <div class="modal-actions">
+        <button type="button" id="cancelWithdrawBtn">キャンセル</button>
+        <button type="button" id="confirmWithdrawBtn">退会する</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
