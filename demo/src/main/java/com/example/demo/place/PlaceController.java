@@ -22,7 +22,7 @@ public class PlaceController {
     public List<PlaceResponse> getPlaces(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) Integer style,
-            @RequestParam(defaultValue = "RATING_DESC") SortOption sort) {
+            @RequestParam(defaultValue = "REVIEW_COUNT_DESC") SortOption sort) {
         return placeService.getPlaces(keyword, style, sort);
     }
 

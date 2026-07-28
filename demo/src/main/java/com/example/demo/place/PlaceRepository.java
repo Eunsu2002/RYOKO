@@ -13,23 +13,23 @@ public interface PlaceRepository extends JpaRepository<Place, Integer>,
 
     // 키워드로 검색하는 기능 + 스타일 비트플래그 받기
     @Query(value = """
-        SELECT p FROM Place p
-        WHERE lower(p.pName) LIKE LOWER(CONCAT('%', :keyword, '%') )
+        SELECT p.* FROM place p
+        WHERE ( lower(p.p_name) LIKE LOWER(CONCAT('%', :keyword, '%'))
         OR lower(p.address) LIKE LOWER(CONCAT('%', :keyword, '%')) 
-        OR lower(p.category) LIKE LOWER(CONCAT('%', :keyword, '%')) 
+        OR lower(p.category) LIKE LOWER(CONCAT('%', :keyword, '%')) )
         AND (:style IS NULL OR (p.style & :style) > 0)
-        ORDER BY p.avgStar DESC
+        ORDER BY p.avg_star DESC
     """, nativeQuery = true)
     List<Place> searchOrderByStar (@Param("keyword") String keyword, @Param("style") Integer style);
 
     // 키워드로 검색하는 기능 + 스타일 비트플래그 받기
     @Query(value = """
-        SELECT p FROM Place p
-        WHERE lower(p.pName) LIKE LOWER(CONCAT('%', :keyword, '%') )
+        SELECT p.* FROM place p
+        WHERE ( lower(p.p_name) LIKE LOWER(CONCAT('%', :keyword, '%'))
         OR lower(p.address) LIKE LOWER(CONCAT('%', :keyword, '%')) 
-        OR lower(p.category) LIKE LOWER(CONCAT('%', :keyword, '%')) 
+        OR lower(p.category) LIKE LOWER(CONCAT('%', :keyword, '%')) )
         AND (:style IS NULL OR (p.style & :style) > 0)
-        ORDER BY p.reviewCount DESC
+        ORDER BY p.review_count DESC
     """, nativeQuery = true)
     List<Place> searchOrderByReviewCount (@Param("keyword") String keyword, @Param("style") Integer style);
 
