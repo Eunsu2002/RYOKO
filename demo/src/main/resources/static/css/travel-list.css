@@ -1,6 +1,6 @@
 :root {
-  --main-yellow: #ffc84d;
-  --button-yellow: #ffb51f;
+  --main-yellow: #FFBA25;
+  --button-yellow: #FFBA25;
   --text-main: #1f2933;
   --text-sub: #6b7280;
   --border: #e5e7eb;
@@ -15,7 +15,7 @@
 }
 
 body {
-  margin: 0;
+  margin: 8px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
   color: var(--text-main);
   background: var(--background);
@@ -27,6 +27,8 @@ a {
 }
 
 nav {
+  box-sizing: content-box;
+  font-family: "Noto Sans JP", sans-serif;
   display: flex;
   position: sticky;
   top: 0;
@@ -81,31 +83,33 @@ nav img {
 
 /* 로그인/회원가입 버튼 */
 .nav-links a#loginBtn {
-  background: #f5a623;
+  background: #FFBA25;
   color: #fff;
   font-weight: 500;
   padding: 7px 16px;
   border-radius: 20px;
+  border: 1px solid transparent;
+  /* ← 추가: hover 때 크기 안 변하게 */
 }
 
 .nav-links a#loginBtn:hover {
   background: #fff;
-  color: #f5a623;
-  border: #f5a623 1px solid;
+  color: #FFBA25;
+  border: #FFBA25 1px solid;
 }
 
 /* 마이페이지 버튼 */
 .nav-links a#myPageBtn {
   background: #fff;
-  color: #f5a623;
-  border: #f5a623 1px solid;
+  color: #FFBA25;
+  border: #FFBA25 1px solid;
   font-weight: 500;
   padding: 7px 16px;
   border-radius: 20px;
 }
 
 .nav-links a#myPageBtn:hover {
-  background: #f5a623;
+  background: #FFBA25;
   color: #fff;
 }
 

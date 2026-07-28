@@ -31,9 +31,13 @@
             <!--for="login-pw" - id="login-pw" 연결, autocomplete="current-password": 기존 비밀번호 자동 완성 -->
             <div class="field-group">
                 <label class="field-label" for="login-pw">パスワード</label>
-                <input class="field-input" type="password" id="login-pw" placeholder="パスワード"
-                    autocomplete="current-password" />
+                <div class="input-with-icon">
+                    <input class="field-input" type="password" id="login-pw" placeholder="パスワード"
+                        autocomplete="current-password" />
+                    <button type="button" class="toggle-pw" id="toggle-pw" aria-label="비밀번호 표시">👁</button>
+                </div>
             </div>
+            <p class="login-error" id="login-error"></p>
 
             <!--로그인 상태 유지 토글 & 비밀번호 찾기 링크-->
             <div class="options-row">

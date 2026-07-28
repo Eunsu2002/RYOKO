@@ -25,7 +25,7 @@ function myOrLogin() {
         e.preventDefault();
         fetch("/api/logout", { method: "POST" })
             .then(function () {
-                window.location.reload();
+                window.location.href = "index.html";
             });
     });
 }
