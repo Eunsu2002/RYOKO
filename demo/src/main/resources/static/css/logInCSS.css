@@ -1,23 +1,37 @@
 /* 브라우저 양식 초기화 코드 */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-a { text-decoration: none; color: inherit; }
-button, input { font-family: inherit; }
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input {
+    font-family: inherit;
+}
 
 /* 디자인 토큰 (피그마) */
 :root {
-    --bg:             rgba(255, 186, 37, 0.15);
-    --accent:         #FFBA25;
-    --accent-hover:   #e6a800;
-    --card-bg:        #FFFFFF;
-    --card-shadow:    2px 4px 4px rgba(0, 0, 0, 0.25);
-    --card-radius:    30px;
-    --input-border:   #D9D9D9;
-    --input-radius:   15px;
-    --placeholder:    #D9D9D9;
-    --text-primary:   #000000;
+    --bg: rgba(255, 186, 37, 0.15);
+    --accent: #FFBA25;
+    --accent-hover: #e6a800;
+    --card-bg: #FFFFFF;
+    --card-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+    --card-radius: 30px;
+    --input-border: #D9D9D9;
+    --input-radius: 15px;
+    --placeholder: #D9D9D9;
+    --text-primary: #000000;
     --text-secondary: #000000;
-    --btn-radius:     15px;
-    --transition:     0.18s ease;
+    --btn-radius: 15px;
+    --transition: 0.18s ease;
 }
 
 /* ─── Page Shell ─────────────────────────────────── */
@@ -34,8 +48,15 @@ body {
 
 /* ─── Page switcher (tab nav) ────────────────────── */
 /* Hidden — state is managed by JS */
-.page { display: none; width: 100%; max-width: 512px; }
-.page.active { display: block; }
+.page {
+    display: none;
+    width: 100%;
+    max-width: 512px;
+}
+
+.page.active {
+    display: block;
+}
 
 /* ─── Back link ──────────────────────────────────── */
 .back-link {
@@ -49,7 +70,10 @@ body {
     cursor: pointer;
     transition: opacity var(--transition);
 }
-.back-link:hover { opacity: .65; }
+
+.back-link:hover {
+    opacity: .65;
+}
 
 /* ─── Card ───────────────────────────────────────── */
 .card {
@@ -148,7 +172,10 @@ body {
     color: var(--accent);
     transition: opacity var(--transition);
 }
-.forgot-link:hover { opacity: .7; }
+
+.forgot-link:hover {
+    opacity: .7;
+}
 
 /* ─── Primary Button ─────────────────────────────── */
 .btn-primary {
@@ -164,12 +191,16 @@ body {
     transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
     margin-bottom: 0;
 }
+
 .btn-primary:hover {
     background: var(--accent-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 16px rgba(255, 186, 37, .35);
 }
-.btn-primary:active { transform: translateY(0); }
+
+.btn-primary:active {
+    transform: translateY(0);
+}
 
 /* ─── Outline Button (회원가입 페이지 하단) ──────── */
 .btn-outline {
@@ -200,7 +231,10 @@ body {
     cursor: pointer;
     transition: opacity var(--transition);
 }
-.bottom-link:hover { opacity: .7; }
+
+.bottom-link:hover {
+    opacity: .7;
+}
 
 /* ─── Signup: two-button row ─────────────────────── */
 .btn-row {
@@ -224,13 +258,17 @@ body {
     border: 1px solid #FFFFFF;
     color: var(--text-primary);
 }
-.btn-half.inactive:hover { background: #c8c8c8; }
+
+.btn-half.inactive:hover {
+    background: #c8c8c8;
+}
 
 .btn-half.active-btn {
     background: var(--accent);
     border: 1px solid var(--input-border);
     color: #FFFFFF;
 }
+
 .btn-half.active-btn:hover {
     background: var(--accent-hover);
     transform: translateY(-1px);
@@ -238,10 +276,71 @@ body {
 
 /* ─── Responsive ─────────────────────────────────── */
 @media (max-width: 560px) {
-    .card { padding: 40px 28px 44px; }
-    .card-title { font-size: 32px; }
-    .card-subtitle { font-size: 16px; }
-    .field-input { height: 58px; font-size: 17px; }
-    .btn-primary { height: 58px; }
-    .options-row { flex-wrap: wrap; gap: 10px; }
+    .card {
+        padding: 40px 28px 44px;
+    }
+
+    .card-title {
+        font-size: 32px;
+    }
+
+    .card-subtitle {
+        font-size: 16px;
+    }
+
+    .field-input {
+        height: 58px;
+        font-size: 17px;
+    }
+
+    .btn-primary {
+        height: 58px;
+    }
+
+    .options-row {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+/* ─── 비밀번호 표시 버튼 ─────────────────────────── */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon .field-input {
+    padding-right: 56px;
+}
+
+/* 눈 버튼 자리 확보 */
+.toggle-pw {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: .55;
+    transition: opacity var(--transition);
+}
+
+.toggle-pw:hover {
+    opacity: 1;
+}
+
+/* ─── 로그인 실패 문구 ───────────────────────────── */
+.login-error {
+    display: none;
+    margin-top: 14px;
+    color: #e53935;
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.login-error.show {
+    display: block;
 }
