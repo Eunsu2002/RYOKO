@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -38,7 +39,14 @@ public class PlaceService {
         // 키워드와 선택한 스타일로 where절 조건문을 거친 places를 List로 반환
         return places.map(PlaceResponse::from);
     }
-
 //    대표 사진 조회
+
+    // 여행지 세부 페이지 내용 담기
+    public List<Place> placeDetail() {
+        // REQ를 유저에게 받고,
+
+    }
+
+
 
 }

@@ -29,4 +29,11 @@ public class PlaceController {
         return placeService.getPlaces(keyword, style, sort, page, size);
     }
 
+    // 각 여행 세부 페이지 연결
+    @GetMapping("/places/{id}")
+    public List<Place> getPlace(Integer id) {
+        // service에서 request 받은 id를 넣어서 받은 값을 JSON으로 넘김
+        return
+    }
+
 }
