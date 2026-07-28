@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,6 +7,7 @@
   <title>부산 해운대 해수욕장 | ようこそ</title>
   <link rel="stylesheet" href="css/travel-detail.css" />
   <script type="module" src="js/wholeJS.js"></script>
+  <script type="module" src="js/travelDetail.js"></script>
 </head>
 
 <body>
@@ -48,26 +49,19 @@
     </div>
 
     <section class="detail-hero">
-      <!-- 아래 컨텐츠들은 추후 다 BE 연결해주는 코드로 바꿔야함. -->
-
-      <!-- Thymeleaf 예시:
-           <img th:src="${travel.imageUrl}" th:alt="${travel.name}" />
-           <h1 th:text="${travel.name}"></h1>
-           <span th:text="${travel.location}"></span>
-      -->
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
+      <img id="placeImg-imgUrl" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
         alt="부산 해운대 해수욕장" />
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1>부산 해운대 해수욕장</h1>
-        <p>⌖ 부산광역시</p>
+        <h1 id="detail-pName">부산 해운대 해수욕장</h1>
+        <p id="detail-address">⌖ 부산광역시</p>
       </div>
     </section>
 
     <section class="content-wrap">
       <article class="info-card">
         <h2>소개</h2>
-        <p>
+        <p id="detail-body">
           국내 최대 규모의 해수욕장으로 여름 휴양지로 인기
         </p>
       </article>
@@ -76,7 +70,7 @@
         <h2>리뷰</h2>
 
         <div class="rating-summary">
-          <strong>4.7</strong>
+          <strong id="detail-avgStar">4.7</strong>
           <div>
             <div class="stars">★★★★★</div>
             <span>3개의 리뷰</span>
@@ -87,64 +81,20 @@
           <h3>리뷰 작성하기</h3>
           <label for="review-rating">별점</label>
           <div class="review-stars" id="review-rating" aria-label="별점 선택">★★★★★</div>
-          <label for="review-content">리뷰 내용</label>
-          <textarea id="review-content" placeholder="이 여행지에 대한 리뷰를 공유해주세요"></textarea>
+          <label for="review-body">리뷰 내용</label>
+          <textarea id="review-body" placeholder="이 여행지에 대한 리뷰를 공유해주세요"></textarea>
           <button type="button">리뷰 등록</button>
         </div>
 
-        <div class="review-list">
-          <!-- 여기도 리뷰 연결 -->
-
-          <!-- Thymeleaf 예시:
-               <div class="review-item" th:each="review : ${reviews}">
-                 <strong th:text="${review.userName}"></strong>
-                 <span th:text="${review.createdAt}"></span>
-                 <p th:text="${review.content}"></p>
-               </div>
-          -->
-
+        <div class="review-list" id="review-list">
           <div class="review-item">
             <div class="review-user-icon">●</div>
             <div class="review-content">
               <div class="review-meta">
-                <strong>김여행</strong>
+                <strong id="review-userId">김여행</strong>
                 <div>
                   <span class="small-stars">★★★★★</span>
-                  <time datetime="2025-05-08">2025-05-08</time>
-                </div>
-              </div>
-              <p>
-                정말 아름다운 곳이었습니다! 가족들과 함께 방문했는데 모두가 만족했어요.
-                특히 일몰이 정말 장관이었습니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="review-item">
-            <div class="review-user-icon">●</div>
-            <div class="review-content">
-              <div class="review-meta">
-                <strong>김관광</strong>
-                <div>
-                  <span class="small-stars">★★★★★</span>
-                  <time datetime="2025-04-08">2025-04-08</time>
-                </div>
-              </div>
-              <p>
-                정말 아름다운 곳이었습니다! 가족들과 함께 방문했는데 모두가 만족했어요.
-                특히 일몰이 정말 장관이었습니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="review-item">
-            <div class="review-user-icon">●</div>
-            <div class="review-content">
-              <div class="review-meta">
-                <strong>김관광</strong>
-                <div>
-                  <span class="small-stars">★★★★☆</span>
-                  <time datetime="2025-04-08">2025-04-08</time>
+                  <time datetime="2025-05-08" id="review-createdAt">2025-05-08</time>
                 </div>
               </div>
               <p>
@@ -163,7 +113,7 @@
           <span class="info-icon">▦</span>
           <div>
             <strong>운영 시간</strong>
-            <p>하절기: 05시~18시</p>
+            <p id="detail-operatingHours">하절기: 05시~18시</p>
           </div>
         </div>
 
@@ -171,7 +121,7 @@
           <span class="info-icon">₩</span>
           <div>
             <strong>추천 일정</strong>
-            <p>당일 ~ 1박 2일</p>
+            <p id="detail-recommendSchedule">당일 ~ 1박 2일</p>
           </div>
         </div>
 
