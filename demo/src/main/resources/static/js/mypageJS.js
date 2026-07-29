@@ -1,7 +1,7 @@
 (async function checkAuth() {
   const res = await fetch("/api/mypage/user");
   if (!res.ok) {
-    location.replace("/logIn.html");
+    location.replace("/logIn");
   }
 })();
 
@@ -35,7 +35,7 @@ async function withdrawUser() {
 
         if (response.ok) {
             alert("회원 탈퇴가 완료되었습니다.");
-            window.location.href = "/index.html";
+            window.location.href = "/index";
         } else {
             const message = await response.text();
             alert(message);

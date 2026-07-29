@@ -12,7 +12,7 @@
 <body>
     <div class="signUpWrapper">
         <!-- 상단: 홈으로 돌아가는 링크 -->
-        <a href="index.html" class="backHomeLink">← 홈으로 돌아가기</a>
+        <a href="index" class="backHomeLink">← 홈으로 돌아가기</a>
 
         <!-- 회원가입 폼이 담긴 흰색 카드 -->
         <div class="signUpCard">
@@ -68,7 +68,7 @@
             <!-- 로그인 페이지로 이동하는 링크 -->
             <p class="loginRedirectText">
                 이미 계정이 있으신가요?
-                <a href="logIn.html" class="loginRedirectLink">로그인하기</a>
+                <a href="logIn" class="loginRedirectLink">로그인하기</a>
             </p>
         </div>
     </div>
@@ -194,7 +194,7 @@
                     return response.text().then(function (message) {
                         alert(message);
                         if (response.ok) {
-                            window.location.href = "logIn.html";
+                            window.location.href = "logIn";
                         }
                     });
                 })
@@ -206,7 +206,7 @@
 
         // 취소 버튼 클릭 시 홈으로 이동
         function handleCancelClick() {
-            window.location.href = "index.html";
+            window.location.href = "index";
         }
 
         // ===== 이벤트 리스너 등록 =====

@@ -100,7 +100,7 @@ function createTravelCardHtml(place) {
 
   return `
     <article class="travel-card">
-      <a href="./travel-detail.html?id=${place.id}" class="card-image-link" aria-label="${name} 상세보기">
+      <a href="./travel-detail?id=${place.id}" class="card-image-link" aria-label="${name} 상세보기">
         <img src="${imageUrl}" alt="${name}" />
         <span class="rating">⭐ ${rating}</span>
       </a>
@@ -110,7 +110,7 @@ function createTravelCardHtml(place) {
         <p class="description">${description}</p>
         <div class="card-bottom">
           <span>리뷰 ${reviewCount}</span>
-          <a href="./travel-detail.html?id=${place.id}">상세보기 →</a>
+          <a href="./travel-detail?id=${place.id}">상세보기 →</a>
         </div>
       </div>
     </article>

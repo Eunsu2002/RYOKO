@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * schedule.html의 달력/카드 그리드가 호출하는 API.
+ * schedule의 달력/카드 그리드가 호출하는 API.
  *
  * GET /api/plans?date=2026-07-20 -> 그 날짜에 시작하는 일정 목록 (달력 클릭 시)
  * POST /api/plans -> 일정 생성 (+ 버튼)

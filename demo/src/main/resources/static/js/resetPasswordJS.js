@@ -14,7 +14,7 @@ document.getElementById("reset-btn").addEventListener("click", function () {
             return response.text().then(function (message) {
                 alert(message);
                 if (response.ok) {
-                    window.location.href = "logIn.html";
+                    window.location.href = "logIn";
                 }
             });
         })
