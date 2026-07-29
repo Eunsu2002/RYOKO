@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.dto.ResetPasswordRequest;
 import com.example.demo.dto.SignupRequest;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 @RequestMapping("/api")
@@ -77,12 +78,13 @@ public class AuthController {
             return ResponseEntity.status(401).body(e.getMessage());
         }
     }
+
     @DeleteMapping("/withdraw")
     public ResponseEntity<?> withdrawUser(HttpSession session) {
 
         Object userId = session.getAttribute("userId");
 
-        if(userId == null) {
+        if (userId == null) {
             return ResponseEntity.status(401).body("로그인 상태가 아닙니다.");
         }
 
