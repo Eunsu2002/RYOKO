@@ -176,7 +176,7 @@ nav img {
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   padding: 1.5rem 2rem;
-  max-width: 900px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -241,7 +241,7 @@ nav img {
 
 /* 회원탈퇴 링크 (카드 그리드 밖, 하단 우측 배치) */
 .withdraw-link-wrapper {
-  max-width: 900px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 0 2rem 1.5rem;
   text-align: right;
