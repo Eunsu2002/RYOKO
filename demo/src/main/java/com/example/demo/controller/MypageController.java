@@ -29,7 +29,7 @@ public class MypageController {
         Object rawUserId = session.getAttribute(SESSION_USER_ID_KEY);
 
         if (rawUserId == null) {
-            return ResponseEntity.status(401).body("로그인 상태가 아닙니다.");
+            return ResponseEntity.status(401).body("ログインしていません。");
         }
 
         Long userId = (Long) rawUserId;

@@ -18,7 +18,7 @@
   <meta charset="UTF-8" />
   <!-- 모바일 화면에서도 올바르게 보이도록 viewport 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>一定 - りょうこそ</title>
+  <title>日程 - りょうこそ</title>
   <!-- 외부 CSS 파일 연결 — 모든 스타일은 style.css에 작성 -->
   <link rel="stylesheet" href="css/scheduleCSS.css">
   <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=14nm107dsy"></script>
@@ -58,7 +58,7 @@
             d="M24.0625 7.29167V4.375M10.9375 7.29167V4.375M4.73958 11.6667H30.2604M4.375 14.6475C4.375 11.5631 4.375 10.0202 5.01083 8.84188C5.58577 7.79086 6.47791 6.94823 7.56 6.43417C8.80833 5.83333 10.4417 5.83333 13.7083 5.83333H21.2917C24.5583 5.83333 26.1917 5.83333 27.44 6.43417C28.5381 6.96208 29.4292 7.805 29.9892 8.84042C30.625 10.0217 30.625 11.5646 30.625 14.649V21.8123C30.625 24.8967 30.625 26.4396 29.9892 27.6179C29.4142 28.6689 28.5221 29.5116 27.44 30.0256C26.1917 30.625 24.5583 30.625 21.2917 30.625H13.7083C10.4417 30.625 8.80833 30.625 7.56 30.0242C6.47813 29.5105 5.58602 28.6684 5.01083 27.6179C4.375 26.4367 4.375 24.8938 4.375 21.8094V14.6475Z"
             stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        一定
+        日程
       </a>
       <a href="logIn.html" class="btn-login" id="loginBtn">ログイン/新規会員登録</a>
       <a href="mypage.html" class="btn-login" id="myPageBtn" style="display:none;">マイページ</a>
@@ -107,7 +107,7 @@
           현재는 Unsplash 샘플 이미지를 사용합니다.
         -->
         <img src="https://images.unsplash.com/photo-1617158679977-4b37ef66e0e5?w=500&auto=format&fit=crop"
-          alt="부산 해운대 해수욕장" />
+          alt="釜山 海雲台ビーチ" />
       </div>
 
       <!-- 여행지 텍스트 정보 -->
@@ -171,7 +171,7 @@
       <!-- ── 일정 카드 그리드 ── -->
       <div class="schedule-cards">
         <div class="schedule-cards-head">
-          <button id="addPlanBtn" class="s-card-btn" type="button">＋ 일정 추가</button>
+          <button id="addPlanBtn" class="s-card-btn" type="button">＋ 日程を追加</button>
         </div>
         <div class="cards-grid" id="cardsGrid">
           <p class="schedule-empty">読み込み中...</p>
@@ -248,31 +248,31 @@
   ===================================================== -->
   <div class="modal-overlay" id="planModalOverlay">
     <div class="modal-box">
-      <h3 id="planModalTitle">일정 추가</h3>
+      <h3 id="planModalTitle">日程を追加</h3>
 
-      <label for="planTitleInput">여행지</label>
-      <input type="text" id="planTitleInput" placeholder="예: 景福宮" />
+      <label for="planTitleInput">旅行先</label>
+      <input type="text" id="planTitleInput" placeholder="例: 景福宮" />
 
-      <label for="planDateInput">날짜</label>
+      <label for="planDateInput">日付</label>
       <input type="date" id="planDateInput" />
 
       <div class="modal-time-row">
         <div>
-          <label for="planStartInput">시작 시간</label>
+          <label for="planStartInput">開始時間</label>
           <input type="time" id="planStartInput" value="09:00" />
         </div>
         <div>
-          <label for="planEndInput">종료 시간</label>
+          <label for="planEndInput">終了時間</label>
           <input type="time" id="planEndInput" value="11:00" />
         </div>
       </div>
 
-      <label for="planMemoInput">설명</label>
-      <textarea id="planMemoInput" placeholder="설명 (선택)"></textarea>
+      <label for="planMemoInput">説明</label>
+      <textarea id="planMemoInput" placeholder="説明（任意）"></textarea>
 
       <div class="modal-actions">
-        <button type="button" id="planCancelBtn">취소</button>
-        <button type="button" id="planSaveBtn">저장</button>
+        <button type="button" id="planCancelBtn">キャンセル</button>
+        <button type="button" id="planSaveBtn">保存</button>
       </div>
     </div>
   </div>

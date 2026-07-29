@@ -19,7 +19,7 @@ document.getElementById("reset-btn").addEventListener("click", function () {
             });
         })
         .catch(function (error) {
-            alert("요청 중 오류가 발생했습니다.");
+            alert("処理中にエラーが発生しました。");
             console.error(error);
         });
 });

@@ -39,7 +39,7 @@ public class AuthController {
                 session.setMaxInactiveInterval(60 * 30); // 30분
             }
 
-            return ResponseEntity.ok("로그인 성공");
+            return ResponseEntity.ok("ログイン成功");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }
@@ -48,14 +48,14 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();
-        return ResponseEntity.ok("로그아웃 성공");
+        return ResponseEntity.ok("ログアウト成功");
     }
 
     @GetMapping("/me")
     public ResponseEntity<?> me(HttpSession session) {
         Object userId = session.getAttribute("userId");
         if (userId == null) {
-            return ResponseEntity.status(401).body("로그인 상태가 아닙니다.");
+            return ResponseEntity.status(401).body("ログインしていません。");
         }
         return ResponseEntity.ok(userId);
     }
@@ -64,7 +64,7 @@ public class AuthController {
     public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
         try {
             authService.resetPassword(request.getEmail(), request.getNewPassword());
-            return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+            return ResponseEntity.ok("パスワードが変更されました。");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }
@@ -74,7 +74,7 @@ public class AuthController {
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
         try {
             authService.signup(request.getName(), request.getPhone(), request.getEmail(), request.getPassword());
-            return ResponseEntity.ok("회원 가입이 완료되었습니다.");
+            return ResponseEntity.ok("パスワードが変更されました。");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }
@@ -86,11 +86,11 @@ public class AuthController {
         Object userId = session.getAttribute("userId");
 
         if (userId == null) {
-            return ResponseEntity.status(401).body("로그인 상태가 아닙니다.");
+            return ResponseEntity.status(401).body("パスワードが変更されました。");
         }
 
         authService.withdrawUser((Long) userId);
         session.invalidate();
-        return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
+        return ResponseEntity.ok("退会が完了しました。");
     }
 }

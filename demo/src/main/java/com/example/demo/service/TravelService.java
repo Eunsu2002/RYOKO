@@ -50,7 +50,7 @@ public class TravelService {
             throws SQLException {
         Travel travel = travelDao.findById(travelId);
         if (travel == null) {
-            throw new IllegalArgumentException("여행지를 찾을 수 없습니다. id=" + travelId);
+            throw new IllegalArgumentException("旅行先が見つかりません。 id=" + travelId);
         }
 
         Review review = new Review();

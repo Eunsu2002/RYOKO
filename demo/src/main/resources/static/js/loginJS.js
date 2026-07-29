@@ -40,7 +40,7 @@ function doLogin() {
             }
         })
         .catch(function (error) {
-            errorBox.textContent = "로그인 요청 중 오류가 발생했습니다.";
+            errorBox.textContent = "ログイン処理中にエラーが発生しました。";
             errorBox.classList.add("show");
             console.error(error);
         });
