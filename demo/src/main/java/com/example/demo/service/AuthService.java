@@ -68,6 +68,6 @@ public class AuthService {
         // 예외 처리 (해당 회원 정보가 없는 경우) ex) 로그인한 뒤 관리자가 해당 회원을 삭제한 경우, 버그로 세션은 남아 있는데 DB에는 회원이 없는 경우
         .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-        userRepository.withdrawUser(user);
+        userRepository.delete(user);
     }
 }
