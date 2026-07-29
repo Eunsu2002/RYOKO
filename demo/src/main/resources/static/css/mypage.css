@@ -173,7 +173,7 @@ nav img {
 ──────────────────────────────── */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   padding: 1.5rem 2rem;
   max-width: 900px;
@@ -199,12 +199,12 @@ nav img {
   border-color: #FFBA25;
 }
 
-/* 각 카드별 테두리 색상 */
+/* 마이플랜 - 검색창처럼 한 줄 전체를 차지 */
 .menu-card.red {
+  grid-column: 1 / -1;
   border-color: #f8c0b0;
 }
 
-/* 내 일정 - 연한 빨강 */
 .menu-card.blue {
   border-color: #b0cff8;
 }
