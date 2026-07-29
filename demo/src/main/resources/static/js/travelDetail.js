@@ -1,13 +1,23 @@
 
-const params = new URLSearchParams(window.location.search)
-const placeId = params.get('id')
 const $ = (selector) => document.querySelector(selector);
+const params = new URLSearchParams(window.location.search);
+const placeId = params.get('id');
 
 let place = null;
 
 console.log(placeId)
 
+function NotIdException(placeId) {
+    if (!placeId) {
+        alert('잘못된 접근입니다.');
+        window.location.href = 'travel-list.html';
+    } else {
+        loadPlaceDetail(placeId)
+    }
+}
+
 async function loadPlaceDetail(placeId) {
+
     try {
         const res = await fetch(`/api/places/${placeId}`);
 
@@ -15,15 +25,18 @@ async function loadPlaceDetail(placeId) {
             throw new Error(`서버 응답 에러: ${res.status}`);
         }
 
-        const place = await res.json();
+        place = await res.json();
         console.log(place);
 
         renderPlaceDetail(place);
     } catch (err) {
+
         console.error('여행지 정보를 불러오지 못했습니다.', err);
+        alert('존재하지 않는 여행지입니다.')
+        window.location.href = 'travel-list.html';
     }
 }
-// place 렌더링
+// 렌더링
 function renderPlaceDetail(place) {
     $(`#detail-pName`).textContent = place.pName;
     $(`#detail-address`).textContent = place.address;
@@ -33,8 +46,53 @@ function renderPlaceDetail(place) {
     $(`#detail-operatingHours`).textContent = place.operatingHours;
     $(`#detail-recommendSchedule`).textContent = place.recommendedSchedule;
     // place 테이블에 place_img 연결 및 Place Entity 관련 추가 필요
-}
+
+    // 리뷰 평균만큼 별 그려주기
+    const starCount = Math.round(place.avgStar);
+    const emptyCount = 5 - starCount;
+    $(`.stars`).textContent = '★'.repeat(starCount) + '☆'.repeat(emptyCount)
+        }
+
+    // 리뷰 등록하는 곳 별 hover 시 별 갯수 변경되게
+    let selectedRating = 0;
+    const starElements = $(`#review-rating .star`)
+
+    starElements.forEach((star) => {
+        star.addEventListener('mouseenter', () => {
+            const hoverValue = Number(star.dataset.value);
+            updateStarDisplay(hoverValue);
+        });
+        star.addEventListener('mouseleave', () => {
+            updateStarDisplay(selectedRating);
+        });
+        star.addEventListener('click', () => {
+            selectedRating = Number(star.dataset.value);
+            updateStarDisplay(selectedRating);
+        });
+    });
+
+    function updateStarDisplay(rating) {
+        starElements.forEach((star) => {
+            const starValue = Number(star.dataset.value);
+            star.textContent = starValue <= rating ? '★' : '☆';
+        });
+    }
+
+    $('#review-button').addEventListener('click', () => {
+        if (selectedRating === 0) {
+            alert('星評価を選択してください。');
+            return;
+        }
+        const reviewContent = $(``)
+
+    })
+
+
+
 // 리뷰 연결 필요
+function renderReview(review){
+
+}
 
 // 일정에 추가 버튼 눌렀을 때 기능
 function addSchedule() {
@@ -56,7 +114,8 @@ function addSchedule() {
             pName: place.pName,
             pLocationLat: place.pLocationLat,
             pLocationLng: place.pLocationLng,
-            visitDate: visitDateTime
+            startDate: visitDateTime,
+            endDate: visitDateTime
         })
     })
         .then(res =>{
@@ -70,4 +129,4 @@ function addSchedule() {
 }
 
 $(`.schedule-btn`).addEventListener('click', addSchedule);
-loadPlaceDetail(placeId);
+NotIdException(placeId)

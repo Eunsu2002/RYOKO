@@ -80,10 +80,16 @@
         <div class="review-form">
           <h3>レビューを書く</h3>
           <label for="review-rating">評価</label>
-          <div class="review-stars" id="review-rating" aria-label="星評価を選択">★★★★★</div>
+          <div class="review-stars" id="review-rating" aria-label="星評価を選択">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
           <label for="review-body">レビュー内容</label>
           <textarea id="review-body" placeholder="この旅行先へのレビューを共有してください"></textarea>
-          <button type="button">投稿する</button>
+          <button type="button" id="review-button">投稿する</button>
         </div>
 
         <div class="review-list" id="review-list">
