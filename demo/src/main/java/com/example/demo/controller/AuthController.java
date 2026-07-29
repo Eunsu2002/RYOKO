@@ -72,9 +72,22 @@ public class AuthController {
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
         try {
             authService.signup(request.getName(), request.getPhone(), request.getEmail(), request.getPassword());
-            return ResponseEntity.ok("회원가입이 완료되었습니다.");
+            return ResponseEntity.ok("회원 가입이 완료되었습니다.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }
+    }
+    @DeleteMapping("/withdraw")
+    public ResponseEntity<?> withdrawUser(HttpSession session) {
+
+        Object userId = session.getAttribute("userId");
+
+        if(userId == null) {
+            return ResponseEntity.status(401).body("로그인 상태가 아닙니다.");
+        }
+
+        authService.withdrawUser((Long) userId);
+        session.invalidate();
+        return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
     }
 }

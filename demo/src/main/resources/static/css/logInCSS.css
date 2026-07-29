@@ -197,9 +197,9 @@ body {
 }
 
 .btn-primary:hover {
-    background: var(--accent-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(255, 186, 37, .35);
+    background-color: #fff;
+    color: #FFBA25;
+    border-color: #FFBA25;
 }
 
 .btn-primary:active {
