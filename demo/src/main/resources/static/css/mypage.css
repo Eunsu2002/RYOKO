@@ -173,7 +173,7 @@ nav img {
 ──────────────────────────────── */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   padding: 1.5rem 2rem;
   max-width: 900px;
