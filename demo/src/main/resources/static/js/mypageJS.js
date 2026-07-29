@@ -1,3 +1,10 @@
+(async function checkAuth() {
+  const res = await fetch("/api/mypage/user");
+  if (!res.ok) {
+    location.replace("/logIn.html");
+  }
+})();
+
 function initWithdraw() {
     document.getElementById("withdrawBtn")
         .addEventListener("click", function (event) {
