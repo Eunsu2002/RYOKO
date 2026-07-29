@@ -19,7 +19,6 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     public User login(String email, String password) {
         Optional<User> found = userRepository.findByEmail(email);
 
@@ -35,6 +34,7 @@ public class AuthService {
 
         return user;
     }
+
     public void resetPassword(String email, String newPassword) {
         if (newPassword == null || newPassword.isBlank()) {
             throw new IllegalArgumentException("新しいパスワードを入力してください。");
@@ -50,6 +50,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
+
     public void signup(String name, String phone, String email, String password) {
         if (userRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("新しいパスワードを入力してください。");
@@ -63,10 +64,12 @@ public class AuthService {
 
         userRepository.save(user);
     }
+
     public void withdrawUser(Long userId) {
         User user = userRepository.findById(userId)
-        // 예외 처리 (해당 회원 정보가 없는 경우) ex) 로그인한 뒤 관리자가 해당 회원을 삭제한 경우, 버그로 세션은 남아 있는데 DB에는 회원이 없는 경우
-        .orElseThrow(() -> new IllegalArgumentException("存在しない会員です。"));
+                // 예외 처리 (해당 회원 정보가 없는 경우) ex) 로그인한 뒤 관리자가 해당 회원을 삭제한 경우, 버그로 세션은 남아 있는데 DB에는
+                // 회원이 없는 경우
+                .orElseThrow(() -> new IllegalArgumentException("存在しない会員です。"));
 
         userRepository.delete(user);
     }
