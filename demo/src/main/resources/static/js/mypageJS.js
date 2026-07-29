@@ -34,15 +34,15 @@ async function withdrawUser() {
         });
 
         if (response.ok) {
-            alert("회원 탈퇴가 완료되었습니다.");
+            alert("退会が完了しました。");
             window.location.href = "/index";
         } else {
             const message = await response.text();
             alert(message);
         }
     } catch (error) {
-        console.error("회원 탈퇴 오류:", error);
-        alert("회원 탈퇴 처리 중 오류가 발생했습니다.");
+        console.error("退会エラー:", error);
+        alert("退会処理中にエラーが発生しました。");
     }
 }
 
