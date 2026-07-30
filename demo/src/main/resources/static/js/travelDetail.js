@@ -18,9 +18,8 @@ function NotIdException(placeId) {
 }
 
 async function loadPlaceDetail(placeId) {
-
     try {
-        const res = await fetch(`/api/places/${placeId}`);
+        const res = await fetch(`application/json`);
 
         if (!res.ok) {
             throw new Error(`서버 응답 에러: ${res.status}`);
@@ -37,7 +36,7 @@ async function loadPlaceDetail(placeId) {
         window.location.href = 'travel-list.html';
     }
 }
-// 렌더링
+// 여행지 세부 내용 렌더링
 function renderPlaceDetail(place) {
     $(`#detail-pName`).textContent = place.pName;
     $(`#detail-address`).textContent = place.address;
@@ -99,14 +98,11 @@ function renderPlaceDetail(place) {
             })
             .catch(err => {
                 console.error(err)
-                alert('API가 아직 없어서 몬함')
+                alert('APIがまだ存在しません。')
             })
     });
 
-
-
-
-// ******* 리뷰 연결 필요
+// ******* 여행지 리뷰 렌더링
 function renderReview(review){
 
 }
