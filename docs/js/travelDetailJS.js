@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // ─── API 호출: 여행지 상세 조회 ───
 async function fetchTravelDetail(id) {
   try {
-    const response = await fetch("/api/travels/" + id);
+    const response = await fetch(`${API_BASE}/api/travels/` + id);
 
     if (!response.ok) {
       throw new Error("API 요청 실패: " + response.status);
@@ -242,7 +242,7 @@ async function submitReview(content) {
     }
 
     var response = await fetch(
-      "/api/travels/" + currentTravelId + "/reviews",
+      `${API_BASE}/api/travels/` + currentTravelId + "/reviews",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -3,7 +3,7 @@ function myOrLogin() {
     const myPageBtn = document.querySelector("#myPageBtn");
     const logoutBtn = document.querySelector("#logoutBtn");
 
-    fetch("/api/me")
+    fetch(`${API_BASE}/api/me`, { credentials: "include" })
         .then(function (response) {
             if (response.ok) {
                 loginBtn.style.display = "none";
@@ -23,9 +23,9 @@ function myOrLogin() {
 
     logoutBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        fetch("/api/logout", { method: "POST" })
+        fetch(`${API_BASE}/api/logout`, { method: "POST", credentials: "include" })
             .then(function () {
-                window.location.href = "index";
+                window.location.href = "index.html";
             });
     });
 }
@@ -60,8 +60,8 @@ export function performSearch(keyword = "", styles = 0) {
     const queryString = params.toString();
 
     window.location.href = queryString
-        ? `travel-list?${queryString}`
-        : "travel-list";
+        ? `travel-list.html?${queryString}`
+        : "travel-list.html";
 }
 
 myOrLogin();

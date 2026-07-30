@@ -1,7 +1,7 @@
 (async function checkAuth() {
-  const res = await fetch("/api/mypage/user");
+  const res = await fetch(`${API_BASE}/api/mypage/user`, { credentials: "include" });
   if (!res.ok) {
-    location.replace("/logIn");
+    location.replace("logIn.html");
   }
 })();
 
@@ -29,13 +29,14 @@ function closeWithdrawModal() {
 
 async function withdrawUser() {
     try {
-        const response = await fetch("/api/withdraw", {
-            method: "DELETE"
+        const response = await fetch(`${API_BASE}/api/withdraw`, {
+        method: "DELETE",
+        credentials: "include"
         });
 
         if (response.ok) {
             alert("退会が完了しました。");
-            window.location.href = "/index";
+            window.location.href = "index.html";
         } else {
             const message = await response.text();
             alert(message);

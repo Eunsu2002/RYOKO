@@ -3,7 +3,7 @@ document.getElementById("reset-btn").addEventListener("click", function () {
     const email = document.getElementById("reset-email").value;
     const newPassword = document.getElementById("reset-pw").value;
 
-    fetch("/api/reset-password", {
+    fetch(`${API_BASE}/api/reset-password`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -14,7 +14,7 @@ document.getElementById("reset-btn").addEventListener("click", function () {
             return response.text().then(function (message) {
                 alert(message);
                 if (response.ok) {
-                    window.location.href = "logIn";
+                    window.location.href = "logIn.html";
                 }
             });
         })

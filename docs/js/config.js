@@ -1,0 +1,1 @@
+const API_BASE = "https://ryokoso.duckdns.org";

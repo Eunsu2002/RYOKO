@@ -7,12 +7,13 @@
     <title>会員登録 | RYOKO</title>
     <!-- 회원가입 페이지 전용 스타일시트 -->
     <link rel="stylesheet" href="css/signupCSS.css">
+    <script src="js/config.js"></script>
 </head>
 
 <body>
     <div class="signUpWrapper">
         <!-- 상단: 홈으로 돌아가는 링크 -->
-        <a href="index" class="backHomeLink">← ホームへ戻る</a>
+        <a href="index.html" class="backHomeLink">← ホームへ戻る</a>
 
         <!-- 회원가입 폼이 담긴 흰색 카드 -->
         <div class="signUpCard">
@@ -68,7 +69,7 @@
             <!-- 로그인 페이지로 이동하는 링크 -->
             <p class="loginRedirectText">
                 すでにアカウントをお持ちの方
-                <a href="logIn" class="loginRedirectLink">ログイン</a>
+                <a href="logIn.html" class="loginRedirectLink">ログイン</a>
             </p>
         </div>
     </div>
@@ -183,7 +184,7 @@
                 password: passwordInput.value,
             };
 
-            fetch("/api/signup", {
+            fetch(`${API_BASE}/api/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -194,7 +195,7 @@
                     return response.text().then(function (message) {
                         alert(message);
                         if (response.ok) {
-                            window.location.href = "logIn";
+                            window.location.href = "logIn.html";
                         }
                     });
                 })
@@ -206,7 +207,7 @@
 
         // 취소 버튼 클릭 시 홈으로 이동
         function handleCancelClick() {
-            window.location.href = "index";
+            window.location.href = "index.html";
         }
 
         // ===== 이벤트 리스너 등록 =====

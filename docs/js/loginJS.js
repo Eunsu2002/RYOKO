@@ -23,15 +23,16 @@ function doLogin() {
 
     errorBox.classList.remove("show"); // 이전 에러 문구 숨기기
 
-    fetch("/api/login", {
+    fetch(`${API_BASE}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ email: email, password: password, keepLoggedIn: keepLoggedIn })
     })
         .then(function (response) {
             if (response.ok) {
                 // [기능 1] 팝업 없이 바로 메인으로
-                window.location.href = "index";
+                window.location.href = "index.html";
             } else {
                 // [기능 4] 실패: 비번 칸 비우고 + 문구 표시
                 pwInput.value = "";

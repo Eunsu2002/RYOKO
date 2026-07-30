@@ -42,7 +42,7 @@ async function searchPlaces() {
   }
 
   try {
-    const res = await fetch(`/api/places?keyword=${encodeURIComponent(keyword)}`);
+    const res = await fetch(`${API_BASE}/api/places?keyword=${encodeURIComponent(keyword)}`);
     if (!res.ok) throw new Error('검색에 실패했습니다.');
     const places = await res.json();
 
@@ -113,7 +113,7 @@ function selectPlace(place) {
 // ===== 상세 모달 =====
 
 async function openDetailModal(placeId) {
-  const res = await fetch(`/api/places/${placeId}`);
+  const res = await fetch(`${API_BASE}/api/places/${placeId}`);
   if (!res.ok) { alert('상세 정보를 불러오지 못했습니다.'); return; }
   const place = await res.json();
 
@@ -270,7 +270,7 @@ async function loadPlans() {
   grid.innerHTML = '<p class="schedule-empty">読み込み中...</p>';
  
   try {
-    const res = await fetch(`/api/plans?date=${selectedDateStr()}`);
+    const res = await fetch(`${API_BASE}/api/plans?date=${selectedDateStr()}`);
     if (!res.ok) throw new Error('일정을 불러오지 못했습니다.');
     const plans = await res.json();
     currentPlans = plans;
@@ -341,7 +341,7 @@ async function onSavePlan() {
  
   try {
     const res = editingId
-      ? await fetch(`/api/plans/${editingId}`, {
+      ? await fetch(`${API_BASE}/api/plans/${editingId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
@@ -376,7 +376,7 @@ async function onDeleteClick(e) {
   if (!confirm('이 일정을 삭제할까요?')) return;
  
   try {
-    const res = await fetch(`/api/plans/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${API_BASE}/api/plans/${id}`, { method: 'DELETE' });
     if (!res.ok && res.status !== 204) throw new Error('삭제에 실패했습니다.');
     await loadPlans();
   } catch (err) {
