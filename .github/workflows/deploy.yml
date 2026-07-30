@@ -29,6 +29,8 @@ jobs:
           spring.jpa.show-sql=true
           spring.jpa.properties.hibernate.format_sql=true
           spring.jpa.open-in-view=false
+          server.servlet.session.cookie.same-site=none
+          server.servlet.session.cookie.secure=true
           EOF
 
       - name: Build with Maven
