@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,30 +17,26 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+@WebServlet("/api/travels/*")
 public class TravelServlet extends HttpServlet {
 
     private final TravelService travelService = new TravelService();
     private final Gson gson = new Gson();
 
-    // GET /api/travels → 여행지 목록
-    // GET /api/travels?keyword=부산 → 키워드 검색
-    // GET /api/travels/1 → 여행지 상세 (리뷰 포함)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setContentType("application/json");
-        String pathInfo = request.getPathInfo(); // null or "/1"
+        String pathInfo = request.getPathInfo();
 
         try {
             if (pathInfo == null || pathInfo.equals("/")) {
-                // 목록 조회
                 String keyword = request.getParameter("keyword");
                 List<Travel> travels = travelService.getTravels(keyword);
                 response.getWriter().write(gson.toJson(travels));
 
             } else {
-                // 상세 조회: /1
                 int id = parseId(pathInfo);
                 Map<String, Object> detail = travelService.getTravelDetail(id);
 
@@ -60,13 +57,12 @@ public class TravelServlet extends HttpServlet {
         }
     }
 
-    // POST /api/travels/1/reviews → 리뷰 등록
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setContentType("application/json");
-        String pathInfo = request.getPathInfo(); // "/1/reviews"
+        String pathInfo = request.getPathInfo();
 
         try {
             if (pathInfo == null || !pathInfo.matches("/\\d+/reviews")) {
@@ -75,10 +71,9 @@ public class TravelServlet extends HttpServlet {
                 return;
             }
 
-            String[] parts = pathInfo.split("/"); // ["", "1", "reviews"]
+            String[] parts = pathInfo.split("/");
             int travelId = Integer.parseInt(parts[1]);
 
-            // 요청 바디 읽기 (JSON)
             String body = readBody(request);
             JsonObject json = JsonParser.parseString(body).getAsJsonObject();
 
@@ -102,7 +97,6 @@ public class TravelServlet extends HttpServlet {
     }
 
     private int parseId(String pathInfo) {
-        // "/1" → 1, "/1/reviews" 같은 경우 방지
         String idPart = pathInfo.substring(1);
         if (idPart.contains("/")) {
             idPart = idPart.substring(0, idPart.indexOf("/"));
