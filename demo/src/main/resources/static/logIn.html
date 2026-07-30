@@ -13,7 +13,7 @@
 <body>
     <div class="page active" id="page-login">
 
-        <a class="back-link" href="index.html">← ホームへ戻る</a>
+        <a class="back-link" href="index">← ホームへ戻る</a>
 
         <!--카드형 로그인 페이지 타이틀-->
         <div class="card">
@@ -31,9 +31,13 @@
             <!--for="login-pw" - id="login-pw" 연결, autocomplete="current-password": 기존 비밀번호 자동 완성 -->
             <div class="field-group">
                 <label class="field-label" for="login-pw">パスワード</label>
-                <input class="field-input" type="password" id="login-pw" placeholder="パスワード"
-                    autocomplete="current-password" />
+                <div class="input-with-icon">
+                    <input class="field-input" type="password" id="login-pw" placeholder="パスワード"
+                        autocomplete="current-password" />
+                    <button type="button" class="toggle-pw" id="toggle-pw" aria-label="パスワードを表示">👁</button>
+                </div>
             </div>
+            <p class="login-error" id="login-error"></p>
 
             <!--로그인 상태 유지 토글 & 비밀번호 찾기 링크-->
             <div class="options-row">
@@ -41,7 +45,7 @@
                     <input type="checkbox" id="keep-login" />
                     ログイン状態を保持する
                 </label>
-                <a class="forgot-link" href="reset-password.html">パスワードをお忘れの方</a>
+                <a class="forgot-link" href="reset-password">パスワードをお忘れの方</a>
             </div>
 
             <!--로그인 버튼-->
@@ -51,7 +55,7 @@
             <!--회원가입 안내 및 링크-->
             <div class="bottom-text">
                 アカウントをお持ちでない方はこちら<br>
-                <a class="bottom-link" href="signup.html">新規登録</a>
+                <a class="bottom-link" href="signup">新規登録</a>
             </div>
         </div>
         <script src="js/loginJS.js"></script>

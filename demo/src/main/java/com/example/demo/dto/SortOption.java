@@ -1,4 +1,4 @@
-package com.example.demo.place;
+package com.example.demo.dto;
 
 public enum SortOption {
     STAR_DESC,

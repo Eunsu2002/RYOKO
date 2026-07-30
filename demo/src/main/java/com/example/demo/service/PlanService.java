@@ -1,7 +1,9 @@
-package com.example.demo.plan;
+package com.example.demo.service;
+import com.example.demo.entity.Plan;
+import com.example.demo.repository.PlanRepository;
 
-import com.example.demo.plan.dto.PlanRequest;
-import com.example.demo.plan.dto.PlanResponse;
+import com.example.demo.dto.PlanRequest;
+import com.example.demo.dto.PlanResponse;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -50,7 +52,7 @@ public class PlanService {
 
     public PlanResponse updatePlan(Integer id, PlanRequest request) {
         Plan plan = planRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("일정을 찾을 수 없습니다. id=" + id));
+                .orElseThrow(() -> new NoSuchElementException("スケジュールが見つかりません。 id=" + id));
 
         plan.setPName(request.getPName());
         plan.setPlaceId(request.getPlaceId());
@@ -65,7 +67,7 @@ public class PlanService {
 
     public void deletePlan(Integer id) {
         if (!planRepository.existsById(id)) {
-            throw new NoSuchElementException("일정을 찾을 수 없습니다. id=" + id);
+            throw new NoSuchElementException("スケジュールが見つかりません。 id=" + id);
         }
         planRepository.deleteById(id);
     }

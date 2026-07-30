@@ -1,18 +1,20 @@
-package com.example.demo.plan;
+package com.example.demo.controller;
 
-import com.example.demo.plan.dto.PlanRequest;
-import com.example.demo.plan.dto.PlanResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.dto.PlanRequest;
+import com.example.demo.dto.PlanResponse;
+import com.example.demo.service.PlanService;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * schedule.html의 달력/카드 그리드가 호출하는 API.
+ * schedule의 달력/카드 그리드가 호출하는 API.
  *
  * GET /api/plans?date=2026-07-20 -> 그 날짜에 시작하는 일정 목록 (달력 클릭 시)
  * POST /api/plans -> 일정 생성 (+ 버튼)

@@ -1,7 +1,9 @@
-package com.example.demo.place;
+package com.example.demo.service;
 
-
-import com.example.demo.place.dto.PlaceResponse;
+import com.example.demo.dto.PlaceResponse;
+import com.example.demo.dto.SortOption;
+import com.example.demo.entity.Place;
+import com.example.demo.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 @RequiredArgsConstructor

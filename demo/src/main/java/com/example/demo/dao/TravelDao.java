@@ -1,5 +1,6 @@
-package com.example.demo.travel;
+package com.example.demo.dao;
 
+import com.example.demo.entity.Travel;
 import com.example.demo.util.DBUtil;
 
 import java.sql.Connection;
@@ -24,8 +25,8 @@ public class TravelDao {
         List<Travel> list = new ArrayList<>();
 
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 list.add(mapRow(rs));
@@ -49,7 +50,7 @@ public class TravelDao {
         String pattern = "%" + keyword + "%";
 
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, pattern);
             pstmt.setString(2, pattern);
@@ -74,7 +75,7 @@ public class TravelDao {
                 + "GROUP BY p.id";
 
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
 

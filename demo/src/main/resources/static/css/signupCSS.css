@@ -117,7 +117,7 @@ body {
 
 /* 포커스 되었을 때 브랜드 시그니처 옐로우 적용 */
 .fieldInput:focus {
-    border-color: #ffba25;
+    border-color: #FFBA25;
     box-shadow: 0 0 0 3px rgba(255, 186, 37, 0.1);
 }
 
@@ -185,7 +185,7 @@ body {
 }
 
 .loginRedirectLink {
-    color: #ffba25;
+    color: #FFBA25;
     font-weight: 700;
     text-decoration: none;
     margin-left: 6px;

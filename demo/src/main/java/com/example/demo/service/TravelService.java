@@ -1,7 +1,9 @@
-package com.example.demo.travel;
+package com.example.demo.service;
 
-import com.example.demo.review.Review;
-import com.example.demo.review.ReviewDao;
+import com.example.demo.dao.ReviewDao;
+import com.example.demo.dao.TravelDao;
+import com.example.demo.entity.Review;
+import com.example.demo.entity.Travel;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -48,7 +50,7 @@ public class TravelService {
             throws SQLException {
         Travel travel = travelDao.findById(travelId);
         if (travel == null) {
-            throw new IllegalArgumentException("여행지를 찾을 수 없습니다. id=" + travelId);
+            throw new IllegalArgumentException("旅行先が見つかりません。 id=" + travelId);
         }
 
         Review review = new Review();

@@ -1,4 +1,4 @@
-package com.example.demo.place;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
@@ -49,13 +49,11 @@ public class Place {
 
     @Column(name = "recommended_schedule")
     private String recommendedSchedule;
-    
-    @Column(name = "created_at", insertable = false, updatable = false )
+
+    @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
 }
-
-

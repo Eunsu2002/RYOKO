@@ -14,12 +14,12 @@ document.getElementById("reset-btn").addEventListener("click", function () {
             return response.text().then(function (message) {
                 alert(message);
                 if (response.ok) {
-                    window.location.href = "logIn.html";
+                    window.location.href = "logIn";
                 }
             });
         })
         .catch(function (error) {
-            alert("요청 중 오류가 발생했습니다.");
+            alert("処理中にエラーが発生しました。");
             console.error(error);
         });
 });

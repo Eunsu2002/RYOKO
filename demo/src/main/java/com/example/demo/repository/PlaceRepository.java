@@ -1,12 +1,11 @@
-package com.example.demo.place;
+package com.example.demo.repository;
 
-
+import com.example.demo.entity.Place;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 
 public interface PlaceRepository extends JpaRepository<Place, Integer> {
 
@@ -14,14 +13,14 @@ public interface PlaceRepository extends JpaRepository<Place, Integer> {
     @Query(value = """
         SELECT p.* FROM place p
         WHERE ( lower(p.p_name) LIKE LOWER(CONCAT('%', :keyword, '%'))
-        OR lower(p.address) LIKE LOWER(CONCAT('%', :keyword, '%')) 
+        OR lower(p.address) LIKE LOWER(CONCAT('%', :keyword, '%'))
         OR lower(p.category) LIKE LOWER(CONCAT('%', :keyword, '%')) )
         AND (:style IS NULL OR (p.style & :style) > 0)
     """,
             countQuery = """
         SELECT COUNT(*) FROM place p
         WHERE ( lower(p.p_name) LIKE LOWER(CONCAT('%', :keyword, '%'))
-        OR lower(p.address) LIKE LOWER(CONCAT('%', :keyword, '%')) 
+        OR lower(p.address) LIKE LOWER(CONCAT('%', :keyword, '%'))
         OR lower(p.category) LIKE LOWER(CONCAT('%', :keyword, '%')) )
         AND (:style IS NULL OR (p.style & :style) > 0)
     """,

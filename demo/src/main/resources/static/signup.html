@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입 | RYOKO</title>
+    <title>会員登録 | RYOKO</title>
     <!-- 회원가입 페이지 전용 스타일시트 -->
     <link rel="stylesheet" href="css/signupCSS.css">
 </head>
@@ -12,63 +12,63 @@
 <body>
     <div class="signUpWrapper">
         <!-- 상단: 홈으로 돌아가는 링크 -->
-        <a href="index.html" class="backHomeLink">← 홈으로 돌아가기</a>
+        <a href="index" class="backHomeLink">← ホームへ戻る</a>
 
         <!-- 회원가입 폼이 담긴 흰색 카드 -->
         <div class="signUpCard">
-            <h1 class="signUpTitle">회원가입</h1>
-            <p class="signUpSubtitle">AI 여행 플래너와 함께 여행을 시작하세요</p>
+            <h1 class="signUpTitle">会員登録</h1>
+            <p class="signUpSubtitle">AI旅行プランナーと一緒に旅を始めましょう</p>
 
             <form id="signUpForm" class="signUpForm">
                 <!-- 이름 입력 -->
                 <div class="formField">
-                    <label for="nameInput" class="fieldLabel">이름</label>
-                    <input type="text" id="nameInput" class="fieldInput" placeholder="홍길동" autocomplete="name">
-                    <p id="nameErrorMessage" class="fieldErrorMessage">이름을 입력해주세요.</p>
+                    <label for="nameInput" class="fieldLabel">お名前</label>
+                    <input type="text" id="nameInput" class="fieldInput" placeholder="山田太郎" autocomplete="name">
+                    <p id="nameErrorMessage" class="fieldErrorMessage">お名前を入力してください。</p>
                 </div>
 
                 <!-- 전화번호 입력 -->
                 <div class="formField">
-                    <label for="phoneInput" class="fieldLabel">전화번호</label>
+                    <label for="phoneInput" class="fieldLabel">電話番号</label>
                     <input type="tel" id="phoneInput" class="fieldInput" placeholder="01012349643" autocomplete="tel">
-                    <p id="phoneErrorMessage" class="fieldErrorMessage">올바른 전화번호 형식이 아닙니다.</p>
+                    <p id="phoneErrorMessage" class="fieldErrorMessage">正しい電話番号の形式ではありません。</p>
                 </div>
 
                 <!-- 이메일 입력 -->
                 <div class="formField">
-                    <label for="emailInput" class="fieldLabel">이메일</label>
+                    <label for="emailInput" class="fieldLabel">メールアドレス</label>
                     <input type="email" id="emailInput" class="fieldInput" placeholder="example@email.com"
                         autocomplete="email">
-                    <p id="emailErrorMessage" class="fieldErrorMessage">올바른 이메일 형식이 아닙니다.</p>
+                    <p id="emailErrorMessage" class="fieldErrorMessage">正しいメールアドレスの形式ではありません。</p>
                 </div>
 
                 <!-- 비밀번호 입력 -->
                 <div class="formField">
-                    <label for="passwordInput" class="fieldLabel">비밀번호</label>
-                    <input type="password" id="passwordInput" class="fieldInput" placeholder="8자 이상 입력해주세요"
+                    <label for="passwordInput" class="fieldLabel">パスワード</label>
+                    <input type="password" id="passwordInput" class="fieldInput" placeholder="8文字以上入力してください"
                         autocomplete="new-password">
-                    <p id="passwordErrorMessage" class="fieldErrorMessage">비밀번호는 8자 이상이어야 합니다.</p>
+                    <p id="passwordErrorMessage" class="fieldErrorMessage">パスワードは8文字以上で入力してください。</p>
                 </div>
 
                 <!-- 비밀번호 확인 입력 -->
                 <div class="formField">
-                    <label for="passwordConfirmInput" class="fieldLabel">비밀번호 확인</label>
-                    <input type="password" id="passwordConfirmInput" class="fieldInput" placeholder="비밀번호를 다시 입력하세요"
+                    <label for="passwordConfirmInput" class="fieldLabel">パスワード（確認）</label>
+                    <input type="password" id="passwordConfirmInput" class="fieldInput" placeholder="パスワードをもう一度入力してください"
                         autocomplete="new-password">
-                    <p id="passwordConfirmErrorMessage" class="fieldErrorMessage">비밀번호가 일치하지 않습니다.</p>
+                    <p id="passwordConfirmErrorMessage" class="fieldErrorMessage">パスワードが一致しません。</p>
                 </div>
 
                 <!-- 하단 버튼: 취소 / 회원가입 -->
                 <div class="buttonRow">
-                    <button type="button" id="cancelButton" class="actionButton cancelButton">취소</button>
-                    <button type="submit" id="submitButton" class="actionButton submitButton">회원가입</button>
+                    <button type="button" id="cancelButton" class="actionButton cancelButton">キャンセル</button>
+                    <button type="submit" id="submitButton" class="actionButton submitButton">会員登録</button>
                 </div>
             </form>
 
             <!-- 로그인 페이지로 이동하는 링크 -->
             <p class="loginRedirectText">
-                이미 계정이 있으신가요?
-                <a href="logIn.html" class="loginRedirectLink">로그인하기</a>
+                すでにアカウントをお持ちの方
+                <a href="logIn" class="loginRedirectLink">ログイン</a>
             </p>
         </div>
     </div>
@@ -194,19 +194,19 @@
                     return response.text().then(function (message) {
                         alert(message);
                         if (response.ok) {
-                            window.location.href = "logIn.html";
+                            window.location.href = "logIn";
                         }
                     });
                 })
                 .catch(function (error) {
-                    alert("회원가입 요청 중 오류가 발생했습니다.");
+                    alert("会員登録処理中にエラーが発生しました。");
                     console.error(error);
                 });
         }
 
         // 취소 버튼 클릭 시 홈으로 이동
         function handleCancelClick() {
-            window.location.href = "index.html";
+            window.location.href = "index";
         }
 
         // ===== 이벤트 리스너 등록 =====

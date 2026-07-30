@@ -47,8 +47,8 @@ function applyParamsToForm(keywordInput, styleCheckboxes) {
 }
 
 
-/*
-// 현재 폼 조건으로 /api/travels를 호출해 검색 결과를 travel-grid에 렌더링
+
+// 현재 폼 조건으로 /api/places를 호출해 검색 결과를 travel-grid에 렌더링
 async function fetchAndRenderResults(keywordInput, styleCheckboxes) {
   const grid = document.getElementById("travelGrid");
   if (!grid) return;
@@ -65,7 +65,7 @@ async function fetchAndRenderResults(keywordInput, styleCheckboxes) {
   }
 
   try {
-    const response = await fetch(`/api/travels?${params.toString()}`);
+    const response = await fetch(`/api/places?${params.toString()}`);
     if (!response.ok) {
       throw new Error(`검색 요청 실패: ${response.status}`);
     }
@@ -100,7 +100,7 @@ function createTravelCardHtml(place) {
 
   return `
     <article class="travel-card">
-      <a href="./travel-detail.html?id=${place.id}" class="card-image-link" aria-label="${name} 상세보기">
+      <a href="./travel-detail?id=${place.id}" class="card-image-link" aria-label="${name} 상세보기">
         <img src="${imageUrl}" alt="${name}" />
         <span class="rating">⭐ ${rating}</span>
       </a>
@@ -110,13 +110,12 @@ function createTravelCardHtml(place) {
         <p class="description">${description}</p>
         <div class="card-bottom">
           <span>리뷰 ${reviewCount}</span>
-          <a href="./travel-detail.html?id=${place.id}">상세보기 →</a>
+          <a href="./travel-detail?id=${place.id}">상세보기 →</a>
         </div>
       </div>
     </article>
   `;
 }
-  */
 
 // 검색 결과(장소명/주소/설명)에 HTML 태그가 섞여 들어오는 것을 방지하기 위한 최소한의 escape
 function escapeHtml(text) {

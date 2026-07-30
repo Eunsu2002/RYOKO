@@ -1,6 +1,6 @@
-package com.example.demo.plan.dto;
+package com.example.demo.dto;
 
-import com.example.demo.plan.Plan;
+import com.example.demo.entity.Plan;
 
 import java.time.LocalDateTime;
 

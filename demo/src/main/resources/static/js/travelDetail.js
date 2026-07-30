@@ -19,7 +19,7 @@ function NotIdException(placeId) {
 
 async function loadPlaceDetail(placeId) {
     try {
-        const res = await fetch(`application/json`);
+        const res = await fetch(`/api/places/${placeId}`);
 
         if (!res.ok) {
             throw new Error(`서버 응답 에러: ${res.status}`);

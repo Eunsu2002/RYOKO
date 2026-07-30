@@ -25,7 +25,7 @@ function myOrLogin() {
         e.preventDefault();
         fetch("/api/logout", { method: "POST" })
             .then(function () {
-                window.location.reload();
+                window.location.href = "index";
             });
     });
 }
@@ -60,8 +60,8 @@ export function performSearch(keyword = "", styles = 0) {
     const queryString = params.toString();
 
     window.location.href = queryString
-        ? `travel-list.html?${queryString}`
-        : "travel-list.html";
+        ? `travel-list?${queryString}`
+        : "travel-list";
 }
 
 myOrLogin();
