@@ -53,7 +53,7 @@ function renderPlaceDetail(place) {
     $(`.stars`).textContent = '★'.repeat(starCount) + '☆'.repeat(emptyCount)
         }
 
-    // 리뷰 등록하는 곳 별 hover 시 별 갯수 변경되게
+    // 리뷰 등록 시 별에 hover 할 경우 별 갯수 변경되게
     let selectedRating = 0;
     const starElements = $(`#review-rating .star`)
 
@@ -83,8 +83,20 @@ function renderPlaceDetail(place) {
             alert('星評価を選択してください。');
             return;
         }
-        const reviewContent = $(``)
+        // 버튼 클릭 시 review에 post 보내기
+        const reviewContent = $(`.review-content`)
 
+        fetch(`api/review/{id}`), {
+            method: 'POST',
+            header: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ rating: selectedRating, content: reviewContent})
+        }
+            .then(res => {
+                if (!res.ok) throw new Error('レビュー投稿成功');
+                alert('レビュー投稿失敗')
+            })
+            .catch(err => console.error(err))
+        
     })
 
 
