@@ -1,5 +1,6 @@
 
 const $ = (selector) => document.querySelector(selector);
+const $$ = (selector)=> document.querySelectorAll(selector);
 const params = new URLSearchParams(window.location.search);
 const placeId = params.get('id');
 
@@ -55,7 +56,7 @@ function renderPlaceDetail(place) {
 
     // 리뷰 등록 시 별에 hover 할 경우 별 갯수 변경되게
     let selectedRating = 0;
-    const starElements = $(`#review-rating .star`)
+    const starElements = $$(`#review-rating .star`)
 
     starElements.forEach((star) => {
         star.addEventListener('mouseenter', () => {
@@ -84,24 +85,28 @@ function renderPlaceDetail(place) {
             return;
         }
         // 버튼 클릭 시 review에 post 보내기
-        const reviewContent = $(`.review-content`)
+        const reviewContent = $(`#review-body`).value;
 
-        fetch(`api/review/{id}`), {
+        // ****** API 만들어지면 그때 연동하기
+        fetch(`api/review/`, {
             method: 'POST',
-            header: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ rating: selectedRating, content: reviewContent})
-        }
+        })
             .then(res => {
-                if (!res.ok) throw new Error('レビュー投稿成功');
-                alert('レビュー投稿失敗')
+                if (!res.ok) throw new Error('レビュー投稿失敗');
+                alert('レビュー投稿成功')
             })
-            .catch(err => console.error(err))
-        
-    })
+            .catch(err => {
+                console.error(err)
+                alert('API가 아직 없어서 몬함')
+            })
+    });
 
 
 
-// 리뷰 연결 필요
+
+// ******* 리뷰 연결 필요
 function renderReview(review){
 
 }
@@ -141,4 +146,4 @@ function addSchedule() {
 }
 
 $(`.schedule-btn`).addEventListener('click', addSchedule);
-NotIdException(placeId)
+NotIdException(placeId);
