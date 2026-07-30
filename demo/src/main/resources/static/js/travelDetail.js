@@ -16,7 +16,7 @@ function NotIdException(placeId) {
         loadPlaceDetail(placeId)
     }
 }
-
+// 여행지 id 별 세부 내역 받아오기
 async function loadPlaceDetail(placeId) {
     try {
         const res = await fetch(`/api/places/${placeId}`);
@@ -47,11 +47,70 @@ function renderPlaceDetail(place) {
     $(`#detail-recommendSchedule`).textContent = place.recommendedSchedule;
     // place 테이블에 place_img 연결 및 Place Entity 관련 추가 필요
 
-    // 리뷰 평균만큼 별 그려주기
-    const starCount = Math.round(place.avgStar);
-    const emptyCount = 5 - starCount;
-    $(`.stars`).textContent = '★'.repeat(starCount) + '☆'.repeat(emptyCount)
+    // getStarString 함수 이용하여 리뷰 수만큼 별 그려주기
+    $(`.stars`).textContent = getStarString(place.avgStar);
+}
+    // 리뷰 평균만큼 별 그려주는 함수
+    function getStarString(rating) {
+        const starCount = Math.round(rating);
+        const emptyCount = 5 - starCount;
+        return '★'.repeat(starCount) + '☆'.repeat(emptyCount);
+    }
+
+    // 리뷰 하나씩 만들기
+    function createReviewHtml (review) {
+        const starString = getStarString(review.rating);
+        const YMDOnly = review.createdAt.split('T');
+
+        return `
+            <div class="review-item">
+            <div class="review-user-icon">●</div>
+            <div class="review-content">
+              <div class="review-meta">
+                <strong>${escapeHtml(review.userName)}</strong>
+                <div>
+                  <span class="small-stars">${starString}</span>
+                  <time datetime="${review.createdAt}">${YMDOnly[0]}</time>
+                </div>
+              </div>
+              <p>${escapeHtml(review.content)}</p>
+            </div>
+          </div>
+        `
+    }
+
+    function renderReviews(reviews) {
+        const reviewList = $(`#review-list`)
+
+        if (!reviews || reviews.length === 0) {
+            reviewList.innerHTML = '<p>まだ投稿したレビューがありません。</p>'
+            return
         }
+
+        reviewList.innerHTML = reviews.map(createReviewHtml).join('');
+
+    }
+
+
+    // 리뷰 받아오기
+    async function loadPlaceReview(placeId) {
+        try {
+            const res = await fetch(`/api/travels/${placeId}`);
+
+            if (!res.ok) {
+                throw new Error(`리뷰 조회 실패: ${res.status}`);
+            }
+
+            const data = await res.json();
+            const reviews = data.reviews;
+
+            renderReviews(reviews);
+        } catch (err) {
+            console.error('리뷰를 불러오지 못했습니다.', err);
+            alert('리뷰를 불러오지 못했습니다.')
+        }
+    }
+
 
     // 리뷰 등록 시 별에 hover 할 경우 별 갯수 변경되게
     let selectedRating = 0;
@@ -102,11 +161,6 @@ function renderPlaceDetail(place) {
             })
     });
 
-// ******* 여행지 리뷰 렌더링
-function renderReview(review){
-
-}
-
 // 일정에 추가 버튼 눌렀을 때 기능
 function addSchedule() {
     if (!place) {
@@ -141,5 +195,12 @@ function addSchedule() {
         });
 }
 
+function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 $(`.schedule-btn`).addEventListener('click', addSchedule);
 NotIdException(placeId);
+loadPlaceReview(placeId);
