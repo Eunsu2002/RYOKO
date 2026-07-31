@@ -32,7 +32,7 @@ function doLogin() {
         .then(function (response) {
             if (response.ok) {
                 // [기능 1] 팝업 없이 바로 메인으로
-                window.location.href = "index.html";
+                window.location.href = "index";
             } else {
                 // [기능 4] 실패: 비번 칸 비우고 + 문구 표시
                 pwInput.value = "";
