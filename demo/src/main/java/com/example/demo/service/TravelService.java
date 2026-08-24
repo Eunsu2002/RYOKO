@@ -2,8 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.dao.ReviewDao;
 import com.example.demo.dao.TravelDao;
-import com.example.demo.entity.Review;
-import com.example.demo.entity.Travel;
+import com.example.demo.dao.Review;
+import com.example.demo.dao.Travel;
 
 import java.sql.SQLException;
 import java.util.HashMap;

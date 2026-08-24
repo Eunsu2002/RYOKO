@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.entity.Travel;
 import com.example.demo.util.DBUtil;
 
 import java.sql.Connection;

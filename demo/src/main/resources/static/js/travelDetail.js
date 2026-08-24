@@ -59,7 +59,7 @@ function renderPlaceDetail(place) {
 
     // 리뷰 하나씩 만들기
     function createReviewHtml (review) {
-        const starString = getStarString(review.rating);
+        const starString = getStarString(review.star);
         const YMDOnly = review.createdAt.split('T');
 
         return `
@@ -67,13 +67,13 @@ function renderPlaceDetail(place) {
             <div class="review-user-icon">●</div>
             <div class="review-content">
               <div class="review-meta">
-                <strong>${escapeHtml(review.userName)}</strong>
+                <strong>${escapeHtml(review.username)}</strong>
                 <div>
                   <span class="small-stars">${starString}</span>
                   <time datetime="${review.createdAt}">${YMDOnly[0]}</time>
                 </div>
               </div>
-              <p>${escapeHtml(review.content)}</p>
+              <p>${escapeHtml(review.body)}</p>
             </div>
           </div>
         `
@@ -86,31 +86,32 @@ function renderPlaceDetail(place) {
             reviewList.innerHTML = '<p>まだ投稿したレビューがありません。</p>'
             return
         }
-
         reviewList.innerHTML = reviews.map(createReviewHtml).join('');
-
     }
 
+    function renderPlaceImg(imageUrl) {
+        const defaultImage = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80';
+        $('#detail-imgUrl').src = imageUrl ?? defaultImage;
+    }
 
     // 리뷰 받아오기
     async function loadPlaceReview(placeId) {
         try {
-            const res = await fetch(`/api/travels/${placeId}`);
+            const res = await fetch(`/api/places/${placeId}/reviews`);
 
             if (!res.ok) {
                 throw new Error(`리뷰 조회 실패: ${res.status}`);
             }
 
             const data = await res.json();
-            const reviews = data.reviews;
 
-            renderReviews(reviews);
+            renderReviews(data);
+
         } catch (err) {
             console.error('리뷰를 불러오지 못했습니다.', err);
             alert('리뷰를 불러오지 못했습니다.')
         }
     }
-
 
     // 리뷰 등록 시 별에 hover 할 경우 별 갯수 변경되게
     let selectedRating = 0;
@@ -146,10 +147,10 @@ function renderPlaceDetail(place) {
         const reviewContent = $(`#review-body`).value;
 
         // ****** API 만들어지면 그때 연동하기
-        fetch(`api/review/`, {
+        fetch(`/api/places/${placeId}/reviews`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({ rating: selectedRating, content: reviewContent})
+            body: JSON.stringify({ star: selectedRating, body: reviewContent})
         })
             .then(res => {
                 if (!res.ok) throw new Error('レビュー投稿失敗');

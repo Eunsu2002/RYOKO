@@ -1,7 +1,7 @@
 package com.example.demo.servlet;
 
-import com.example.demo.entity.Review;
-import com.example.demo.entity.Travel;
+import com.example.demo.dao.Review;
+import com.example.demo.dao.Travel;
 import com.example.demo.service.TravelService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
