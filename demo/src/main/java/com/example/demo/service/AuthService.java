@@ -53,8 +53,12 @@ public class AuthService {
 
     public void signup(String name, String phone, String email, String password) {
         if (userRepository.existsByEmail(email)) {
-            throw new IllegalArgumentException("新しいパスワードを入力してください。");
+            throw new IllegalArgumentException("すでに登録されているメールアドレスです。");
         }
+
+        if (userRepository.existsByUsername(name)) {
+        throw new IllegalArgumentException("既に使われているニックネームです。");
+}
 
         User user = new User();
         user.setUsername(name);
