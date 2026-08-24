@@ -74,7 +74,7 @@ public class AuthController {
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
         try {
             authService.signup(request.getName(), request.getPhone(), request.getEmail(), request.getPassword());
-            return ResponseEntity.ok("パスワードが変更されました。");
+            return ResponseEntity.ok("会員登録が完了しました。");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }
@@ -86,7 +86,7 @@ public class AuthController {
         Object userId = session.getAttribute("userId");
 
         if (userId == null) {
-            return ResponseEntity.status(401).body("パスワードが変更されました。");
+            return ResponseEntity.status(401).body("ログインしていません。");
         }
 
         authService.withdrawUser((Long) userId);
