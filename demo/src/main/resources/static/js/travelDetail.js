@@ -154,7 +154,12 @@ function renderPlaceDetail(place) {
         })
             .then(res => {
                 if (!res.ok) throw new Error('レビュー投稿失敗');
-                alert('レビュー投稿成功')
+                alert('レビュー投稿成功');
+                loadPlaceReview(placeId);
+                loadPlaceDetail(placeId);
+                $('#review-body').value = '';
+                selectedRating = 0;
+                updateStarDisplay(0);
             })
             .catch(err => {
                 console.error(err)
