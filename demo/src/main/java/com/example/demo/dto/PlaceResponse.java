@@ -14,8 +14,10 @@ public record PlaceResponse(
         Float avgStar,
         Integer reviewCount,
         String operatingHours,
-        String recommendedSchedule) {
-    public static PlaceResponse from(Place place) {
+        String recommendedSchedule,
+        String imgUrl
+) {
+    public static PlaceResponse from(Place place, String imgUrl) {
         return new PlaceResponse(
                 place.getId(),
                 place.getPName(),
@@ -28,7 +30,8 @@ public record PlaceResponse(
                 place.getAvgStar(),
                 place.getReviewCount(),
                 place.getOperatingHours(),
-                place.getRecommendedSchedule());
+                place.getRecommendedSchedule(),
+                imgUrl
+        );
     }
-
 }

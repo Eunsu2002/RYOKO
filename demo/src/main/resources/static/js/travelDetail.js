@@ -41,11 +41,11 @@ function renderPlaceDetail(place) {
     $(`#detail-pName`).textContent = place.pName;
     $(`#detail-address`).textContent = place.address;
     $(`#detail-body`).textContent = place.body;
+    renderPlaceImg(place.imgUrl);
     $(`#place-reviewCount`).textContent = `${place.reviewCount}件のレビュー`;
     $(`#detail-avgStar`).textContent = place.avgStar.toFixed(2);
     $(`#detail-operatingHours`).textContent = place.operatingHours;
     $(`#detail-recommendSchedule`).textContent = place.recommendedSchedule;
-    // place 테이블에 place_img 연결 및 Place Entity 관련 추가 필요
 
     // getStarString 함수 이용하여 리뷰 수만큼 별 그려주기
     $(`.stars`).textContent = getStarString(place.avgStar);

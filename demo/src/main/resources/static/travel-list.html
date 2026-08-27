@@ -95,21 +95,6 @@
 
     <section class="travel-section">
       <div class="travel-grid">
-        <!-- 이 아래 컨텐츠들은 추후 다 BE 연결해주는 코드로 바꿔야함.
-        일단 .html이니 React는 생각안하고 
-        spring boot + 타임리프 쓴다고 생각하고 예시는 타임리프로 작성 
-        -->
-
-        <!--
-          Thymeleaf 예시:
-          <article class="travel-card" th:each="travel : ${travels}">
-            <a th:href="@{/travels/{id}(id=${travel.id})}">
-            <img th:src="${travel.imageUrl}" th:alt="${travel.name}">
-            <h2 th:text="${travel.name}"></h2>
-            ...
-          </article>
-        -->
-
         <article class="travel-card">
           <a href="./travel-detail" class="card-image-link" aria-label="釜山 海雲台ビーチ 詳細を見る">
             <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
