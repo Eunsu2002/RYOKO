@@ -10,7 +10,7 @@ console.log(placeId)
 
 function NotIdException(placeId) {
     if (!placeId) {
-        alert('잘못된 접근입니다.');
+        openModal('間違った接近です。');
         window.location.href = 'travel-list.html';
     } else {
         loadPlaceDetail(placeId)
@@ -22,7 +22,7 @@ async function loadPlaceDetail(placeId) {
         const res = await fetch(`/api/places/${placeId}`);
 
         if (!res.ok) {
-            throw new Error(`서버 응답 에러: ${res.status}`);
+            throw new Error(`サーバー応答エラー: ${res.status}`);
         }
 
         place = await res.json();
@@ -31,8 +31,8 @@ async function loadPlaceDetail(placeId) {
         renderPlaceDetail(place);
     } catch (err) {
 
-        console.error('여행지 정보를 불러오지 못했습니다.', err);
-        alert('존재하지 않는 여행지입니다.')
+        console.error('存在しない旅行先です。', err);
+        openModal('存在しない旅行先です。');
         window.location.href = 'travel-list.html';
     }
 }
@@ -100,7 +100,7 @@ function renderPlaceDetail(place) {
             const res = await fetch(`/api/places/${placeId}/reviews`);
 
             if (!res.ok) {
-                throw new Error(`리뷰 조회 실패: ${res.status}`);
+                throw new Error(`レビュー照会失敗: ${res.status}`);
             }
 
             const data = await res.json();
@@ -108,8 +108,8 @@ function renderPlaceDetail(place) {
             renderReviews(data);
 
         } catch (err) {
-            console.error('리뷰를 불러오지 못했습니다.', err);
-            alert('리뷰를 불러오지 못했습니다.')
+            console.error('レビューを読み込めませんでした。', err);
+            openModal('レビューを読み込めません。');
         }
     }
 
@@ -140,13 +140,13 @@ function renderPlaceDetail(place) {
 
     $('#review-button').addEventListener('click', () => {
         if (selectedRating === 0) {
-            alert('星評価を選択してください。');
+            openModal('星評価を選択してください。');
             return;
         }
+
         // 버튼 클릭 시 review에 post 보내기
         const reviewContent = $(`#review-body`).value;
 
-        // ****** API 만들어지면 그때 연동하기
         fetch(`/api/places/${placeId}/reviews`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
@@ -154,7 +154,9 @@ function renderPlaceDetail(place) {
         })
             .then(res => {
                 if (!res.ok) throw new Error('レビュー投稿失敗');
-                alert('レビュー投稿成功');
+
+                openModal('レビュー投稿成功！');
+
                 loadPlaceReview(placeId);
                 loadPlaceDetail(placeId);
                 $('#review-body').value = '';
@@ -163,14 +165,14 @@ function renderPlaceDetail(place) {
             })
             .catch(err => {
                 console.error(err)
-                alert('APIがまだ存在しません。')
+                openModal('APIがまだ存在しません。');
             })
     });
 
 // 일정에 추가 버튼 눌렀을 때 기능
 function addSchedule() {
     if (!place) {
-        alert("旅行先の情報を読み込めませんでした。")
+        openModal("旅行先の情報を読み込めませんでした。")
         return
     }
 
@@ -193,11 +195,11 @@ function addSchedule() {
     })
         .then(res =>{
             if (!res.ok) throw new Error("日程追加失敗")
-            alert('日程に追加されました！')
+            openModal('日程に追加されました！')
         })
         .catch(err => {
             console.error(err);
-            alert('日程の追加中にエラーが発生しました。')
+            openModal('日程の追加中にエラーが発生しました。')
         });
 }
 
@@ -207,6 +209,19 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+// 모달창 복붙
+function openModal(message) {
+    $(`#modal-message`).textContent = message;
+    document.getElementById("modalOverlay").classList.add("open");
+}
+function closeModal() {
+    document.getElementById("modalOverlay").classList.remove("open");
+}
+
+$('#confirmBtn').addEventListener('click', closeModal);
+
 $(`.schedule-btn`).addEventListener('click', addSchedule);
+
+
 NotIdException(placeId);
 loadPlaceReview(placeId);
