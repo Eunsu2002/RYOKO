@@ -1,71 +1,37 @@
 package com.example.demo.entity;
 
-public class Review {
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.time.LocalDateTime;
+
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "reviews")
+public class Review{
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int travelId;
-    private long userId;
-    private String userName;
-    private int rating;
-    private String content;
-    private String createdAt;
 
-    public Review() {
-    }
+    @Column(name = "place_id")
+    private int placeId;
 
-    public int getId() {
-        return id;
-    }
+    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Column(name = "star")
+    private double star;
 
-    public int getTravelId() {
-        return travelId;
-    }
+    @Column(name = "body", columnDefinition = "TEXT")
+    private String body;
 
-    public void setTravelId(int travelId) {
-        this.travelId = travelId;
-    }
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private LocalDateTime createdAt;
 
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
 }

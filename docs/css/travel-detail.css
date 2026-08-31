@@ -544,4 +544,10 @@ nav img {
     align-items: flex-start;
     gap: 3px;
   }
+
+  .star {
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
 }

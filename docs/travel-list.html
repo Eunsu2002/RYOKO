@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/travel-list.css" />
   <script src="js/config.js"></script>
   <script type="module" src="js/wholeJS.js"></script>
-  <script type="module" src="js/travelListJS.js"></script>
+  <script defer src="js/travelListJS.js"></script>
   <!-- 추후 spring boot 등 사용 시 
   DB데이터가 들어가니 templates 폴더에 들어가야하므로 변경 필요 
   -->
@@ -95,123 +95,8 @@
     </section>
 
     <section class="travel-section">
-      <div class="travel-grid">
-        <!-- 이 아래 컨텐츠들은 추후 다 BE 연결해주는 코드로 바꿔야함.
-        일단 .html이니 React는 생각안하고 
-        spring boot + 타임리프 쓴다고 생각하고 예시는 타임리프로 작성 
-        -->
-
-        <!--
-          Thymeleaf 예시:
-          <article class="travel-card" th:each="travel : ${travels}">
-            <a th:href="@{/travels/{id}(id=${travel.id})}">
-            <img th:src="${travel.imageUrl}" th:alt="${travel.name}">
-            <h2 th:text="${travel.name}"></h2>
-            ...
-          </article>
-        -->
-
-        <article class="travel-card">
-          <a href="./travel-detail" class="card-image-link" aria-label="釜山 海雲台ビーチ 詳細を見る">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
-              alt="釜山 海雲台ビーチ 夜景" />
-            <span class="rating">⭐ 4.8</span>
-          </a>
-          <div class="card-body">
-            <h2>釜山 海雲台ビーチ</h2>
-            <p class="location">釜山広域市</p>
-            <p class="description">韓国最大級のビーチで、夏の避暑地として人気</p>
-            <div class="card-bottom">
-              <span>レビュー 892</span>
-              <a href="./travel-detail">詳細を見る →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="travel-card">
-          <a href="./travel-detail" class="card-image-link" aria-label="釜山 海雲台ビーチ 詳細を見る">
-            <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=80"
-              alt="釜山 夜景" />
-            <span class="rating">⭐ 4.8</span>
-          </a>
-          <div class="card-body">
-            <h2>釜山 海雲台ビーチ</h2>
-            <p class="location">釜山広域市</p>
-            <p class="description">韓国最大級のビーチで、夏の避暑地として人気</p>
-            <div class="card-bottom">
-              <span>レビュー 892</span>
-              <a href="./travel-detail">詳細を見る →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="travel-card">
-          <a href="./travel-detail" class="card-image-link" aria-label="釜山 海雲台ビーチ 詳細を見る">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
-              alt="ビーチとヤシの木" />
-            <span class="rating">⭐ 4.8</span>
-          </a>
-          <div class="card-body">
-            <h2>釜山 海雲台ビーチ</h2>
-            <p class="location">釜山広域市</p>
-            <p class="description">韓国最大級のビーチで、夏の避暑地として人気</p>
-            <div class="card-bottom">
-              <span>レビュー 892</span>
-              <a href="./travel-detail">詳細を見る →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="travel-card">
-          <a href="./travel-detail" class="card-image-link" aria-label="釜山 海雲台ビーチ 詳細を見る">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
-              alt="釜山 海雲台ビーチ 夜景" />
-            <span class="rating">⭐ 4.8</span>
-          </a>
-          <div class="card-body">
-            <h2>釜山 海雲台ビーチ</h2>
-            <p class="location">釜山広域市</p>
-            <p class="description">韓国最大級のビーチで、夏の避暑地として人気</p>
-            <div class="card-bottom">
-              <span>レビュー 892</span>
-              <a href="./travel-detail">詳細を見る →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="travel-card">
-          <a href="./travel-detail" class="card-image-link" aria-label="釜山 海雲台ビーチ 詳細を見る">
-            <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=80"
-              alt="釜山 夜景" />
-            <span class="rating">⭐ 4.8</span>
-          </a>
-          <div class="card-body">
-            <h2>釜山 海雲台ビーチ</h2>
-            <p class="location">釜山広域市</p>
-            <p class="description">韓国最大級のビーチで、夏の避暑地として人気</p>
-            <div class="card-bottom">
-              <span>レビュー 892</span>
-              <a href="./travel-detail">詳細を見る →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="travel-card">
-          <a href="./travel-detail" class="card-image-link" aria-label="釜山 海雲台ビーチ 詳細を見る">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
-              alt="ビーチとヤシの木" />
-            <span class="rating">⭐ 4.8</span>
-          </a>
-          <div class="card-body">
-            <h2>釜山 海雲台ビーチ</h2>
-            <p class="location">釜山広域市</p>
-            <p class="description">韓国最大級のビーチで、夏の避暑地として人気</p>
-            <div class="card-bottom">
-              <span>レビュー 892</span>
-              <a href="./travel-detail">詳細を見る →</a>
-            </div>
-          </div>
-        </article>
+      <div class="travel-grid" id="travelGrid">
+        <!-- 検索結果は travelListJS.js が動的にレンダリング -->
       </div>
     </section>
   </main>

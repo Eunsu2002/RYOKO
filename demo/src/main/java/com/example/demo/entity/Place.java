@@ -5,9 +5,12 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "place")
@@ -33,13 +36,13 @@ public class Place {
     private String address;
 
     @Column(name = "p_location_lat", nullable = false)
-    private Float pLocationLat;
+    private float pLocationLat;
 
     @Column(name = "p_location_lng", nullable = false)
-    private Float pLocationLng;
+    private float pLocationLng;
 
     @Column(name = "avg_star")
-    private Float avgStar;
+    private float avgStar;
 
     @Column(name = "review_count")
     private Integer reviewCount;

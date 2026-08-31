@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8" />
@@ -46,31 +46,24 @@
 
   <main>
     <div class="page-top">
-      <a href="./travel-list" class="back-link">← 旅行先一覧へ戻る</a>
+      <a href="./travel-list" class="back-link">← 旅行先リストに戻る</a>
     </div>
 
     <section class="detail-hero">
-      <!-- 아래 컨텐츠들은 추후 다 BE 연결해주는 코드로 바꿔야함. -->
-
-      <!-- Thymeleaf 예시:
-           <img th:src="${travel.imageUrl}" th:alt="${travel.name}" />
-           <h1 th:text="${travel.name}"></h1>
-           <span th:text="${travel.location}"></span>
-      -->
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
-        alt="釜山 海雲台ビーチ" />
+      <img id="detail-imgUrl" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
+        alt="부산 해운대 해수욕장" />
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1>釜山 海雲台ビーチ</h1>
-        <p>⌖ 釜山広域市</p>
+        <h1 id="detail-pName">부산 해운대 해수욕장</h1>
+        <p id="detail-address">⌖ 부산광역시</p>
       </div>
     </section>
 
     <section class="content-wrap">
       <article class="info-card">
         <h2>紹介</h2>
-        <p>
-          韓国最大級のビーチで、夏の避暑地として人気
+        <p id="detail-body">
+          국내 최대 규모의 해수욕장으로 여름 휴양지로 인기
         </p>
       </article>
 
@@ -78,77 +71,42 @@
         <h2>レビュー</h2>
 
         <div class="rating-summary">
-          <strong>4.7</strong>
+          <strong id="detail-avgStar">4.7</strong>
           <div>
             <div class="stars">★★★★★</div>
-            <span>3件のレビュー</span>
+            <span id="place-reviewCount">3件のレビュー</span>
           </div>
         </div>
 
         <div class="review-form">
           <h3>レビューを書く</h3>
           <label for="review-rating">評価</label>
-          <div class="review-stars" id="review-rating" aria-label="評価を選択">★★★★★</div>
-          <label for="review-content">レビュー内容</label>
-          <textarea id="review-content" placeholder="この旅行先についてのレビューを共有してください"></textarea>
-          <button type="button">レビューを投稿</button>
+          <div class="review-stars" id="review-rating" aria-label="星評価を選択">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <label for="review-body">レビュー内容</label>
+          <textarea id="review-body" placeholder="この旅行先へのレビューを共有してください"></textarea>
+          <button type="button" id="review-button">投稿する</button>
         </div>
 
-        <div class="review-list">
-          <!-- 여기도 리뷰 연결 -->
-
-          <!-- Thymeleaf 예시:
-               <div class="review-item" th:each="review : ${reviews}">
-                 <strong th:text="${review.userName}"></strong>
-                 <span th:text="${review.createdAt}"></span>
-                 <p th:text="${review.content}"></p>
-               </div>
-          -->
-
+        <div class="review-list" id="review-list">
           <div class="review-item">
             <div class="review-user-icon">●</div>
             <div class="review-content">
               <div class="review-meta">
-                <strong>旅行 太郎</strong>
+                <strong id="review-userId">김여행</strong>
                 <div>
                   <span class="small-stars">★★★★★</span>
-                  <time datetime="2025-05-08">2025-05-08</time>
+                  <time datetime="2025-05-08" id="review-createdAt">2025-05-08</time>
                 </div>
               </div>
               <p>
-                本当に美しい場所でした！家族と一緒に訪れましたが、みんな満足でした。特に夕日が本当に絶景でした
-              </p>
-            </div>
-          </div>
-
-          <div class="review-item">
-            <div class="review-user-icon">●</div>
-            <div class="review-content">
-              <div class="review-meta">
-                <strong>観光 花子</strong>
-                <div>
-                  <span class="small-stars">★★★★★</span>
-                  <time datetime="2025-04-08">2025-04-08</time>
-                </div>
-              </div>
-              <p>
-                本当に美しい場所でした！家族と一緒に訪れましたが、みんな満足でした。特に夕日が本当に絶景でした
-              </p>
-            </div>
-          </div>
-
-          <div class="review-item">
-            <div class="review-user-icon">●</div>
-            <div class="review-content">
-              <div class="review-meta">
-                <strong>山田太郎</strong>
-                <div>
-                  <span class="small-stars">★★★★☆</span>
-                  <time datetime="2025-04-08">2025-04-08</time>
-                </div>
-              </div>
-              <p>
-                本当に美しい場所でした！家族と一緒に訪れましたが、みんな満足でした。特に夕日が本当に絶景でした。
+                정말 아름다운 곳이었습니다! 가족들과 함께 방문했는데 모두가 만족했어요.
+                특히 일몰이 정말 장관이었습니다.
               </p>
             </div>
           </div>
@@ -156,21 +114,21 @@
       </article>
 
       <article class="travel-info-card">
-        <h2>旅行情報</h2>
+        <h2>旅行先情報</h2>
 
         <div class="travel-info-row">
           <span class="info-icon">▦</span>
           <div>
             <strong>営業時間</strong>
-            <p>夏季: 5時〜18時</p>
+            <p id="detail-operatingHours">하절기: 05시~18시</p>
           </div>
         </div>
 
         <div class="travel-info-row">
           <span class="info-icon">₩</span>
           <div>
-            <strong>おすすめ日程</strong>
-            <p>日帰り〜1泊2日</p>
+            <strong>おすすめの日程</strong>
+            <p id="detail-recommendSchedule">당일 ~ 1박 2일</p>
           </div>
         </div>
 
@@ -196,29 +154,26 @@
       </div>
 
       <div class="footer-column">
-        <h3>서비스</h3>
-        <a href="#">여행지</a>
-        <a href="#">여행 일정</a>
-        <a href="#">여행 가이드</a>
+        <h3>サービス</h3>
+        <a href="#">旅行先</a>
+        <a href="#">旅行日程</a>
+        <a href="#">旅行ガイド</a>
       </div>
 
       <div class="footer-column">
-        <h3>기능 소개</h3>
-        <a href="#">통합 기능</a>
-        <a href="#">추천 여행</a>
-        <a href="#">취향 분석 시스템</a>
-        <a href="#">데이터 분석</a>
+        <h3>機能紹介</h3>
+        <a href="#">統合機能</a>
+        <a href="#">推薦旅行先</a>
       </div>
 
       <div class="footer-column">
-        <h3>고객지원</h3>
-        <a href="#">자주 묻는 질문</a>
-        <a href="#">고객센터</a>
-        <a href="#">이용약관</a>
-        <a href="#">개인정보 처리방침</a>
+        <h3>お問い合わせ</h3>
+        <a href="#">よくあるご質問</a>
+        <a href="#">カスタマーサポート</a>
       </div>
     </div>
   </footer>
+
 </body>
 
 </html>
