@@ -314,6 +314,7 @@ b {
 .popular-card {
   display: block;
   text-decoration: none;
+  background-color: none;
   color: inherit;
   border-radius: 12px;
   overflow: hidden;
