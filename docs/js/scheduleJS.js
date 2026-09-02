@@ -7,7 +7,7 @@ import { renderPlaceDetail } from './placeDetailRenderer.js';
 
 // ===================== 네이버 지도 + 검색 =====================
  
-let map, marker;
+let map;
 let currentPopup = null; // 지도 위 place-popup InfoWindow (한 번에 하나만)
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -17,11 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     minZoom: 1,
     mapTypeControl: false,
     zoomControl: false
-  });
-
-  marker = new naver.maps.Marker({
-    position: map.getCenter(),
-    map: map
   });
 
   document.getElementById('searchBtn').addEventListener('click', searchPlaces);
@@ -110,7 +105,6 @@ function selectPlace(place) {
   const position = new naver.maps.LatLng(place.pLocationLat, place.pLocationLng);
   map.setCenter(position);
   map.setZoom(16);
-  marker.setPosition(position);
 
   if (currentPopup) currentPopup.close();
 
@@ -119,9 +113,6 @@ function selectPlace(place) {
       <div class="popup-body">
         <h4>${place.pName}</h4>
         <p class="popup-sub">${place.address}</p>
-        <div class="popup-actions">
-          <button class="icon-btn" data-action="detail">詳細を見る</button>
-        </div>
       </div>
     </div>
   `;
@@ -138,12 +129,6 @@ function selectPlace(place) {
 
   // 선택한 여행지를 featured-card에 채움
   renderFeaturedCard(place);
-
-  // InfoWindow 콘텐츠는 매번 새로 그려지므로 열릴 때마다 리스너 재연결
-  naver.maps.Event.addListener(currentPopup, 'domready', () => {
-    const btn = document.querySelector('.place-popup [data-action="detail"]');
-    if (btn) btn.addEventListener('click', () => openDetailModal(place.id));
-  });
 }
 
 // ===== 상세 모달 =====

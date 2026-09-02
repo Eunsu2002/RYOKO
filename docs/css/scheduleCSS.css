@@ -207,6 +207,14 @@ nav img {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
 }
 
+.map-searchbar input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  background: transparent;
+}
+
 
 /* ─────────────────────────────────────────────────────
    5. 추천 여행지 카드
