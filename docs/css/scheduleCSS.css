@@ -861,3 +861,15 @@ footer {
   font-size: 12px;
   color: #bbb;
 }
+/* 여행지 미선택 시 안내 문구 (featured-card 자리 대체) */
+.featured-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  background: #f5f6f8;
+  border: 2px dashed #cfd4dc;
+  border-radius: 12px;
+  color: #8a929e;
+  font-size: 1.05rem;
+}

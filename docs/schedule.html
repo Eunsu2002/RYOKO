@@ -84,20 +84,21 @@
        - 왼쪽: 이미지 / 오른쪽: 이름, 설명, 리뷰 수, 상세보기 링크
   ===================================================== -->
   <section class="featured-section">
-    <div class="featured-card">
+    <!-- 선택 전: 안내 문구 -->
+    <div class="featured-placeholder" id="featuredPlaceholder">
+      <p>地図から旅行先を選択してください。</p>
+    </div>
+    <!-- 선택 후: 여행지 카드 (JS가 display 제어) -->
+    <div class="featured-card" id="featuredCard" style="display:none;">
       <div class="featured-img">
-        <img id="featuredImg"
-          src="https://images.unsplash.com/photo-1617158679977-4b37ef66e0e5?w=500&auto=format&fit=crop"
-          alt="旅行先の画像" />
+        <img id="featuredImg" src="" alt="旅行先の画像" />
       </div>
       <div class="featured-info">
-        <h2 id="featuredTitle">釜山・海雲台海水浴場</h2>
-        <p class="featured-loc" id="featuredLoc">📍 釜山広域市</p>
-        <p class="featured-desc" id="featuredDesc">
-          国内最大規模の海水浴場で、夏の休暇地として有名な場所
-        </p>
+        <h2 id="featuredTitle"></h2>
+        <p class="featured-loc" id="featuredLoc"></p>
+        <p class="featured-desc" id="featuredDesc"></p>
         <div class="featured-bottom">
-          <span class="review-count" id="featuredReview">⭐ レビュー 892</span>
+          <span class="review-count" id="featuredReview"></span>
           <button type="button" class="btn-detail" id="featuredDetailBtn">詳細を見る →</button>
         </div>
       </div>

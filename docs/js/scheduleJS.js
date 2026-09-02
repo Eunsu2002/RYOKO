@@ -43,11 +43,12 @@ async function searchPlaces() {
 
   try {
     const res = await fetch(`${API_BASE}/api/places?keyword=${encodeURIComponent(keyword)}`);
-    if (!res.ok) throw new Error('검색에 실패했습니다.');
-    const places = await res.json();
+    if (!res.ok) throw new Error('検索に失敗しました。');
+    const data = await res.json();
+    const places = data.content ?? data;
 
-    if (places.length === 0) {
-      box.innerHTML = '<li class="search-empty">검색 결과가 없습니다.</li>';
+    if (!places || places.length === 0) {
+      box.innerHTML = '<li class="search-empty">検索結果がありません。</li>';
       return;
     }
 
@@ -73,6 +74,38 @@ async function searchPlaces() {
 
 // ===== 지도 위 place-popup 카드 =====
 
+// ===== featured-card (선택한 여행지 카드) =====
+
+let selectedPlaceId = null; // featured-card에 현재 표시 중인 여행지 id
+
+// 선택 전: 안내 문구 표시 (여행지 미선택 상태)
+function renderFeaturedPlaceholder() {
+  selectedPlaceId = null;
+  const card = document.getElementById('featuredCard');
+  if (card) card.style.display = 'none';
+  const ph = document.getElementById('featuredPlaceholder');
+  if (ph) ph.style.display = 'flex';
+}
+
+// 선택 후: featured-card에 여행지 정보 채우기
+function renderFeaturedCard(place) {
+  selectedPlaceId = place.id;
+
+  const ph = document.getElementById('featuredPlaceholder');
+  if (ph) ph.style.display = 'none';
+
+  const card = document.getElementById('featuredCard');
+  if (card) card.style.display = 'flex';
+
+  const defaultImg = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80';
+  document.getElementById('featuredImg').src = place.imgUrl ?? defaultImg;
+  document.getElementById('featuredTitle').textContent = place.pName;
+  document.getElementById('featuredLoc').textContent = '📍 ' + place.address;
+  document.getElementById('featuredDesc').textContent = place.body ?? '';
+  const count = place.reviewCount ?? 0;
+  document.getElementById('featuredReview').textContent = `⭐ レビュー ${count}`;
+}
+
 function selectPlace(place) {
   const position = new naver.maps.LatLng(place.pLocationLat, place.pLocationLng);
   map.setCenter(position);
@@ -87,7 +120,7 @@ function selectPlace(place) {
         <h4>${place.pName}</h4>
         <p class="popup-sub">${place.address}</p>
         <div class="popup-actions">
-          <button class="icon-btn" data-action="detail">상세보기</button>
+          <button class="icon-btn" data-action="detail">詳細を見る</button>
         </div>
       </div>
     </div>
@@ -103,6 +136,9 @@ function selectPlace(place) {
 
   currentPopup.open(map, position);
 
+  // 선택한 여행지를 featured-card에 채움
+  renderFeaturedCard(place);
+
   // InfoWindow 콘텐츠는 매번 새로 그려지므로 열릴 때마다 리스너 재연결
   naver.maps.Event.addListener(currentPopup, 'domready', () => {
     const btn = document.querySelector('.place-popup [data-action="detail"]');
@@ -114,7 +150,7 @@ function selectPlace(place) {
 
 async function openDetailModal(placeId) {
   const res = await fetch(`${API_BASE}/api/places/${placeId}`);
-  if (!res.ok) { alert('상세 정보를 불러오지 못했습니다.'); return; }
+  if (!res.ok) { alert('詳細情報を読み込めませんでした。'); return; }
   const place = await res.json();
 
   document.getElementById('detailModalContent').innerHTML = renderPlaceDetail(place, { showMap: false });
@@ -387,6 +423,13 @@ async function onDeleteClick(e) {
 document.addEventListener('DOMContentLoaded', () => {
   renderCalendar();
   loadPlans();
+  renderFeaturedPlaceholder(); // 처음엔 여행지 미선택 안내
+
+  // featured-card의 '詳細を見る' → 선택된 여행지 상세 모달
+  const featuredBtn = document.getElementById('featuredDetailBtn');
+  if (featuredBtn) featuredBtn.addEventListener('click', () => {
+    if (selectedPlaceId) openDetailModal(selectedPlaceId);
+  });
  
   const addBtn = document.getElementById('addPlanBtn');
   if (addBtn) addBtn.addEventListener('click', () => openPlanModal('add'));
