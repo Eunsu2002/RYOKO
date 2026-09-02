@@ -19,11 +19,10 @@ public class PlaceController {
     @GetMapping
     public Page<PlaceResponse> getPlaces(
             @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) Integer style,
+            @RequestParam(name = "styles", required = false) Integer style,
             @RequestParam(defaultValue = "REVIEW_COUNT_DESC") SortOption sort,
             @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "6") Integer size
-            ) {
+            @RequestParam(defaultValue = "6") Integer size) {
         return placeService.getPlaces(keyword, style, sort, page, size);
     }
 

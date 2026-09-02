@@ -14,34 +14,34 @@ export function renderPlaceDetail(place, options = {}) {
 
     <section class="content-wrap">
       <article class="info-card">
-        <h2>소개</h2>
+        <h2>紹介</h2>
         <p>${place.body ?? ''}</p>
       </article>
 
       ${showMap ? `
         <article class="map-card">
-          <h2>위치</h2>
+          <h2>位置</h2>
           <div id="place-map-${place.id}" class="place-map"></div>
         </article>
       ` : ''}
 
       <article class="travel-info-card">
-        <h2>여행 정보</h2>
+        <h2>旅行情報</h2>
         <div class="travel-info-row">
           <span class="info-icon">▦</span>
           <div>
-            <strong>운영 시간</strong>
-            <p>${place.operatingHours ?? '정보 없음'}</p>
+            <strong>営業時間</strong>
+            <p>${place.operatingHours ?? '情報なし'}</p>
           </div>
         </div>
         <div class="travel-info-row">
           <span class="info-icon">₩</span>
           <div>
-            <strong>추천 일정</strong>
-            <p>${place.recommendedSchedule ?? '정보 없음'}</p>
+            <strong>おすすめ日程</strong>
+            <p>${place.recommendedSchedule ?? '情報なし'}</p>
           </div>
         </div>
-        <button type="button" class="schedule-btn">일정에 추가하기</button>
+        <button type="button" class="schedule-btn">日程に追加</button>
       </article>
     </section>
   `;
