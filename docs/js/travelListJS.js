@@ -69,9 +69,10 @@ async function fetchAndRenderResults(keywordInput, styleCheckboxes) {
     if (!response.ok) {
       throw new Error(`검색 요청 실패: ${response.status}`);
     }
-    const places = await response.json();
+    const data = await response.json();
+    const places = data.content ?? data;   // 페이지 객체면 content, 배열이면 그대로
     renderTravelCards(grid, places);
-  } catch (error) {
+    } catch (error) {
     console.error(error);
     grid.innerHTML = '<p class="no-result">검색 결과를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>';
   }
