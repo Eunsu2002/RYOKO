@@ -321,6 +321,7 @@ b {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .popular-card:hover {
@@ -344,6 +345,22 @@ b {
 
 #tour3 {
   background-image: url('../images/gyeongju.jpg');
+}
+
+.popular-card .popular {
+  background: transparent;
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+.popular-card .popular p {
+  background: transparent;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+  margin: 0;
 }
 
 .search-cta {
