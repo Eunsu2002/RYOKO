@@ -12,14 +12,18 @@ document.getElementById("reset-btn").addEventListener("click", function () {
     })
         .then(function (response) {
             return response.text().then(function (message) {
-                alert(message);
                 if (response.ok) {
-                    window.location.href = "logIn";
+                    // 확인 버튼을 누른 뒤 로그인 페이지로 이동
+                    showModal(message, function () {
+                        window.location.href = "logIn";
+                    });
+                } else {
+                    showModal(message);
                 }
             });
         })
         .catch(function (error) {
-            alert("処理中にエラーが発生しました。");
+            showModal("処理中にエラーが発生しました。");
             console.error(error);
         });
 });

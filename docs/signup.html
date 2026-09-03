@@ -193,14 +193,17 @@
             })
                 .then(function (response) {
                     return response.text().then(function (message) {
-                        alert(message);
                         if (response.ok) {
-                            window.location.href = "logIn";
+                            showModal(message, function () {
+                                window.location.href = "logIn";
+                            });
+                        } else {
+                            showModal(message);
                         }
                     });
                 })
                 .catch(function (error) {
-                    alert("会員登録処理中にエラーが発生しました。");
+                    showModal("会員登録処理中にエラーが発生しました。");
                     console.error(error);
                 });
         }

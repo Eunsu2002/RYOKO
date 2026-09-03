@@ -1,0 +1,43 @@
+/* 공통 알림 모달 (alert 대체) */
+.ui-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.ui-modal-overlay.open { display: flex; }
+
+.ui-modal-box {
+  background: #fff;
+  width: 90%;
+  max-width: 360px;
+  border-radius: 14px;
+  padding: 28px 24px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+.ui-modal-message {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+  white-space: pre-line;
+}
+.ui-modal-actions {
+  display: flex;
+  justify-content: center;
+}
+.ui-modal-actions button {
+  background: #FFBA25;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 9px 32px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ui-modal-actions button:hover { background: #e09415; }
