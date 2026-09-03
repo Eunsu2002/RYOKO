@@ -67,21 +67,21 @@ async function fetchAndRenderResults(keywordInput, styleCheckboxes) {
   try {
     const response = await fetch(`${API_BASE}/api/places?${params.toString()}`);
     if (!response.ok) {
-      throw new Error(`검색 요청 실패: ${response.status}`);
+      throw new Error(`検索リクエスト失敗: ${response.status}`);
     }
     const data = await response.json();
     const places = data.content ?? data;   // 페이지 객체면 content, 배열이면 그대로
     renderTravelCards(grid, places);
     } catch (error) {
     console.error(error);
-    grid.innerHTML = '<p class="no-result">검색 결과를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>';
+    grid.innerHTML = '<p class="no-result">検索結果を読み込めませんでした。しばらくしてからもう一度お試しください。</p>';
   }
 }
 
 // 검색 결과 배열을 travel-card 마크업으로 그려준다.
 function renderTravelCards(grid, places) {
   if (!places || places.length === 0) {
-    grid.innerHTML = '<p class="no-result">검색 조건에 맞는 여행지가 없습니다.</p>';
+    grid.innerHTML = '<p class="no-result">条件に合う旅行先がありません。</p>';
     return;
   }
 
@@ -96,12 +96,12 @@ function createTravelCardHtml(place) {
   const address = escapeHtml(place.address ?? "");
   const description = escapeHtml(place.body ?? "");
 
-  // TODO: place_img 테이블 연동 전이라 임시 이미지를 사용 중. 이미지 API 연결 시 교체 필요.
-  const imageUrl = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80";
+  // place_img 테이블의 대표 이미지 사용 (없으면 기본 이미지)
+  const imageUrl = place.imgUrl ?? "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&q=80";
 
   return `
     <article class="travel-card">
-      <a href="./travel-detail?id=${place.id}" class="card-image-link" aria-label="${name} 상세보기">
+      <a href="./travel-detail?id=${place.id}" class="card-image-link" aria-label="${name} 詳細">
         <img src="${imageUrl}" alt="${name}" />
         <span class="rating">⭐ ${rating}</span>
       </a>
@@ -110,8 +110,8 @@ function createTravelCardHtml(place) {
         <p class="location">${address}</p>
         <p class="description">${description}</p>
         <div class="card-bottom">
-          <span>리뷰 ${reviewCount}</span>
-          <a href="./travel-detail?id=${place.id}">상세보기 →</a>
+          <span>レビュー ${reviewCount}</span>
+          <a href="./travel-detail?id=${place.id}">詳細を見る →</a>
         </div>
       </div>
     </article>
