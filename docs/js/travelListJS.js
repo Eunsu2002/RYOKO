@@ -63,6 +63,7 @@ async function fetchAndRenderResults(keywordInput, styleCheckboxes) {
   if (styles > 0) {
     params.set("styles", String(styles));
   }
+  params.set("size", "100");
 
   try {
     const response = await fetch(`${API_BASE}/api/places?${params.toString()}`);

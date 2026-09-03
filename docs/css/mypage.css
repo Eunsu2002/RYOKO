@@ -261,50 +261,58 @@ nav img {
    푸터 (하단 영역)
 ──────────────────────────────── */
 footer {
-  margin-top: 3rem;
-  background: #fff;
-  border-top: 1px solid #eee;
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 1.5rem;
-  font-size: 0.85rem;
-}
-
-.footer-brand p {
-  color: #888;
-  margin-top: 6px;
-  font-size: 0.8rem;
-}
-
-.footer-section h4 {
-  font-weight: 700;
-  margin-bottom: 10px;
-  font-size: 0.85rem;
-}
-
-.footer-section a {
-  display: block;
-  color: #888;
-  text-decoration: none;
-  margin-bottom: 6px;
-  font-size: 0.8rem;
-}
-
-.footer-section a:hover {
-  color: #FFBA25;
-}
-
-.footer-brand .sns {
   display: flex;
-  gap: 10px;
-  margin-top: 12px;
-  font-size: 1.1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 50px;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  margin: 0 50px;
 }
 
-.footer-brand .sns a {
-  color: #888;
+footer>section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+footer>section b {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+footer>section a {
+  color: #555;
+  font-size: 14px;
+  margin: 0;
+}
+
+footer>div {
+  display: flex;
+  gap: 80px;
+}
+
+footer>div section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer>div section b {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+footer>div section a {
+  color: #555;
+  font-size: 14px;
+  margin: 0;
+  cursor: pointer;
   text-decoration: none;
+}
+
+footer>div section a:hover {
+  color: #333;
 }
 
 /* ────────────────────────────────
@@ -361,60 +369,4 @@ footer {
   line-height: 1.6;
   color: #4b5563;
   text-align: center;
-}
-
-
-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 40px 50px;
-  background-color: #ffffff;
-  border-top: 1px solid #e5e5e5;
-  margin: 0 50px;
-}
-
-footer>section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-footer>section b {
-  font-size: 18px;
-  margin-bottom: 4px;
-}
-
-footer>section a {
-  color: #555;
-  font-size: 14px;
-  margin: 0;
-}
-
-footer>div {
-  display: flex;
-  gap: 80px;
-}
-
-footer>div section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-footer>div section b {
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-
-footer>div section a {
-  color: #555;
-  font-size: 14px;
-  margin: 0;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-footer>div section a:hover {
-  color: #333;
 }
