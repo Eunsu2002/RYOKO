@@ -1,4 +1,3 @@
-
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector)=> document.querySelectorAll(selector);
 const params = new URLSearchParams(window.location.search);
@@ -178,7 +177,7 @@ function addSchedule() {
         return
     }
 
-    const startDate = prompt('訪問日を入力してください。(예: 2026-08-15)');
+    const startDate = prompt('訪問日を入力してください。(例: 2026-08-15)');
     if (!startDate) return;
 
     const visitDateTime = `${startDate}T00:00:00`;

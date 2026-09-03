@@ -35,15 +35,16 @@ async function withdrawUser() {
         });
 
         if (response.ok) {
-            alert("退会が完了しました。");
-            window.location.href = "index";
+            showModal("退会が完了しました。", function () {
+                window.location.href = "index";
+            });
         } else {
             const message = await response.text();
-            alert(message);
+            showModal(message);
         }
     } catch (error) {
         console.error("退会エラー:", error);
-        alert("退会処理中にエラーが発生しました。");
+        showModal("退会処理中にエラーが発生しました。");
     }
 }
 

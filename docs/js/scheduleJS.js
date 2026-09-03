@@ -135,7 +135,7 @@ function selectPlace(place) {
 
 async function openDetailModal(placeId) {
   const res = await fetch(`${API_BASE}/api/places/${placeId}`);
-  if (!res.ok) { alert('詳細情報を読み込めませんでした。'); return; }
+  if (!res.ok) { showModal('詳細情報を読み込めませんでした。'); return; }
   const place = await res.json();
 
   document.getElementById('detailModalContent').innerHTML = renderPlaceDetail(place, { showMap: false });
@@ -292,7 +292,7 @@ async function loadPlans() {
  
   try {
     const res = await fetch(`${API_BASE}/api/plans?date=${selectedDateStr()}`);
-    if (!res.ok) throw new Error('일정을 불러오지 못했습니다.');
+    if (!res.ok) throw new Error('日程を読み込めませんでした。');
     const plans = await res.json();
     currentPlans = plans;
  
@@ -320,7 +320,7 @@ function buildDateTime(timeStr) {
 function openPlanModal(mode, plan, prefill) {
   editingId = (mode === 'edit') ? plan.id : null;
 
-  document.getElementById('planModalTitle').textContent = (mode === 'edit') ? '일정 수정' : '일정 추가';
+  document.getElementById('planModalTitle').textContent = (mode === 'edit') ? '日程を編集' : '日程を追加';
   document.getElementById('planTitleInput').value =
     (mode === 'edit') ? (plan.pName ?? '') : (prefill?.pName ?? '');
   document.getElementById('planDateInput').value =
@@ -345,11 +345,11 @@ async function onSavePlan() {
   const memo = document.getElementById('planMemoInput').value.trim();
  
   if (!pName) {
-    alert('제목을 입력해주세요.');
+    showModal('タイトルを入力してください。');
     return;
   }
   if (!startTime || !endTime) {
-    alert('시작/종료 시간을 입력해주세요.');
+    showModal('開始・終了時間を入力してください。');
     return;
   }
  
@@ -373,12 +373,12 @@ async function onSavePlan() {
           body: JSON.stringify(body),
         });
  
-    if (!res.ok) throw new Error(editingId ? '수정에 실패했습니다.' : '일정 추가에 실패했습니다.');
+    if (!res.ok) throw new Error(editingId ? '編集に失敗しました。' : '日程の追加に失敗しました。');
  
     closePlanModal();
     await loadPlans();
   } catch (err) {
-    alert(err.message);
+    showModal(err.message);
   }
 }
  
@@ -394,14 +394,14 @@ async function onDeleteClick(e) {
   const card = e.target.closest('.s-card');
   const id = card.dataset.id;
  
-  if (!confirm('이 일정을 삭제할까요?')) return;
+  if (!confirm('この日程を削除しますか？')) return;
  
   try {
     const res = await fetch(`${API_BASE}/api/plans/${id}`, { method: 'DELETE' });
-    if (!res.ok && res.status !== 204) throw new Error('삭제에 실패했습니다.');
+    if (!res.ok && res.status !== 204) throw new Error('削除に失敗しました。');
     await loadPlans();
   } catch (err) {
-    alert(err.message);
+    showModal(err.message);
   }
 }
  
@@ -432,4 +432,3 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.id === 'detailModalOverlay') closeDetailModal();
   });
 });
- 
