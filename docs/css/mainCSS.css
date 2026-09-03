@@ -328,6 +328,12 @@ b {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
+#tour1, #tour2, #tour3 {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 #tour1 {
   background-image: url('../images/busan.jpg');
 }
